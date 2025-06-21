@@ -1,38 +1,3 @@
-/* Custom styles for Swiper pagination bullets for Brands */
-.brand-swiper .swiper-pagination-bullet {
-  display: none;
-}
-
-.brand-swiper .swiper-pagination-bullet-active {
-  display: none;
-}
-
-/* Custom styles for Swiper pagination bullets for Products (vertical) */
-.product-swiper .swiper-pagination {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 10;
-}
-
-.product-pagination-bullet {
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #d1d5db; /* Gray-300 */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.product-pagination-bullet-active {
-  background-color: #3b82f6; /* Blue-600 */
-}
-
 /* Ensure brand slides expand to content for 'auto' slidesPerView */
 .brand-swiper-slide {
   width: auto !important;
@@ -67,11 +32,7 @@
 /* Padding untuk swiper-wrapper agar konten tidak terlalu dekat dengan tepi */
 .brand-swiper .swiper-wrapper {
   padding-bottom: 0.5rem;
-}
-
-/* Aturan untuk menghilangkan bullet Swiper yang muncul secara default */
-.brand-swiper .swiper-pagination {
-  display: none !important;
+  transition-timing-function: linear !important;
 }
 
 /* Adjust the image sizes within the slides for consistency with the provided image */
@@ -88,99 +49,7 @@
   padding-bottom: 0 !important;
 }
 
-/* --- New CSS for CategoryGridSection (We On Numbers) --- */
-
-/* Custom styles for Swiper pagination bullets for Brands */
-.brand-swiper .swiper-pagination-bullet {
-  display: none;
-}
-
-.brand-swiper .swiper-pagination-bullet-active {
-  display: none;
-}
-
-/* Custom styles for Swiper pagination bullets for Products (vertical) */
-.product-swiper .swiper-pagination {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 10;
-}
-
-.product-pagination-bullet {
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #d1d5db; /* Gray-300 */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.product-pagination-bullet-active {
-  background-color: #3b82f6; /* Blue-600 */
-}
-
-/* Ensure brand slides expand to content for 'auto' slidesPerView */
-.brand-swiper-slide {
-  width: auto !important;
-  height: auto !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0.5rem;
-}
-
-/* Adjust the main Swiper container height for products */
-.product-swiper.swiper {
-  height: 500px;
-  border-radius: 1.5rem;
-}
-
-/* Remove default Swiper styles for the wrapper to let flexbox manage it */
-.product-swiper .swiper-wrapper {
-  align-items: center;
-}
-
-/* Custom CSS for hiding the scrollbar */
-.custom-scrollbar-hidden::-webkit-scrollbar {
-  display: none;
-}
-
-.custom-scrollbar-hidden {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Padding untuk swiper-wrapper agar konten tidak terlalu dekat dengan tepi */
-.brand-swiper .swiper-wrapper {
-  padding-bottom: 0.5rem;
-}
-
-/* Aturan untuk menghilangkan bullet Swiper yang muncul secara default */
-.brand-swiper .swiper-pagination {
-  display: none !important;
-}
-
-/* Adjust the image sizes within the slides for consistency with the provided image */
-.brand-swiper-slide img {
-  height: auto;
-  max-height: 50px;
-  width: auto;
-  max-width: 120px;
-}
-
-/* Override default Swiper styles that might add unnecessary height/padding */
-.brand-swiper {
-  height: auto !important;
-  padding-bottom: 0 !important;
-}
-
-/* --- New CSS for CategoryGridSection (We On Numbers) --- */
+/* --- CSS for CategoryGridSection (We On Numbers) --- */
 
 .section-statistik {
   max-width: 1140px;
@@ -189,9 +58,9 @@
   flex-direction: row;
   gap: 50px;
   align-items: center;
-  background-color: #f8f4f4; /* Match the background from App.jsx */
-  border-radius: 1.5rem; /* rounded-3xl */
-  padding: 2rem 3rem; /* Adjusted padding to be consistent with p-8 lg:p-12 */
+  background-color: #f8f4f4;
+  border-radius: 1.5rem;
+  padding: 2rem 3rem;
 }
 .statistik-header {
   flex: 0 0 auto;
@@ -238,8 +107,8 @@
   border-radius: 8px;
   min-height: 151px;
   transition: 0.2s ease-in-out;
-  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-  overflow: hidden; /* Ensure color animation stays within bounds */
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .statistik-card:not(.statistik-card-more):hover {
   box-shadow: 4px 4px 0px 0px #222;
@@ -247,12 +116,10 @@
 }
 /* Specific widths for cards based on their position/type */
 .statistik-card-large {
-  /* For 1st, 4th, 5th child */
   flex: 1 0 auto;
   width: 259px;
 }
 .statistik-card-small {
-  /* For 2nd, 3rd, 6th child */
   flex: 0 0 auto;
   width: 211px;
 }
@@ -266,10 +133,10 @@
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: 2; /* Ensure text is above the animating color */
-  display: flex; /* Use flex to align content if needed */
+  z-index: 2;
+  display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Pushed content to top and bottom */
+  justify-content: space-between;
 }
 .statistik-card-title .title {
   color: #222;
@@ -292,32 +159,32 @@
   left: auto;
   right: 0;
   bottom: 0;
-  width: 10px; /* Starting width for animation */
+  width: 10px;
   height: 100%;
   border-radius: 0 6px 6px 0;
   border-left: 2px solid #222;
-  z-index: 1; /* Below the text content */
+  z-index: 1;
 }
 /* Apply specific colors based on the data's bgColorClass */
 .statistik-card-color.bg-blue-600 {
   background-color: #2563eb;
-} /* Example: Blue */
+}
 .statistik-card-color.bg-orange-400 {
   background-color: #fb923c;
-} /* Example: Orange */
+}
 .statistik-card-color.bg-purple-600 {
   background-color: #9333ea;
-} /* Example: Purple */
+}
 .statistik-card-color.bg-teal-400 {
   background-color: #2dd4bf;
-} /* Example: Teal */
+}
 .statistik-card-color.bg-red-500 {
   background-color: #ef4444;
-} /* Example: Red */
+}
 
 .statistik-card:hover .statistik-card-color {
   animation-name: statistikCardAnim;
-  animation-duration: 1s; /* Kecepatan animasi lebih cepat */
+  animation-duration: 0.5s;
   animation-fill-mode: forwards;
 }
 @keyframes statistikCardAnim {
@@ -334,7 +201,7 @@
 }
 .statistik-card.statistik-card-more {
   background-color: #eee9df;
-  border: 2px solid #222; /* Add border for consistency */
+  border: 2px solid #222;
 }
 .statistik-card-more .statistik-card-text {
   padding: 50px 22px 50px 30px;
@@ -347,7 +214,7 @@
   line-height: normal;
   margin: 0;
 }
-/* Media Queries */
+/* Media Queries for CategoryGridSection */
 @media (min-width: 768px) and (max-width: 1367px) {
   .section-statistik {
     justify-content: center;
@@ -365,11 +232,11 @@
   .statistik-card {
     min-height: 120px;
   }
-  .statistik-card-large {
-    width: 48% !important;
-  }
+  .statistik-card-large,
   .statistik-card-small {
-    width: 48% !important;
+    width: calc(
+      50% - 7.5px
+    ) !important; /* Adjusted for 2 columns with 15px gap */
   }
   .statistik-card-text {
     padding: 20px;
@@ -421,37 +288,27 @@
   .statistik-card {
     min-height: 108px;
     flex: 0 0 auto;
-    width: calc(50% - 7px); /* Sesuaikan lebar agar 2 kolom */
+    width: calc(50% - 7px);
     border-radius: 8px;
   }
-  .statistik-card-large {
-    width: calc(50% - 7px); /* Menggunakan calc untuk lebih responsif */
-  }
-  .statistik-card-small {
-    width: calc(50% - 7px); /* Menggunakan calc untuk lebih responsif */
-  }
-  /* Mengatur ulang agar kartu memiliki lebar yang lebih fleksibel di mobile */
-  /* Remove the specific nth-child widths and rely on calc(50% - gap) for 2 columns */
+  .statistik-card-large,
+  .statistik-card-small,
   .statistik-card:nth-child(1),
   .statistik-card:nth-child(4),
   .statistik-card:nth-child(5),
   .statistik-card:nth-child(2),
   .statistik-card:nth-child(3),
   .statistik-card:nth-child(6) {
-    width: calc(
-      50% - 7px
-    ); /* Ensure all cards are 2 columns with appropriate gap */
+    width: calc(50% - 7px);
     flex: none;
   }
-
   .statistik-card-text {
     padding: 0 18px;
-    position: absolute;
-    height: auto;
-    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: static;
+    height: auto;
   }
   .statistik-card-title .title {
     font-size: 24px;
@@ -460,18 +317,20 @@
   .statistik-card-description .description {
     font-size: 12px;
   }
-  /* MENGAKTIFKAN KEMBALI ANIMASI HOVER DI MOBILE */
+  /* Memastikan elemen warna terlihat dan berfungsi di mobile */
   .statistik-card-color {
     position: absolute;
     top: 0;
     left: auto;
     right: 0;
     bottom: 0;
-    width: 10px; /* Starting width for animation */
+    width: 10px;
     height: 100%;
     border-radius: 0 6px 6px 0;
     border-left: 2px solid #222;
-    z-index: 1; /* Below the text content */
+    z-index: 1;
+    /* Hapus atau komentari baris di bawah ini untuk mengaktifkan kembali */
+    /* display: none; */ /* <- Ini adalah yang menyebabkan tidak tampil di mobile */
   }
   .statistik-card.statistik-card-more {
     width: calc(50% - 7px);
@@ -481,5 +340,114 @@
   }
   .statistik-card-more .statistik-card-title .title {
     font-size: 16px;
+  }
+}
+
+/* --- New CSS for AchivementSection --- */
+.section-achivement {
+  display: flex;
+  flex-direction: row; /* Default for desktop */
+  align-items: center;
+  margin-top: 100px; /* Example margin-top */
+  background-color: #f8f4f4; /* Background color */
+  border-radius: 1.5rem; /* rounded-3xl */
+  overflow: hidden; /* Penting untuk margin negatif */
+}
+.achivement-header {
+  flex: 0 0 auto;
+  width: 38.1vw; /* Lebar sesuai spesifikasi desktop */
+  padding: 70px 195px 70px 50px;
+  background-color: #adc2e6;
+  border-left: 2px solid #222;
+  z-index: 10;
+  box-sizing: border-box; /* Pastikan padding termasuk dalam lebar */
+}
+.achivement-subtitle {
+  margin-bottom: 15px;
+}
+.achivement-subtitle .subtitle {
+  color: #513b6a;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+  text-align: right;
+}
+.achivement-title .title {
+  color: #222;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  text-align: right;
+}
+.achivement-body {
+  flex: 0 0 auto;
+  width: 64.5vw; /* Lebar sesuai spesifikasi desktop */
+  margin-left: -4%; /* Margin negatif untuk overlap dengan header */
+  box-sizing: border-box;
+}
+.achivement-slider .swiper-wrapper {
+  transition-timing-function: linear !important; /* Pastikan transisi linear untuk continuous scroll */
+}
+.achivement-slide img {
+  max-width: 100px; /* Ukuran gambar di dalam slide */
+  max-height: 100px;
+  object-fit: contain;
+}
+
+/* Media Queries untuk AchivementSection */
+@media (min-width: 768px) and (max-width: 1367px) {
+  .achivement-header {
+    padding: 70px 70px 70px 50px; /* Sesuaikan padding */
+    width: 42.817vw; /* Sesuaikan lebar */
+  }
+  .achivement-body {
+    width: 55vw; /* Sesuaikan lebar */
+    margin-left: -2%; /* Sesuaikan margin negatif */
+  }
+  .achivement-title .title {
+    font-size: 32px; /* Sesuaikan ukuran font */
+  }
+}
+
+@media (max-width: 767px) {
+  /* Mengubah 750px menjadi 767px agar konsisten dengan breakpoint Tailwind */
+  .section-achivement {
+    flex-direction: column; /* Tumpuk vertikal di mobile */
+    margin: 50px 0 70px; /* Sesuaikan margin */
+    overflow: hidden; /* Pertahankan overflow hidden */
+    border-radius: 0; /* Hapus border-radius di mobile jika tidak diinginkan */
+    box-shadow: none; /* Hapus shadow di mobile jika tidak diinginkan */
+    padding: 0; /* Hapus padding di container utama */
+  }
+  .achivement-header {
+    width: 100%; /* Lebar penuh */
+    padding: 0 15px; /* Padding di sisi */
+    order: 1; /* Pindah ke atas */
+    border-left: 0; /* Hapus border kiri */
+    margin-bottom: 30px; /* Jarak di bawah header */
+    background-color: transparent; /* Hapus background color di mobile */
+  }
+  .achivement-subtitle .subtitle {
+    font-size: 16px;
+    text-align: center; /* Rata tengah di mobile */
+  }
+  .achivement-title .title {
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+  }
+  .achivement-body {
+    width: 160%; /* Lebar yang lebih besar untuk memungkinkan gulir */
+    margin-left: 0; /* Hapus margin negatif */
+    order: 2; /* Pindah ke bawah */
+  }
+  .achivement-slider {
+    /* Sesuaikan ukuran slide atau container jika perlu di mobile */
+  }
+  .achivement-slide img {
+    max-width: 80px; /* Ukuran gambar yang lebih kecil di mobile */
+    max-height: 80px;
   }
 }

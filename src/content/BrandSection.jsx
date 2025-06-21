@@ -330,7 +330,7 @@ export default function BrandSection() {
         }}
         speed={3000} // Kecepatan autoplay untuk gerakan sangat mulus
         freeMode={true}
-        className="mySwiper brand-swiper !pb-5" // Menambah padding bawah untuk ruang di bawah logo
+        className="brand-swiper" // Menambah padding bawah untuk ruang di bawah logo
       >
         {currentBrandsData.map((brand, index) => (
           <SwiperSlide
@@ -343,7 +343,7 @@ export default function BrandSection() {
                 allBrandSets[activeBrandSetIndex].label
               }`}
               // Kelas disederhanakan, sesuaikan w- h- jika perlu untuk ukuran logo yang tepat
-              className="object-contain max-w-[120px] max-h-[50px] transform transition-transform duration-300 hover:scale-105"
+              className="object-contain max-w-[120px] max-h-[50px]"
             />
           </SwiperSlide>
         ))}
