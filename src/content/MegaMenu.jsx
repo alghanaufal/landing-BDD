@@ -5,9 +5,9 @@ export default function MegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false); // State to manage search bar visibility
-  const [searchText, setSearchText] = useState(""); // State for search input
-  const [isScrolled, setIsScrolled] = useState(false); // Pastikan isScrolled dideklarasikan dengan benar
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function MegaMenu() {
         clearTimeout(timeoutRef.current);
       }
       setActiveMenu(menu);
-      setIsSearchOpen(false); // Close search when hovering desktop menu
+      setIsSearchOpen(false);
     }
   };
 
@@ -52,20 +52,26 @@ export default function MegaMenu() {
   const toggleMobileMenu = () => {
     setIsOpen(!isOpen);
     setActiveMenu(null);
-    setIsSearchOpen(false); // Ensure search is closed when mobile menu toggles
+    setIsSearchOpen(false);
   };
 
   const toggleSubMenu = (menu) => {
     if (isMobile) {
       setActiveMenu(activeMenu === menu ? null : menu);
-      setIsSearchOpen(false); // Ensure search is closed when submenu toggles
+      setIsSearchOpen(false);
     }
   };
 
-  // This handleSearchAction can be used for actual search logic
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+    if (isOpen) {
+      setIsOpen(false);
+    }
+    setActiveMenu(null);
+  };
+
   const handleSearchAction = () => {
-    console.log("Performing search for:", searchText);
-    // Tambahkan logika pencarian Anda di sini
+    console.log("Melakukan pencarian untuk:", searchText);
   };
 
   const menuItems = [
@@ -101,7 +107,7 @@ export default function MegaMenu() {
           image:
             "https://images.unsplash.com/photo-1553484771-371a605b060b?w=300&h=200&fit=crop",
           description:
-            "Get help whenever you need it with our round-the-clock support",
+            "Dapatkan bantuan kapan pun Anda membutuhkannya dengan dukungan 24 jam kami",
         },
       },
     },
@@ -131,14 +137,15 @@ export default function MegaMenu() {
         featured: {
           title: "Learn & Grow",
           image: "https://placehold.co/300x200/FF5733/FFFFFF?text=Program",
-          description: "Explore our programs designed for your growth.",
+          description:
+            "Jelajahi program-program kami yang dirancang untuk pertumbuhan Anda.",
         },
       },
     },
     {
       id: "information",
       title: "Information",
-      hasSubmenu: true, // Assuming Information also has sub-items
+      hasSubmenu: true,
       content: {
         categories: [
           {
@@ -159,7 +166,8 @@ export default function MegaMenu() {
         featured: {
           title: "Stay Informed",
           image: "https://placehold.co/300x200/33FF57/000000?text=Information",
-          description: "Find all the information you need about us.",
+          description:
+            "Temukan semua informasi yang Anda butuhkan tentang kami.",
         },
       },
     },
@@ -194,24 +202,18 @@ export default function MegaMenu() {
       onMouseLeave={handleMouseLeave}
     >
       <div className="max-w mx-auto px-4 sm:px-6 lg:px-8">
-        {" "}
-        {/* Menggunakan max-w-7xl */}
         <div className="flex justify-between items-center h-16">
-          {/* Bagian Kiri: Tombol Hamburger Mobile dan Logo */}
           <div className="flex items-center">
-            {/* Tombol Menu Mobile (Ikon Hamburger/X) - Pindah ke kiri, hanya tampil di mobile */}
             <button
               onClick={toggleMobileMenu}
               className="lg:hidden p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600"
             >
               {isOpen ? (
-                <X className="h-6 w-6" /> // Ikon X saat menu mobile terbuka
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-6 w-6" /> // Ikon Hamburger saat menu mobile tertutup
+                <Menu className="h-6 w-6" />
               )}
             </button>
-            {/* Logo */}
-            {/* Menggunakan isMobile untuk memilih sumber gambar logo */}
             <img
               src={isMobile ? "/Logo-S.png" : "/Logo.png"}
               alt="Logo"
@@ -219,14 +221,12 @@ export default function MegaMenu() {
             />
           </div>
 
-          {/* Grup Menu Desktop dan Ikon Sisi Kanan */}
           <div className="flex items-center space-x-4 lg:space-x-8">
-            {/* Tautan Navigasi Menu Desktop */}
             <div className="hidden lg:flex lg:items-center lg:space-x-8">
               {menuItems.map((item) => (
                 <div
                   key={item.id}
-                  onMouseEnter={() => handleMouseEnter(item.id)} // Atur menu aktif saat hover
+                  onMouseEnter={() => handleMouseEnter(item.id)}
                 >
                   <button
                     className={`flex items-center px-3 py-2 transition-colors duration-200 font-medium text-gray-700 hover:text-blue-600 ${
@@ -234,10 +234,10 @@ export default function MegaMenu() {
                     }`}
                   >
                     {item.title}
-                    {item.hasSubmenu && ( // Tampilkan ikon chevron jika item menu memiliki sub-menu
+                    {item.hasSubmenu && (
                       <ChevronDown
                         className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                          activeMenu === item.id ? "rotate-180" : "" // Putar chevron saat menu aktif
+                          activeMenu === item.id ? "rotate-180" : ""
                         }`}
                       />
                     )}
@@ -245,17 +245,15 @@ export default function MegaMenu() {
                 </div>
               ))}
             </div>
-            {/* Ikon Sisi Kanan: Pencarian, Pengguna, Keranjang Belanja */}
+
             <div className="flex items-center space-x-4">
-              {/* Tombol Search untuk Desktop, disembunyikan di mobile */}
               <button
-                onClick={handleSearchAction} // Aksi pencarian
-                className="hidden lg:block p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600"
+                onClick={toggleSearch}
+                className="p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600 hidden lg:block" // Hidden di mobile, block di desktop
               >
                 <Search className="h-5 w-5" />
               </button>
 
-              {/* Tombol "Free Consultation!" */}
               <button className="flex items-center bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 shadow-lg">
                 <svg
                   className="mr-2 h-5 w-5"
@@ -276,7 +274,6 @@ export default function MegaMenu() {
         </div>
       </div>
 
-      {/* Konten Mega Menu Desktop */}
       {activeMenuContent && (
         <div className="hidden lg:block absolute top-16 left-0 right-0 bg-white shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -325,7 +322,55 @@ export default function MegaMenu() {
         </div>
       )}
 
-      {/* Konten Mega Menu Mobile (Dropdown) */}
+      {isSearchOpen && (
+        <div className="hidden lg:block bg-white border-t border-gray-200 shadow-lg animate-fade-in-down">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex items-center space-x-3">
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  placeholder="Cari produk, kategori, merek..."
+                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+                  autoFocus
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                />
+                <button
+                  onClick={handleSearchAction}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors duration-200"
+                >
+                  <Search className="h-5 w-5" />
+                </button>
+              </div>
+              <button
+                onClick={toggleSearch}
+                className="px-4 py-3 text-gray-600 hover:text-red-600 transition-colors duration-200"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <span className="text-sm text-gray-500">Pencarian populer:</span>
+              {[
+                "Smartphone",
+                "Laptop",
+                "Headphones",
+                "Fashion",
+                "Home Decor",
+              ].map((term) => (
+                <button
+                  key={term}
+                  className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200"
+                  onClick={() => setSearchText(term)}
+                >
+                  {term}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {isOpen && (
         <div
           className="lg:hidden bg-white border-t"
@@ -335,7 +380,6 @@ export default function MegaMenu() {
           }}
         >
           <div className="px-4 py-3 space-y-4 max-h-96 overflow-y-auto">
-            {/* Search bar for mobile - now at the top of the mobile dropdown */}
             <div className="w-full">
               <div className="flex items-center space-x-3">
                 <div className="flex-1 relative">
@@ -354,11 +398,31 @@ export default function MegaMenu() {
                   </button>
                 </div>
                 <button
-                  onClick={handleSearchAction} // Changed to trigger search action
+                  onClick={handleSearchAction}
                   className="bg-blue-600 text-white px-4 py-3 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-200"
                 >
                   Cari sekarang
                 </button>
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <span className="text-sm text-gray-500">
+                  Pencarian populer:
+                </span>
+                {[
+                  "Smartphone",
+                  "Laptop",
+                  "Headphones",
+                  "Fashion",
+                  "Home Decor",
+                ].map((term) => (
+                  <button
+                    key={term}
+                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200"
+                    onClick={() => setSearchText(term)}
+                  >
+                    {term}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -380,7 +444,6 @@ export default function MegaMenu() {
 
                 {item.hasSubmenu && activeMenu === item.id && (
                   <div className="pl-4 pb-2 space-y-1">
-                    {/* Menambahkan pemeriksaan eksplisit untuk item.content dan item.content.categories */}
                     {item.content &&
                       item.content.categories &&
                       item.content.categories.map((category, index) => (
