@@ -81,45 +81,51 @@ export default function MegaMenu() {
       title: "Services",
       hasSubmenu: true,
       content: {
-        mainItems: [
-          // New structure for desktop mega menu content
+        sections: [
           {
-            title: "Performance Creative",
-            description:
-              "Create ads-ready contents to better communicate your brand message.",
-            linkText: "See Service",
-            linkHref: "#",
+            items: [
+              {
+                title: "Performance Creative",
+                description:
+                  "Create ads-ready contents to better communicate your brand message.",
+                linkText: "See Service",
+                linkHref: "#",
+              },
+              {
+                title: "Website Development",
+                description:
+                  "Effective website with sufficient performance and aesthetic to fulfil transaction and deliver brand identity",
+                linkText: "See Service",
+                linkHref: "#",
+              },
+              {
+                title: "Search Engine Optimization",
+                description:
+                  "Organically increase your website and online store visibility.",
+                linkText: "See Service",
+                linkHref: "#",
+              },
+            ],
           },
           {
-            title: "Website Development",
-            description:
-              "Effective website with sufficient performance and aesthetic to fulfil transaction and deliver brand identity",
-            linkText: "See Service",
-            linkHref: "#",
-          },
-          {
-            title: "Search Engine Optimization",
-            description:
-              "Organically increase your website and online store visibility.",
-            linkText: "See Service",
-            linkHref: "#",
-          },
-          {
-            title: "Professional Service",
-            description:
-              "Tailored training program guided by industry experts and professionals.",
-            linkText: "See Service",
-            linkHref: "#",
-          },
-          {
-            title: "Digital Advertising",
-            description:
-              "Optimize ads performance, install CPAS, solve invisible issues on your online ads campaign.",
-            linkText: "See Service",
-            linkHref: "#",
+            items: [
+              {
+                title: "Professional Service",
+                description:
+                  "Tailored training program guided by industry experts and professionals.",
+                linkText: "See Service",
+                linkHref: "#",
+              },
+              {
+                title: "Digital Advertising",
+                description:
+                  "Optimize ads performance, install CPAS, solve invisible issues on your online ads campaign.",
+                linkText: "See Service",
+                linkHref: "#",
+              },
+            ],
           },
         ],
-        // The original 'categories' structure is kept for mobile rendering
         categories: [
           {
             title: "Support",
@@ -149,20 +155,24 @@ export default function MegaMenu() {
       title: "Program",
       hasSubmenu: true,
       content: {
-        mainItems: [
+        sections: [
           {
-            title: "Educational Programs",
-            description:
-              "Explore our coding bootcamps, design workshops, and marketing courses.",
-            linkText: "See Program",
-            linkHref: "#",
-          },
-          {
-            title: "Partnership Programs",
-            description:
-              "Join our affiliate, reseller, or strategic alliance programs for mutual growth.",
-            linkText: "See Program",
-            linkHref: "#",
+            items: [
+              {
+                title: "Educational Programs",
+                description:
+                  "Explore our coding bootcamps, design workshops, and marketing courses.",
+                linkText: "See Program",
+                linkHref: "#",
+              },
+              {
+                title: "Partnership Programs",
+                description:
+                  "Join our affiliate, reseller, or strategic alliance programs for mutual growth.",
+                linkText: "See Program",
+                linkHref: "#",
+              },
+            ],
           },
         ],
         categories: [
@@ -190,32 +200,36 @@ export default function MegaMenu() {
       title: "Information",
       hasSubmenu: true,
       content: {
-        mainItems: [
+        sections: [
           {
-            title: "About Us",
-            description: "Learn about our company, mission, and values.",
-            linkText: "Read More",
-            linkHref: "#",
-          },
-          {
-            title: "Careers",
-            description:
-              "Discover career opportunities and join our growing team.",
-            linkText: "View Jobs",
-            linkHref: "#",
-          },
-          {
-            title: "Blog & Insights",
-            description:
-              "Stay updated with our latest articles, news, and industry insights.",
-            linkText: "Visit Blog",
-            linkHref: "#",
-          },
-          {
-            title: "FAQs",
-            description: "Find answers to frequently asked questions.",
-            linkText: "See FAQs",
-            linkHref: "#",
+            items: [
+              {
+                title: "About Us",
+                description: "Learn about our company, mission, and values.",
+                linkText: "Read More",
+                linkHref: "#",
+              },
+              {
+                title: "Careers",
+                description:
+                  "Discover career opportunities and join our growing team.",
+                linkText: "View Jobs",
+                linkHref: "#",
+              },
+              {
+                title: "Blog & Insights",
+                description:
+                  "Stay updated with our latest articles, news, and industry insights.",
+                linkText: "Visit Blog",
+                linkHref: "#",
+              },
+              {
+                title: "FAQs",
+                description: "Find answers to frequently asked questions.",
+                linkText: "See FAQs",
+                linkHref: "#",
+              },
+            ],
           },
         ],
         categories: [
@@ -252,7 +266,6 @@ export default function MegaMenu() {
       hasSubmenu: false,
     },
   ];
-
   const activeMenuContent = menuItems.find(
     (item) => item.id === activeMenu
   )?.content;
@@ -328,8 +341,91 @@ export default function MegaMenu() {
 
       {activeMenuContent && (
         <div className="hidden lg:block absolute top-16 left-0 right-0 bg-[#F7F5F0] shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {activeMenuContent.sections ? (
+            activeMenuContent.sections.map((section, sectionIndex) => {
+              // Determine the grid columns based on the number of items or specific section
+              let gridColsClass = "md:grid-cols-2"; // Default for md breakpoint
+
+              // Logic to set specific grid columns based on active menu and section index
+              if (activeMenu === "services") {
+                if (sectionIndex === 0) {
+                  // First section of Services: 3 columns
+                  gridColsClass += " lg:grid-cols-3";
+                } else if (sectionIndex === 1) {
+                  // Second section of Services: 2 columns
+                  gridColsClass += " lg:grid-cols-2";
+                }
+              } else if (activeMenu === "program") {
+                gridColsClass += " lg:grid-cols-2"; // Program always 2 columns
+              } else if (activeMenu === "information") {
+                gridColsClass += " lg:grid-cols-4"; // Information always 4 columns
+              } else {
+                // Fallback for other sections, if needed, based on number of items
+                if (section.items.length === 1) {
+                  gridColsClass += " lg:grid-cols-1";
+                } else if (section.items.length === 2) {
+                  gridColsClass += " lg:grid-cols-2";
+                } else {
+                  gridColsClass += " lg:grid-cols-3"; // Default to 3 for others
+                }
+              }
+
+              return (
+                <div
+                  key={sectionIndex}
+                  className={`grid grid-cols-1 ${gridColsClass} gap-6 ${
+                    sectionIndex > 0 ? "mt-6" : ""
+                  }`}
+                >
+                  {section.items.map((item, itemIndex) => (
+                    <div
+                      key={itemIndex}
+                      className="bg-white p-4 rounded-lg shadow-sm"
+                    >
+                      <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-4">
+                        {item.description}
+                      </p>
+                      <a
+                        href={item.linkHref}
+                        className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group"
+                      >
+                        {item.linkText}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="2"
+                          stroke="currentColor"
+                          className="w-4 h-4 ml-1 transform transition-transform duration-200 group-hover:translate-x-1"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              );
+            })
+          ) : (
+            /* Fallback for old mainItems structure if sections are not defined */
+            <div
+              className={`grid grid-cols-1 md:grid-cols-2 ${
+                activeMenuContent.mainItems &&
+                activeMenuContent.mainItems.length === 1
+                  ? "lg:grid-cols-1"
+                  : activeMenuContent.mainItems &&
+                    activeMenuContent.mainItems.length === 2
+                  ? "lg:grid-cols-2"
+                  : "lg:grid-cols-3"
+              } gap-6`}
+            >
               {activeMenuContent.mainItems &&
                 activeMenuContent.mainItems.map((item, index) => (
                   <div
@@ -365,7 +461,7 @@ export default function MegaMenu() {
                   </div>
                 ))}
             </div>
-          </div>
+          )}
         </div>
       )}
 
