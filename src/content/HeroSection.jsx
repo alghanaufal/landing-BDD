@@ -35,25 +35,6 @@ export default function HeroSection() {
           className="flex-grow hidden lg:flex object-cover"
         />
       </div>
-
-      <div className="mt-16 lg:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-        <div>
-          <div className="text-3xl lg:text-4xl font-bold mb-2">10K+</div>
-          <div className="text-gray-200">Happy Customers</div>
-        </div>
-        <div>
-          <div className="text-3xl lg:text-4xl font-bold mb-2">5K+</div>
-          <div className="text-gray-200">Products</div>
-        </div>
-        <div>
-          <div className="text-3xl lg:text-4xl font-bold mb-2">99%</div>
-          <div className="text-gray-200">Satisfaction</div>
-        </div>
-        <div>
-          <div className="text-3xl lg:text-4xl font-bold mb-2">24/7</div>
-          <div className="text-gray-200">Support</div>
-        </div>
-      </div>
     </section>
   );
 }

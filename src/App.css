@@ -1,0 +1,98 @@
+.custom-swiper-container {
+  width: 100%;
+  height: 500px; /* Tinggi kontainer slider */
+  overflow: hidden; /* Sembunyikan konten di luar batas */
+  border-radius: 1.5rem; /* rounded-3xl */
+  position: relative; /* Diperlukan untuk penempatan pagination */
+  user-select: none; /* Mencegah pemilihan teks saat menggulir */
+}
+
+.custom-swiper-wrapper {
+  display: flex;
+  flex-direction: column; /* Untuk slider vertikal */
+  transition: transform 0.5s ease-in-out; /* Transisi halus antar slide */
+  height: 100%; /* Pastikan wrapper mengambil tinggi penuh untuk menyelaraskan slide dengan benar */
+}
+
+.swiper-slide-custom {
+  flex-shrink: 0; /* Pastikan slide tidak menyusut */
+  width: 100%;
+  height: 100%; /* Setiap slide mengambil 100% tinggi kontainer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff; /* Latar belakang putih untuk setiap slide */
+  padding: 1rem;
+  box-sizing: border-box; /* Pastikan padding tidak menambah ukuran total */
+}
+
+.custom-pagination {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.custom-pagination-bullet {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #d1d5db; /* Gray-300 */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-pagination-bullet.active {
+  background-color: #3b82f6; /* Blue-600 */
+}
+
+/* Custom styles for Popular Brands horizontal slider */
+.brand-slider-container {
+  overflow: hidden;
+  position: relative;
+  cursor: grab; /* Grab cursor for the container */
+}
+
+.brand-slider-container:active {
+  cursor: grabbing; /* Grabbing cursor when active */
+}
+
+.brand-slider-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  /* Will be managed by JS for infinite loop, so no default transform */
+}
+
+.brand-slide {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.brand-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  gap: 8px;
+}
+
+.brand-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: #cbd5e0; /* Gray-300 */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.brand-pagination-bullet.active {
+  background-color: #3b82f6; /* Blue-600 */
+}
