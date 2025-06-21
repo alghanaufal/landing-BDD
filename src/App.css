@@ -304,11 +304,12 @@
   }
   .statistik-card-text {
     padding: 0 18px;
+    position: absolute;
+    height: auto;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: static;
-    height: auto;
   }
   .statistik-card-title .title {
     font-size: 24px;
