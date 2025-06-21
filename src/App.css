@@ -1,98 +1,64 @@
-.custom-swiper-container {
-  width: 100%;
-  height: 500px; /* Tinggi kontainer slider */
-  overflow: hidden; /* Sembunyikan konten di luar batas */
-  border-radius: 1.5rem; /* rounded-3xl */
-  position: relative; /* Diperlukan untuk penempatan pagination */
-  user-select: none; /* Mencegah pemilihan teks saat menggulir */
+/* Custom styles for Swiper pagination bullets for Brands */
+/* Targets the pagination bullets within the 'brand-swiper' */
+.brand-swiper .swiper-pagination-bullet {
+  width: 10px; /* Width of the pagination bullet */
+  height: 10px; /* Height of the pagination bullet */
+  background-color: #cbd5e0; /* Gray-300 background color */
+  border-radius: 50%; /* Makes the bullet a perfect circle */
+  opacity: 1; /* Ensures bullets are fully visible by default */
+  transition: background-color 0.3s ease; /* Smooth transition for background color changes */
 }
 
-.custom-swiper-wrapper {
-  display: flex;
-  flex-direction: column; /* Untuk slider vertikal */
-  transition: transform 0.5s ease-in-out; /* Transisi halus antar slide */
-  height: 100%; /* Pastikan wrapper mengambil tinggi penuh untuk menyelaraskan slide dengan benar */
+/* Styles for the active brand pagination bullet */
+.brand-swiper .swiper-pagination-bullet-active {
+  background-color: #3b82f6; /* Blue-600 background color when active */
 }
 
-.swiper-slide-custom {
-  flex-shrink: 0; /* Pastikan slide tidak menyusut */
-  width: 100%;
-  height: 100%; /* Setiap slide mengambil 100% tinggi kontainer */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff; /* Latar belakang putih untuk setiap slide */
-  padding: 1rem;
-  box-sizing: border-box; /* Pastikan padding tidak menambah ukuran total */
+/* Custom styles for Swiper pagination bullets for Products (vertical) */
+/* The height for the .product-swiper is handled by Tailwind classes in JSX (h-[500px]) */
+
+/* Positioning and layout for the product slider's pagination */
+.product-swiper .swiper-pagination {
+  position: absolute; /* Absolute positioning relative to the Swiper container */
+  right: 10px; /* 10px from the right edge */
+  top: 50%; /* Vertically centered */
+  transform: translateY(-50%); /* Adjusts vertical centering precisely */
+  display: flex; /* Uses flexbox for layout */
+  flex-direction: column; /* Arranges bullets in a column */
+  gap: 10px; /* Space between bullets */
+  z-index: 10; /* Ensures pagination is above other content */
 }
 
-.custom-pagination {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 10;
+/* Styles for individual product pagination bullets */
+.product-pagination-bullet {
+  display: block; /* Ensures each bullet is a block element */
+  width: 10px; /* Width of the bullet */
+  height: 10px; /* Height of the bullet */
+  border-radius: 50%; /* Makes the bullet a perfect circle */
+  background-color: #d1d5db; /* Gray-300 background color */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for background color changes */
 }
 
-.custom-pagination-bullet {
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #d1d5db; /* Gray-300 */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+/* Styles for the active product pagination bullet */
+.product-pagination-bullet-active {
+  background-color: #3b82f6; /* Blue-600 background color when active */
 }
 
-.custom-pagination-bullet.active {
-  background-color: #3b82f6; /* Blue-600 */
+/* Ensure brand slides expand to content for 'auto' slidesPerView */
+/* This is crucial for the smooth, continuous autoplay of the brand slider */
+.brand-swiper-slide {
+  width: auto !important; /* Forces the slide to take its natural width, overriding Swiper's default */
 }
 
-/* Custom styles for Popular Brands horizontal slider */
-.brand-slider-container {
-  overflow: hidden;
-  position: relative;
-  cursor: grab; /* Grab cursor for the container */
+/* Adjust the main Swiper container height for products */
+.product-swiper.swiper {
+  height: 500px; /* Fixed height for the product slider container */
+  border-radius: 1.5rem; /* Apply rounded corners (equivalent to Tailwind's rounded-3xl) */
 }
 
-.brand-slider-container:active {
-  cursor: grabbing; /* Grabbing cursor when active */
-}
-
-.brand-slider-wrapper {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  /* Will be managed by JS for infinite loop, so no default transform */
-}
-
-.brand-slide {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.brand-pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
-  gap: 8px;
-}
-
-.brand-pagination-bullet {
-  width: 10px;
-  height: 10px;
-  background-color: #cbd5e0; /* Gray-300 */
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.brand-pagination-bullet.active {
-  background-color: #3b82f6; /* Blue-600 */
+/* Remove default Swiper styles for the wrapper to let flexbox manage it */
+/* This helps in centering product cards within the vertical slides */
+.product-swiper .swiper-wrapper {
+  align-items: center; /* Vertically centers the content (product cards) within each slide */
 }

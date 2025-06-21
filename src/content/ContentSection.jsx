@@ -1,7 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
-import "../App.css";
+import React, { useState, useEffect } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper modules
+import { Pagination, Mousewheel, Autoplay } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/autoplay"; // If using autoplay module
 
 export default function ContentSection() {
+  // Data for popular products, including name, price, image URL, and rating
   const popularProducts = [
     {
       name: "Wireless Headphones",
@@ -68,6 +77,7 @@ export default function ContentSection() {
     },
   ];
 
+  // Data for popular brands, including name and logo URL
   const popularBrands = [
     {
       name: "TechNova",
@@ -107,247 +117,39 @@ export default function ContentSection() {
     },
   ];
 
-  const [currentProductSlide, setCurrentProductSlide] = useState(0); // State untuk melacak slide aktif produk
-  const productSliderRef = useRef(null); // Ref untuk elemen slider produk
-  const productSlideHeightRef = useRef(0); // Ref untuk menyimpan tinggi satu slide produk
-  const isProductScrolling = useRef(false); // Ref untuk mencegah gulir cepat produk
-
-  const [currentBrandSlide, setCurrentBrandSlide] = useState(0); // State untuk melacak slide aktif merek
-  const brandSliderRef = useRef(null); // Ref untuk elemen slider merek
-  const brandSlideWidthRef = useRef(0); // Ref untuk menyimpan lebar satu slide merek
-  const isBrandDragging = useRef(false); // Ref untuk melacak apakah sedang di-drag
-  const startDragX = useRef(0); // Posisi X awal saat drag dimulai
-  const currentTranslateX = useRef(0); // Transformasi X saat ini untuk slider merek
-  const animationFrameId = useRef(null); // Untuk mengelola requestAnimationFrame
-  const autoplayIntervalBrand = useRef(null); // Untuk autoplay merek
-
-  // Utility function to get responsive slides per view for brands
+  // Utility function to determine the number of slides to show per view based on screen width
   const getBrandsSlidesPerView = () => {
-    if (window.innerWidth < 640) return 2;
-    if (window.innerWidth < 768) return 3;
-    if (window.innerWidth < 1024) return 4;
-    if (window.innerWidth < 1280) return 5;
-    return 6;
+    if (window.innerWidth < 640) return 2; // 2 slides on small screens (e.g., mobile)
+    if (window.innerWidth < 768) return 3; // 3 slides on medium screens (e.g., tablets)
+    if (window.innerWidth < 1024) return 4; // 4 slides on large screens
+    if (window.innerWidth < 1280) return 5; // 5 slides on extra-large screens
+    return 6; // 6 slides on larger desktops
   };
 
-  // Efek untuk menghitung tinggi slide produk dan menambahkan/menghapus event listener mousewheel
+  // State to force re-rendering of the brand Swiper when the window is resized
+  const [swiperBrandKey, setSwiperBrandKey] = useState(0);
+
+  // Effect hook to handle window resize events
   useEffect(() => {
-    const calculateProductSlideHeight = () => {
-      if (productSliderRef.current) {
-        const firstSlide = productSliderRef.current.querySelector(
-          ".swiper-slide-custom"
-        );
-        if (firstSlide) {
-          productSlideHeightRef.current = firstSlide.offsetHeight;
-        }
-      }
-    };
-
-    const handleProductWheel = (event) => {
-      event.preventDefault();
-
-      if (isProductScrolling.current) return;
-      isProductScrolling.current = true;
-
-      const numSlides = popularProducts.length;
-      let newSlide = currentProductSlide;
-
-      if (event.deltaY > 0) {
-        newSlide = (currentProductSlide + 1) % numSlides;
-      } else {
-        newSlide = (currentProductSlide - 1 + numSlides) % numSlides;
-      }
-
-      setCurrentProductSlide(newSlide);
-
-      setTimeout(() => {
-        isProductScrolling.current = false;
-      }, 500);
-    };
-
-    calculateProductSlideHeight();
-    const currentProductSliderContainer =
-      productSliderRef.current?.parentElement;
-    if (currentProductSliderContainer) {
-      currentProductSliderContainer.addEventListener(
-        "wheel",
-        handleProductWheel,
-        {
-          passive: false,
-        }
-      );
-    }
-
-    window.addEventListener("resize", calculateProductSlideHeight);
-
-    return () => {
-      if (currentProductSliderContainer) {
-        currentProductSliderContainer.removeEventListener(
-          "wheel",
-          handleProductWheel
-        );
-      }
-      window.removeEventListener("resize", calculateProductSlideHeight);
-    };
-  }, [currentProductSlide, popularProducts.length]);
-
-  // Efek untuk slider merek (horizontal, grab cursor, infinite loop)
-  useEffect(() => {
-    const slidesPerView = getBrandsSlidesPerView();
-    const singleSlideWidth = brandSliderRef.current
-      ? brandSliderRef.current.clientWidth / slidesPerView
-      : 0;
-    brandSlideWidthRef.current = singleSlideWidth;
-
-    const wrapper = brandSliderRef.current;
-    if (!wrapper) return;
-
-    // Clone slides for infinite loop
-    const setupInfiniteLoop = () => {
-      // Clear any existing clones
-      Array.from(wrapper.children).forEach((child) => {
-        if (child.classList.contains("clone")) {
-          wrapper.removeChild(child);
-        }
-      });
-
-      const originalSlides = Array.from(wrapper.children);
-      const numOriginalSlides = originalSlides.length;
-      const clonesNeeded = slidesPerView * 2; // Enough clones for seamless loop
-
-      // Append clones of the first slides
-      for (let i = 0; i < clonesNeeded; i++) {
-        const clone = originalSlides[i % numOriginalSlides].cloneNode(true);
-        clone.classList.add("clone");
-        wrapper.appendChild(clone);
-      }
-
-      // Prepend clones of the last slides
-      for (let i = 0; i < clonesNeeded; i++) {
-        const clone =
-          originalSlides[
-            numOriginalSlides - 1 - (i % numOriginalSlides)
-          ].cloneNode(true);
-        clone.classList.add("clone");
-        wrapper.prepend(clone);
-      }
-
-      // Set initial position to show original content
-      wrapper.style.transition = "none";
-      currentTranslateX.current = -clonesNeeded * singleSlideWidth;
-      wrapper.style.transform = `translateX(${currentTranslateX.current}px)`;
-    };
-
-    setupInfiniteLoop(); // Initial setup
-
-    const updatePosition = () => {
-      wrapper.style.transform = `translateX(${currentTranslateX.current}px)`;
-    };
-
-    const animate = () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-      updatePosition();
-      animationFrameId.current = requestAnimationFrame(animate);
-    };
-
-    const handleMouseDown = (e) => {
-      isBrandDragging.current = true;
-      startDragX.current = e.pageX - currentTranslateX.current;
-      wrapper.style.transition = "none"; // Disable smooth transition during drag
-      clearInterval(autoplayIntervalBrand.current); // Pause autoplay
-    };
-
-    const handleMouseMove = (e) => {
-      if (!isBrandDragging.current) return;
-      const newTranslateX = e.pageX - startDragX.current;
-      currentTranslateX.current = newTranslateX;
-      updatePosition();
-    };
-
-    const handleMouseUp = () => {
-      isBrandDragging.current = false;
-      wrapper.style.transition = "transform 0.5s ease-out"; // Re-enable smooth transition
-
-      // Snap to nearest slide
-      const snapTo =
-        Math.round(currentTranslateX.current / singleSlideWidth) *
-        singleSlideWidth;
-      currentTranslateX.current = snapTo;
-      updatePosition();
-
-      // Restart autoplay after a short delay
-      autoplayIntervalBrand.current = setInterval(autoplayBrand, 2500);
-    };
-
-    const autoplayBrand = () => {
-      if (!isBrandDragging.current) {
-        currentTranslateX.current -= singleSlideWidth;
-        wrapper.style.transition = "transform 0.5s ease-in-out";
-        updatePosition();
-
-        // Loop back if at the end of original slides
-        const totalContentWidth = popularBrands.length * singleSlideWidth;
-        const clonedStart = -clonesNeeded * singleSlideWidth;
-        const clonedEnd =
-          -(clonesNeeded + popularBrands.length) * singleSlideWidth;
-
-        if (currentTranslateX.current <= clonedEnd) {
-          setTimeout(() => {
-            wrapper.style.transition = "none"; // Disable transition for instant jump
-            currentTranslateX.current = clonedStart;
-            updatePosition();
-          }, 500); // Match transition duration
-        }
-      }
-    };
-
-    // Initial autoplay start
-    autoplayIntervalBrand.current = setInterval(autoplayBrand, 2500);
-
-    wrapper.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    wrapper.addEventListener("mouseleave", handleMouseUp); // End drag if mouse leaves
-
-    // Recalculate on resize
     const handleResize = () => {
-      const newSlidesPerView = getBrandsSlidesPerView();
-      const newSingleSlideWidth = wrapper.clientWidth / newSlidesPerView;
-      brandSlideWidthRef.current = newSingleSlideWidth;
-      setupInfiniteLoop(); // Re-setup clones and position on resize
+      // Increment the key to force Swiper to re-render and re-calculate slidesPerView
+      setSwiperBrandKey((prevKey) => prevKey + 1);
     };
+
+    // Add event listener for window resize
     window.addEventListener("resize", handleResize);
 
+    // Clean up: remove event listener when component unmounts
     return () => {
-      wrapper.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-      wrapper.removeEventListener("mouseleave", handleMouseUp);
       window.removeEventListener("resize", handleResize);
-      clearInterval(autoplayIntervalBrand.current);
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
     };
-  }, [popularBrands.length]); // Dependencies for brand slider effect
-
-  // Handler untuk navigasi manual menggunakan titik-titik pagination produk
-  const goToProductSlide = (index) => {
-    // With Swiper, this is handled by Swiper's internal pagination
-  };
-
-  // Handler untuk navigasi manual menggunakan titik-titik pagination merek
-  const goToBrandSlide = (index) => {
-    // With Swiper, this is handled by Swiper's internal pagination
-  };
+  }, []); // Empty dependency array means this effect runs only once on mount and cleans up on unmount
 
   return (
     <section className="py-16 lg:py-24 font-inter">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Bagian Merek Populer dengan Custom Slider Horizontal */}
-        <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl">
+        {/* Popular Brands Section with Swiper Slider (Horizontal) */}
+        <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl mb-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Our Trusted Brands
@@ -356,54 +158,40 @@ export default function ContentSection() {
               Explore products from the best brands in the industry
             </p>
           </div>
-          {/* Slider Kustom Merek */}
-          <div className="brand-slider-container">
-            <div
-              ref={brandSliderRef}
-              className="brand-slider-wrapper"
-              // No direct style transform here, managed by JS for infinite loop
-            >
-              {/* Combine original and cloned brands for infinite loop */}
-              {[...popularBrands, ...popularBrands, ...popularBrands].map(
-                (brand, index) => (
-                  <div
-                    key={index} // Use index here, combined with array for uniqueness if needed
-                    className="brand-slide"
-                    style={{
-                      minWidth: `${100 / getBrandsSlidesPerView()}%`,
-                    }}
-                  >
-                    <div className="flex flex-col items-center justify-center p-4">
-                      <img
-                        src={brand.logo}
-                        alt={brand.name}
-                        className="w-24 h-24 object-contain mb-2 rounded-full border border-gray-200 p-2 transform transition-transform duration-300 hover:scale-105"
-                      />
-                      <p className="text-md font-medium text-gray-800">
-                        {brand.name}
-                      </p>
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
-            {/* Titik-titik pagination kustom merek */}
-            <div className="brand-pagination">
-              {popularBrands.map((_, index) => (
-                <span
-                  key={index}
-                  className={`brand-pagination-bullet ${
-                    index === currentBrandSlide ? "active" : ""
-                  }`}
-                  onClick={() => setCurrentBrandSlide(index)}
-                  aria-label={`Go to brand slide ${index + 1}`}
-                ></span>
-              ))}
-            </div>
-          </div>
+          {/* Swiper implementation for Brands */}
+          <Swiper
+            key={swiperBrandKey} // Key for responsive re-rendering
+            modules={[Autoplay, Pagination]} // Modules used: Autoplay for continuous movement, Pagination for dots
+            spaceBetween={20} // Space between each slide
+            slidesPerView={getBrandsSlidesPerView()} // Number of slides visible at once, based on screen size
+            loop={true} // Enables infinite loop for continuous scrolling
+            autoplay={{
+              delay: 0, // No delay between slides, ensuring continuous movement
+              disableOnInteraction: false, // Autoplay continues even if user interacts
+              reverseDirection: true, // Scrolls from right to left
+            }}
+            speed={3000} // Speed of the autoplay transition in milliseconds (lower = faster)
+            pagination={{ clickable: true }} // Enables clickable pagination dots
+            className="mySwiper brand-swiper" // Custom class for styling
+          >
+            {popularBrands.map((brand, index) => (
+              <SwiperSlide key={index} className="brand-swiper-slide">
+                <div className="flex flex-col items-center justify-center p-4">
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    className="w-24 h-24 object-contain mb-2 rounded-full border border-gray-200 p-2 transform transition-transform duration-300 hover:scale-105"
+                  />
+                  <p className="text-md font-medium text-gray-800">
+                    {brand.name}
+                  </p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
-        {/* Grid Kategori */}
+        {/* Categories Grid Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {[
             {
@@ -450,7 +238,7 @@ export default function ContentSection() {
           ))}
         </div>
 
-        {/* Bagian Fitur */}
+        {/* Features Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {[
             {
@@ -486,7 +274,7 @@ export default function ContentSection() {
           ))}
         </div>
 
-        {/* Bagian Produk Populer dengan Custom Slider Vertikal */}
+        {/* Popular Products Section with Swiper Slider (Vertical) */}
         <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl p-8 lg:p-12 mb-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -496,20 +284,27 @@ export default function ContentSection() {
               Best-selling items loved by our customers
             </p>
           </div>
-          {/* Slider Kustom Produk */}
-          <div className="custom-swiper-container">
-            <div
-              ref={productSliderRef}
-              className="custom-swiper-wrapper"
-              style={{
-                transform: `translateY(-${
-                  currentProductSlide * productSlideHeightRef.current
-                }px)`,
-              }}
-            >
-              {popularProducts.map((product, index) => (
-                <div key={index} className="swiper-slide-custom">
-                  {/* Konten kartu produk di dalam setiap slide */}
+          {/* Swiper implementation for Products */}
+          <Swiper
+            modules={[Pagination, Mousewheel]} // Modules used: Pagination for dots, Mousewheel for mouse scrolling
+            direction={"vertical"} // Sets the slider direction to vertical
+            slidesPerView={1} // Shows one slide at a time
+            spaceBetween={0} // No space between slides for a clean vertical stack
+            mousewheel={true} // Enables mousewheel control for navigation
+            pagination={{
+              clickable: true, // Pagination dots are clickable
+              el: ".product-pagination", // Specifies the custom container for pagination dots
+              bulletClass: "product-pagination-bullet", // Custom class for individual bullets
+              bulletActiveClass: "product-pagination-bullet-active", // Custom class for the active bullet
+            }}
+            loop={true} // Enables infinite loop
+            // Custom class and Tailwind for height and width for the Swiper container
+            className="mySwiper product-swiper h-[500px] w-full rounded-3xl"
+          >
+            {popularProducts.map((product, index) => (
+              <SwiperSlide key={index}>
+                {/* Product card content within each slide */}
+                <div className="flex justify-center items-center h-full w-full">
                   <div className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow duration-300 group cursor-pointer w-full max-w-sm mx-auto">
                     <div className="aspect-square mb-4 overflow-hidden rounded-lg">
                       <img
@@ -534,22 +329,11 @@ export default function ContentSection() {
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-            {/* Titik-titik pagination kustom produk */}
-            <div className="custom-pagination">
-              {popularProducts.map((_, index) => (
-                <span
-                  key={index}
-                  className={`custom-pagination-bullet ${
-                    index === currentProductSlide ? "active" : ""
-                  }`}
-                  onClick={() => setCurrentProductSlide(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                ></span>
-              ))}
-            </div>
-          </div>
+              </SwiperSlide>
+            ))}
+            {/* Custom pagination container for product slider */}
+            <div className="product-pagination"></div>
+          </Swiper>
         </div>
       </div>
     </section>
