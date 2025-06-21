@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, Menu, X, User, ShoppingCart, Search } from "lucide-react";
-// Import FaWhatsapp dihapus karena menyebabkan error, diganti dengan SVG inline
 
 export default function MegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false); // State to manage search bar visibility
+  const [searchText, setSearchText] = useState(""); // State for search input
+  const [isScrolled, setIsScrolled] = useState(false); // Pastikan isScrolled dideklarasikan dengan benar
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -37,6 +37,7 @@ export default function MegaMenu() {
         clearTimeout(timeoutRef.current);
       }
       setActiveMenu(menu);
+      setIsSearchOpen(false); // Close search when hovering desktop menu
     }
   };
 
@@ -51,78 +52,23 @@ export default function MegaMenu() {
   const toggleMobileMenu = () => {
     setIsOpen(!isOpen);
     setActiveMenu(null);
-    setIsSearchOpen(false);
+    setIsSearchOpen(false); // Ensure search is closed when mobile menu toggles
   };
 
   const toggleSubMenu = (menu) => {
     if (isMobile) {
       setActiveMenu(activeMenu === menu ? null : menu);
+      setIsSearchOpen(false); // Ensure search is closed when submenu toggles
     }
   };
 
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-    if (isOpen) {
-      setIsOpen(false);
-    }
+  // This handleSearchAction can be used for actual search logic
+  const handleSearchAction = () => {
+    console.log("Performing search for:", searchText);
+    // Tambahkan logika pencarian Anda di sini
   };
 
   const menuItems = [
-    {
-      id: "products",
-      title: "Products",
-      hasSubmenu: true,
-      content: {
-        categories: [
-          {
-            title: "Electronics",
-            items: [
-              "Smartphones",
-              "Laptops",
-              "Tablets",
-              "Headphones",
-              "Cameras",
-            ],
-          },
-          {
-            title: "Fashion",
-            items: [
-              "Men's Clothing",
-              "Women's Clothing",
-              "Shoes",
-              "Accessories",
-              "Bags",
-            ],
-          },
-          {
-            title: "Home & Garden",
-            items: [
-              "Furniture",
-              "Kitchen",
-              "Decor",
-              "Garden Tools",
-              "Lighting",
-            ],
-          },
-          {
-            title: "Sports",
-            items: [
-              "Fitness Equipment",
-              "Outdoor Gear",
-              "Team Sports",
-              "Water Sports",
-              "Winter Sports",
-            ],
-          },
-        ],
-        featured: {
-          title: "Featured Products",
-          image:
-            "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop",
-          description: "Check out our latest collection of premium products",
-        },
-      },
-    },
     {
       id: "services",
       title: "Services",
@@ -160,13 +106,76 @@ export default function MegaMenu() {
       },
     },
     {
-      id: "about",
-      title: "About",
+      id: "program",
+      title: "Program",
+      hasSubmenu: true,
+      content: {
+        categories: [
+          {
+            title: "Educational",
+            items: [
+              "Coding Bootcamps",
+              "Design Workshops",
+              "Marketing Courses",
+            ],
+          },
+          {
+            title: "Partnership",
+            items: [
+              "Affiliate Program",
+              "Reseller Program",
+              "Strategic Alliances",
+            ],
+          },
+        ],
+        featured: {
+          title: "Learn & Grow",
+          image: "https://placehold.co/300x200/FF5733/FFFFFF?text=Program",
+          description: "Explore our programs designed for your growth.",
+        },
+      },
+    },
+    {
+      id: "information",
+      title: "Information",
+      hasSubmenu: true, // Assuming Information also has sub-items
+      content: {
+        categories: [
+          {
+            title: "Company Info",
+            items: [
+              "About Us",
+              "Careers",
+              "Press",
+              "Terms of Service",
+              "Privacy Policy",
+            ],
+          },
+          {
+            title: "Resources",
+            items: ["FAQs", "Blog", "Downloads", "Case Studies"],
+          },
+        ],
+        featured: {
+          title: "Stay Informed",
+          image: "https://placehold.co/300x200/33FF57/000000?text=Information",
+          description: "Find all the information you need about us.",
+        },
+      },
+    },
+    {
+      id: "news-blog",
+      title: "News & Blog",
       hasSubmenu: false,
     },
     {
-      id: "contact",
-      title: "Contact",
+      id: "loyalty-program",
+      title: "Loyalty Program",
+      hasSubmenu: false,
+    },
+    {
+      id: "web-seo-audit",
+      title: "Web & SEO Audit",
       hasSubmenu: false,
     },
   ];
@@ -184,7 +193,9 @@ export default function MegaMenu() {
       }`}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="max-w px-4 sm:px-6 lg:px-8">
+      <div className="max-w mx-auto px-4 sm:px-6 lg:px-8">
+        {" "}
+        {/* Menggunakan max-w-7xl */}
         <div className="flex justify-between items-center h-16">
           {/* Bagian Kiri: Tombol Hamburger Mobile dan Logo */}
           <div className="flex items-center">
@@ -204,7 +215,7 @@ export default function MegaMenu() {
             <img
               src={isMobile ? "/Logo-S.png" : "/Logo.png"}
               alt="Logo"
-              className={`flex-shrink-0 ${isMobile ? "ml-2" : ""}`} // Tambahkan margin kiri pada mobile jika ada hamburger
+              className={`flex-shrink-0 ${isMobile ? "ml-2" : ""}`}
             />
           </div>
 
@@ -236,13 +247,15 @@ export default function MegaMenu() {
             </div>
             {/* Ikon Sisi Kanan: Pencarian, Pengguna, Keranjang Belanja */}
             <div className="flex items-center space-x-4">
+              {/* Tombol Search untuk Desktop, disembunyikan di mobile */}
               <button
-                onClick={toggleSearch}
-                className="p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600"
+                onClick={handleSearchAction} // Aksi pencarian
+                className="hidden lg:block p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600"
               >
                 <Search className="h-5 w-5" />
               </button>
-              {/* Changed button for Free Consultation, now using inline SVG for WhatsApp icon */}
+
+              {/* Tombol "Free Consultation!" */}
               <button className="flex items-center bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 shadow-lg">
                 <svg
                   className="mr-2 h-5 w-5"
@@ -263,93 +276,56 @@ export default function MegaMenu() {
         </div>
       </div>
 
+      {/* Konten Mega Menu Desktop */}
       {activeMenuContent && (
-        <div className="absolute top-16 left-0 right-0 bg-white shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down">
+        <div className="hidden lg:block absolute top-16 left-0 right-0 bg-white shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              {activeMenuContent.categories.map((category, index) => (
-                <div key={index} className="space-y-3">
-                  <h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide">
-                    {category.title}
-                  </h3>
-                  <ul className="space-y-2">
-                    {category.items.map((subItem, subIndex) => (
-                      <li key={subIndex}>
-                        <a
-                          href="#"
-                          className="text-gray-600 hover:text-blue-600 transition-colors duration-200 text-sm block py-1"
-                        >
-                          {subItem}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+              {activeMenuContent.categories &&
+                activeMenuContent.categories.map((category, index) => (
+                  <div key={index} className="space-y-3">
+                    <h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide">
+                      {category.title}
+                    </h3>
+                    <ul className="space-y-2">
+                      {category.items.map((subItem, subIndex) => (
+                        <li key={subIndex}>
+                          <a
+                            href="#"
+                            className="text-gray-600 hover:text-blue-600 transition-colors duration-200 text-sm block py-1"
+                          >
+                            {subItem}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+
+              {activeMenuContent.featured && (
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-4">
+                  <img
+                    src={activeMenuContent.featured.image}
+                    alt="Featured"
+                    className="w-full h-32 object-cover rounded-lg mb-3"
+                  />
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    {activeMenuContent.featured.title}
+                  </h4>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {activeMenuContent.featured.description}
+                  </p>
+                  <button className="bg-blue-600 px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors duration-200">
+                    Learn More
+                  </button>
                 </div>
-              ))}
-
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-4">
-                <img
-                  src={activeMenuContent.featured.image}
-                  alt="Featured"
-                  className="w-full h-32 object-cover rounded-lg mb-3"
-                />
-                <h4 className="font-semibold text-gray-900 mb-2">
-                  {activeMenuContent.featured.title}
-                </h4>
-                <p className="text-sm text-gray-600 mb-3">
-                  {activeMenuContent.featured.description}
-                </p>
-                <button className="bg-blue-600 px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors duration-200">
-                  Learn More
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      {isSearchOpen && (
-        <div className="bg-white border-t border-gray-200 shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex items-center space-x-3">
-              <div className="flex-1 relative">
-                <input
-                  type="text"
-                  placeholder="Search products, categories, brands..."
-                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
-                  autoFocus
-                />
-                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors duration-200">
-                  <Search className="h-5 w-5" />
-                </button>
-              </div>
-              <button
-                onClick={toggleSearch}
-                className="px-4 py-3 text-gray-600 hover:text-red-600 transition-colors duration-200"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <span className="text-sm text-gray-500">Popular searches:</span>
-              {[
-                "Smartphone",
-                "Laptop",
-                "Headphones",
-                "Fashion",
-                "Home Decor",
-              ].map((term) => (
-                <button
-                  key={term}
-                  className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200"
-                >
-                  {term}
-                </button>
-              ))}
+              )}
             </div>
           </div>
         </div>
       )}
 
+      {/* Konten Mega Menu Mobile (Dropdown) */}
       {isOpen && (
         <div
           className="lg:hidden bg-white border-t"
@@ -358,7 +334,34 @@ export default function MegaMenu() {
             backdropFilter: !isScrolled ? "blur(10px)" : "none",
           }}
         >
-          <div className="px-4 py-3 space-y-1 max-h-96 overflow-y-auto">
+          <div className="px-4 py-3 space-y-4 max-h-96 overflow-y-auto">
+            {/* Search bar for mobile - now at the top of the mobile dropdown */}
+            <div className="w-full">
+              <div className="flex items-center space-x-3">
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    placeholder="Masukkan kata kunci pencarian"
+                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                  />
+                  <button
+                    onClick={handleSearchAction}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors duration-200"
+                  >
+                    <Search className="h-5 w-5" />
+                  </button>
+                </div>
+                <button
+                  onClick={handleSearchAction} // Changed to trigger search action
+                  className="bg-blue-600 text-white px-4 py-3 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-200"
+                >
+                  Cari sekarang
+                </button>
+              </div>
+            </div>
+
             {menuItems.map((item) => (
               <div key={item.id}>
                 <button
@@ -377,21 +380,24 @@ export default function MegaMenu() {
 
                 {item.hasSubmenu && activeMenu === item.id && (
                   <div className="pl-4 pb-2 space-y-1">
-                    {activeMenuContent &&
-                      activeMenuContent.categories.map((category, index) => (
+                    {/* Menambahkan pemeriksaan eksplisit untuk item.content dan item.content.categories */}
+                    {item.content &&
+                      item.content.categories &&
+                      item.content.categories.map((category, index) => (
                         <div key={index} className="py-2">
                           <h4 className="font-medium text-gray-900 text-sm uppercase tracking-wide mb-2">
                             {category.title}
                           </h4>
-                          {category.items.map((subItem, subIndex) => (
-                            <a
-                              key={subIndex}
-                              href="#"
-                              className="block px-3 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            >
-                              {subItem}
-                            </a>
-                          ))}
+                          {category.items &&
+                            category.items.map((subItem, subIndex) => (
+                              <a
+                                key={subIndex}
+                                href="#"
+                                className="block px-3 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200"
+                              >
+                                {subItem}
+                              </a>
+                            ))}
                         </div>
                       ))}
                   </div>
