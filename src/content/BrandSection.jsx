@@ -288,7 +288,7 @@ export default function BrandSection() {
   }, []);
 
   return (
-    <div className="bg-white rounded-2xl border border-black p-8 lg:p-12 mb-20">
+    <div className="bg-white rounded-2xl border border-black p-8 lg:p-12 mb-20 mx-14">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           Over 800+ Business growing with Boleh Dicoba Digital
