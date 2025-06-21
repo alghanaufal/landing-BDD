@@ -81,6 +81,45 @@ export default function MegaMenu() {
       title: "Services",
       hasSubmenu: true,
       content: {
+        mainItems: [
+          // New structure for desktop mega menu content
+          {
+            title: "Performance Creative",
+            description:
+              "Create ads-ready contents to better communicate your brand message.",
+            linkText: "See Service",
+            linkHref: "#",
+          },
+          {
+            title: "Website Development",
+            description:
+              "Effective website with sufficient performance and aesthetic to fulfil transaction and deliver brand identity",
+            linkText: "See Service",
+            linkHref: "#",
+          },
+          {
+            title: "Search Engine Optimization",
+            description:
+              "Organically increase your website and online store visibility.",
+            linkText: "See Service",
+            linkHref: "#",
+          },
+          {
+            title: "Professional Service",
+            description:
+              "Tailored training program guided by industry experts and professionals.",
+            linkText: "See Service",
+            linkHref: "#",
+          },
+          {
+            title: "Digital Advertising",
+            description:
+              "Optimize ads performance, install CPAS, solve invisible issues on your online ads campaign.",
+            linkText: "See Service",
+            linkHref: "#",
+          },
+        ],
+        // The original 'categories' structure is kept for mobile rendering
         categories: [
           {
             title: "Support",
@@ -103,13 +142,6 @@ export default function MegaMenu() {
             ],
           },
         ],
-        featured: {
-          title: "24/7 Support",
-          image:
-            "https://images.unsplash.com/photo-1553484771-371a605b060b?w=300&h=200&fit=crop",
-          description:
-            "Dapatkan bantuan kapan pun Anda membutuhkannya dengan dukungan 24 jam kami",
-        },
       },
     },
     {
@@ -117,6 +149,22 @@ export default function MegaMenu() {
       title: "Program",
       hasSubmenu: true,
       content: {
+        mainItems: [
+          {
+            title: "Educational Programs",
+            description:
+              "Explore our coding bootcamps, design workshops, and marketing courses.",
+            linkText: "See Program",
+            linkHref: "#",
+          },
+          {
+            title: "Partnership Programs",
+            description:
+              "Join our affiliate, reseller, or strategic alliance programs for mutual growth.",
+            linkText: "See Program",
+            linkHref: "#",
+          },
+        ],
         categories: [
           {
             title: "Educational",
@@ -135,12 +183,6 @@ export default function MegaMenu() {
             ],
           },
         ],
-        featured: {
-          title: "Learn & Grow",
-          image: "https://placehold.co/300x200/FF5733/FFFFFF?text=Program",
-          description:
-            "Jelajahi program-program kami yang dirancang untuk pertumbuhan Anda.",
-        },
       },
     },
     {
@@ -148,6 +190,34 @@ export default function MegaMenu() {
       title: "Information",
       hasSubmenu: true,
       content: {
+        mainItems: [
+          {
+            title: "About Us",
+            description: "Learn about our company, mission, and values.",
+            linkText: "Read More",
+            linkHref: "#",
+          },
+          {
+            title: "Careers",
+            description:
+              "Discover career opportunities and join our growing team.",
+            linkText: "View Jobs",
+            linkHref: "#",
+          },
+          {
+            title: "Blog & Insights",
+            description:
+              "Stay updated with our latest articles, news, and industry insights.",
+            linkText: "Visit Blog",
+            linkHref: "#",
+          },
+          {
+            title: "FAQs",
+            description: "Find answers to frequently asked questions.",
+            linkText: "See FAQs",
+            linkHref: "#",
+          },
+        ],
         categories: [
           {
             title: "Company Info",
@@ -164,12 +234,6 @@ export default function MegaMenu() {
             items: ["FAQs", "Blog", "Downloads", "Case Studies"],
           },
         ],
-        featured: {
-          title: "Stay Informed",
-          image: "https://placehold.co/300x200/33FF57/000000?text=Information",
-          description:
-            "Temukan semua informasi yang Anda butuhkan tentang kami.",
-        },
       },
     },
     {
@@ -246,11 +310,10 @@ export default function MegaMenu() {
                 </div>
               ))}
             </div>
-
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleSearch}
-                className="p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600 hidden lg:block" // Hidden di mobile, block di desktop
+                className="p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600 hidden lg:block"
               >
                 <Search className="h-5 w-5" />
               </button>
@@ -264,48 +327,43 @@ export default function MegaMenu() {
       </div>
 
       {activeMenuContent && (
-        <div className="hidden lg:block absolute top-16 left-0 right-0 bg-white shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down">
+        <div className="hidden lg:block absolute top-16 left-0 right-0 bg-[#F7F5F0] shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              {activeMenuContent.categories &&
-                activeMenuContent.categories.map((category, index) => (
-                  <div key={index} className="space-y-3">
-                    <h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide">
-                      {category.title}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {activeMenuContent.mainItems &&
+                activeMenuContent.mainItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-4 rounded-lg shadow-sm"
+                  >
+                    <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                      {item.title}
                     </h3>
-                    <ul className="space-y-2">
-                      {category.items.map((subItem, subIndex) => (
-                        <li key={subIndex}>
-                          <a
-                            href="#"
-                            className="text-gray-600 hover:text-blue-600 transition-colors duration-200 text-sm block py-1"
-                          >
-                            {subItem}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="text-sm text-gray-600 mb-4">
+                      {item.description}
+                    </p>
+                    <a
+                      href={item.linkHref}
+                      className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group"
+                    >
+                      {item.linkText}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                        className="w-4 h-4 ml-1 transform transition-transform duration-200 group-hover:translate-x-1"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </a>
                   </div>
                 ))}
-
-              {activeMenuContent.featured && (
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-4">
-                  <img
-                    src={activeMenuContent.featured.image}
-                    alt="Featured"
-                    className="w-full h-32 object-cover rounded-lg mb-3"
-                  />
-                  <h4 className="font-semibold text-gray-900 mb-2">
-                    {activeMenuContent.featured.title}
-                  </h4>
-                  <p className="text-sm text-gray-600 mb-3">
-                    {activeMenuContent.featured.description}
-                  </p>
-                  <button className="bg-blue-600 px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors duration-200">
-                    Learn More
-                  </button>
-                </div>
-              )}
             </div>
           </div>
         </div>
