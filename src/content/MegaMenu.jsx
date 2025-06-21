@@ -150,13 +150,6 @@ export default function MegaMenu() {
                 linkText: "See Program",
                 linkHref: "#program-partnership",
               },
-              {
-                title: "Partnership Programs",
-                description:
-                  "Join our affiliate, reseller, or strategic alliance programs for mutual growth.",
-                linkText: "See Program",
-                linkHref: "#program-partnership",
-              },
             ],
           },
         ],
@@ -183,6 +176,13 @@ export default function MegaMenu() {
                 linkText: "View Jobs",
                 linkHref: "#info-careers",
               },
+              {
+                title: "Blog & Insights",
+                description:
+                  "Stay updated with our latest articles, news, and industry insights.",
+                linkText: "Visit Blog",
+                linkHref: "#info-blog",
+              },
             ],
           },
         ],
@@ -192,21 +192,22 @@ export default function MegaMenu() {
       id: "news-blog",
       title: "News & Blog",
       hasSubmenu: false,
-      linkHref: "#news-blog", // Added direct link for non-submenu items
+      linkHref: "#news-blog",
     },
     {
       id: "loyalty-program",
       title: "Loyalty Program",
       hasSubmenu: false,
-      linkHref: "#loyalty-program", // Added direct link
+      linkHref: "#loyalty-program",
     },
     {
       id: "web-seo-audit",
       title: "Web & SEO Audit",
       hasSubmenu: false,
-      linkHref: "#web-seo-audit", // Added direct link
+      linkHref: "#web-seo-audit",
     },
   ];
+
   const activeMenuContent = menuItems.find(
     (item) => item.id === activeMenu
   )?.content;
@@ -280,84 +281,54 @@ export default function MegaMenu() {
         </div>
       </div>
 
-      {activeMenuContent && (
+      {activeMenuContent && activeMenuContent.sections && (
         <div
           className="hidden lg:block absolute top-16 left-0 right-0 bg-[#F7F5F0] shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down px-8 py-6"
-          onMouseEnter={() => handleMouseEnter(activeMenu)} // Keep menu open if mouse re-enters content
+          onMouseEnter={() => handleMouseEnter(activeMenu)}
         >
-          {activeMenuContent.sections &&
-            activeMenuContent.sections.map((section, sectionIndex) => {
-              // Determine the grid columns based on the active menu and section index
-              let gridColsClass = "md:grid-cols-2"; // Default for md breakpoint
-
-              if (activeMenu === "services") {
-                if (sectionIndex === 0) {
-                  gridColsClass = "lg:grid-cols-3"; // First section of Services: 3 columns
-                } else if (sectionIndex === 1) {
-                  gridColsClass = "lg:grid-cols-2"; // Second section of Services: 2 columns
-                }
-              } else if (activeMenu === "program") {
-                gridColsClass = "lg:grid-cols-2"; // Program always 2 columns
-              } else if (activeMenu === "information") {
-                gridColsClass = "lg:grid-cols-4"; // Information always 4 columns
-              } else {
-                // Fallback for other sections, if needed, based on number of items
-                if (section.items.length === 1) {
-                  gridColsClass = "lg:grid-cols-1";
-                } else if (section.items.length === 2) {
-                  gridColsClass = "lg:grid-cols-2";
-                } else {
-                  gridColsClass = "lg:grid-cols-3"; // Default to 3 for others
-                }
-              }
-
-              return (
-                <div
-                  key={sectionIndex}
-                  className={`grid grid-cols-1 ${gridColsClass} gap-6 ${
-                    sectionIndex > 0 ? "mt-6 pt-6 border-t border-gray-200" : ""
-                  }`}
+          {activeMenuContent.sections.map((section, sectionIndex) => (
+            <div
+              key={sectionIndex}
+              className={`flex flex-wrap gap-6 ${
+                sectionIndex > 0 ? "mt-6 pt-6 border-t border-gray-200" : ""
+              }`}
+            >
+              {section.items.map((item, itemIndex) => (
+                <a
+                  key={itemIndex}
+                  href={item.linkHref}
+                  className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-grow bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 block"
                 >
-                  {section.items.map((item, itemIndex) => (
-                    <a
-                      key={itemIndex}
-                      href={item.linkHref}
-                      className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 block"
+                  <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                    {item.description}
+                  </p>
+                  <span className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group">
+                    {item.linkText}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      className="w-4 h-4 ml-1 transform transition-transform duration-200 group-hover:translate-x-1"
                     >
-                      <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                        {" "}
-                        {/* Added line-clamp for description */}
-                        {item.description}
-                      </p>
-                      <span className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group">
-                        {item.linkText}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          stroke="currentColor"
-                          className="w-4 h-4 ml-1 transform transition-transform duration-200 group-hover:translate-x-1"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              );
-            })}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              ))}
+            </div>
+          ))}
         </div>
       )}
 
-      {/* Desktop Search Bar */}
       {isSearchOpen && (
         <div className="hidden lg:block bg-white border-t border-gray-200 shadow-lg animate-fade-in-down">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -370,9 +341,6 @@ export default function MegaMenu() {
                   autoFocus
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") handleSearchAction();
-                  }}
                 />
                 <button
                   onClick={handleSearchAction}
@@ -412,23 +380,16 @@ export default function MegaMenu() {
         </div>
       )}
 
-      {/* Mobile Menu Dropdown */}
       {isOpen && (
         <div
           className="lg:hidden bg-white border-t rounded-b-lg shadow-lg"
           style={{
-            // Apply slight transparency and blur when not scrolled for a modern look
             backgroundColor: isScrolled ? "white" : "rgba(255, 255, 255, 0.95)",
             backdropFilter: !isScrolled ? "blur(10px)" : "none",
           }}
         >
           <div className="px-4 py-3 space-y-4 max-h-[80vh] overflow-y-auto">
-            {" "}
-            {/* Added max-height for scrollability */}
-            {/* Mobile Search Bar (always visible when menu is open) */}
             <div className="w-full sticky top-0 bg-white pt-1 pb-3 -mx-4 px-4 border-b border-gray-200 z-10">
-              {" "}
-              {/* Sticky search bar */}
               <div className="flex items-center space-x-3">
                 <div className="flex-1 relative">
                   <input
@@ -437,9 +398,6 @@ export default function MegaMenu() {
                     className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 font-inter"
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter") handleSearchAction();
-                    }}
                   />
                   <button
                     onClick={handleSearchAction}
@@ -477,7 +435,7 @@ export default function MegaMenu() {
                 ))}
               </div>
             </div>
-            {/* Mobile Navigation Links */}
+
             {menuItems.map((item) => (
               <div key={item.id}>
                 {item.hasSubmenu ? (
@@ -497,14 +455,13 @@ export default function MegaMenu() {
                 ) : (
                   <a
                     href={item.linkHref}
-                    onClick={toggleMobileMenu} // Close menu when direct link is clicked
+                    onClick={toggleMobileMenu}
                     className="block px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-200 font-medium font-inter"
                   >
                     {item.title}
                   </a>
                 )}
 
-                {/* Mobile Submenu Content (using sections.items) */}
                 {item.hasSubmenu && activeMenu === item.id && (
                   <div
                     id={`mobile-submenu-${item.id}`}
@@ -518,7 +475,7 @@ export default function MegaMenu() {
                             <a
                               key={subIndex}
                               href={subItem.linkHref}
-                              onClick={toggleMobileMenu} // Close menu when a submenu item is clicked
+                              onClick={toggleMobileMenu}
                               className="block px-3 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200 font-inter"
                             >
                               {subItem.title}
