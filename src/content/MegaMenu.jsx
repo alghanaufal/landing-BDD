@@ -89,21 +89,21 @@ export default function MegaMenu() {
                 description:
                   "Create ads-ready contents to better communicate your brand message.",
                 linkText: "See Service",
-                linkHref: "#",
+                linkHref: "#service-performance-creative",
               },
               {
                 title: "Website Development",
                 description:
-                  "Effective website with sufficient performance and aesthetic to fulfil transaction and deliver brand identity",
+                  "Effective website with sufficient performance and aesthetic to fulfil transaction and deliver brand identity.",
                 linkText: "See Service",
-                linkHref: "#",
+                linkHref: "#service-website-development",
               },
               {
                 title: "Search Engine Optimization",
                 description:
                   "Organically increase your website and online store visibility.",
                 linkText: "See Service",
-                linkHref: "#",
+                linkHref: "#service-seo",
               },
             ],
           },
@@ -114,37 +114,15 @@ export default function MegaMenu() {
                 description:
                   "Tailored training program guided by industry experts and professionals.",
                 linkText: "See Service",
-                linkHref: "#",
+                linkHref: "#service-professional",
               },
               {
                 title: "Digital Advertising",
                 description:
                   "Optimize ads performance, install CPAS, solve invisible issues on your online ads campaign.",
                 linkText: "See Service",
-                linkHref: "#",
+                linkHref: "#service-digital-advertising",
               },
-            ],
-          },
-        ],
-        categories: [
-          {
-            title: "Support",
-            items: [
-              "Customer Service",
-              "Technical Support",
-              "Installation",
-              "Warranty",
-              "Returns",
-            ],
-          },
-          {
-            title: "Business",
-            items: [
-              "Consulting",
-              "Enterprise Solutions",
-              "Bulk Orders",
-              "Custom Solutions",
-              "Training",
             ],
           },
         ],
@@ -163,33 +141,22 @@ export default function MegaMenu() {
                 description:
                   "Explore our coding bootcamps, design workshops, and marketing courses.",
                 linkText: "See Program",
-                linkHref: "#",
+                linkHref: "#program-educational",
               },
               {
                 title: "Partnership Programs",
                 description:
                   "Join our affiliate, reseller, or strategic alliance programs for mutual growth.",
                 linkText: "See Program",
-                linkHref: "#",
+                linkHref: "#program-partnership",
               },
-            ],
-          },
-        ],
-        categories: [
-          {
-            title: "Educational",
-            items: [
-              "Coding Bootcamps",
-              "Design Workshops",
-              "Marketing Courses",
-            ],
-          },
-          {
-            title: "Partnership",
-            items: [
-              "Affiliate Program",
-              "Reseller Program",
-              "Strategic Alliances",
+              {
+                title: "Partnership Programs",
+                description:
+                  "Join our affiliate, reseller, or strategic alliance programs for mutual growth.",
+                linkText: "See Program",
+                linkHref: "#program-partnership",
+              },
             ],
           },
         ],
@@ -207,45 +174,16 @@ export default function MegaMenu() {
                 title: "About Us",
                 description: "Learn about our company, mission, and values.",
                 linkText: "Read More",
-                linkHref: "#",
+                linkHref: "#info-about-us",
               },
               {
                 title: "Careers",
                 description:
                   "Discover career opportunities and join our growing team.",
                 linkText: "View Jobs",
-                linkHref: "#",
-              },
-              {
-                title: "Blog & Insights",
-                description:
-                  "Stay updated with our latest articles, news, and industry insights.",
-                linkText: "Visit Blog",
-                linkHref: "#",
-              },
-              {
-                title: "FAQs",
-                description: "Find answers to frequently asked questions.",
-                linkText: "See FAQs",
-                linkHref: "#",
+                linkHref: "#info-careers",
               },
             ],
-          },
-        ],
-        categories: [
-          {
-            title: "Company Info",
-            items: [
-              "About Us",
-              "Careers",
-              "Press",
-              "Terms of Service",
-              "Privacy Policy",
-            ],
-          },
-          {
-            title: "Resources",
-            items: ["FAQs", "Blog", "Downloads", "Case Studies"],
           },
         ],
       },
@@ -254,16 +192,19 @@ export default function MegaMenu() {
       id: "news-blog",
       title: "News & Blog",
       hasSubmenu: false,
+      linkHref: "#news-blog", // Added direct link for non-submenu items
     },
     {
       id: "loyalty-program",
       title: "Loyalty Program",
       hasSubmenu: false,
+      linkHref: "#loyalty-program", // Added direct link
     },
     {
       id: "web-seo-audit",
       title: "Web & SEO Audit",
       hasSubmenu: false,
+      linkHref: "#web-seo-audit", // Added direct link
     },
   ];
   const activeMenuContent = menuItems.find(
@@ -340,33 +281,33 @@ export default function MegaMenu() {
       </div>
 
       {activeMenuContent && (
-        <div className="hidden lg:block absolute top-16 left-0 right-0 bg-[#F7F5F0] shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down">
-          {activeMenuContent.sections ? (
+        <div
+          className="hidden lg:block absolute top-16 left-0 right-0 bg-[#F7F5F0] shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down px-8 py-6"
+          onMouseEnter={() => handleMouseEnter(activeMenu)} // Keep menu open if mouse re-enters content
+        >
+          {activeMenuContent.sections &&
             activeMenuContent.sections.map((section, sectionIndex) => {
-              // Determine the grid columns based on the number of items or specific section
+              // Determine the grid columns based on the active menu and section index
               let gridColsClass = "md:grid-cols-2"; // Default for md breakpoint
 
-              // Logic to set specific grid columns based on active menu and section index
               if (activeMenu === "services") {
                 if (sectionIndex === 0) {
-                  // First section of Services: 3 columns
-                  gridColsClass += " lg:grid-cols-3";
+                  gridColsClass = "lg:grid-cols-3"; // First section of Services: 3 columns
                 } else if (sectionIndex === 1) {
-                  // Second section of Services: 2 columns
-                  gridColsClass += " lg:grid-cols-2";
+                  gridColsClass = "lg:grid-cols-2"; // Second section of Services: 2 columns
                 }
               } else if (activeMenu === "program") {
-                gridColsClass += " lg:grid-cols-2"; // Program always 2 columns
+                gridColsClass = "lg:grid-cols-2"; // Program always 2 columns
               } else if (activeMenu === "information") {
-                gridColsClass += " lg:grid-cols-4"; // Information always 4 columns
+                gridColsClass = "lg:grid-cols-4"; // Information always 4 columns
               } else {
                 // Fallback for other sections, if needed, based on number of items
                 if (section.items.length === 1) {
-                  gridColsClass += " lg:grid-cols-1";
+                  gridColsClass = "lg:grid-cols-1";
                 } else if (section.items.length === 2) {
-                  gridColsClass += " lg:grid-cols-2";
+                  gridColsClass = "lg:grid-cols-2";
                 } else {
-                  gridColsClass += " lg:grid-cols-3"; // Default to 3 for others
+                  gridColsClass = "lg:grid-cols-3"; // Default to 3 for others
                 }
               }
 
@@ -374,24 +315,24 @@ export default function MegaMenu() {
                 <div
                   key={sectionIndex}
                   className={`grid grid-cols-1 ${gridColsClass} gap-6 ${
-                    sectionIndex > 0 ? "mt-6" : ""
+                    sectionIndex > 0 ? "mt-6 pt-6 border-t border-gray-200" : ""
                   }`}
                 >
                   {section.items.map((item, itemIndex) => (
-                    <div
+                    <a
                       key={itemIndex}
-                      className="bg-white p-4 rounded-lg shadow-sm"
+                      href={item.linkHref}
+                      className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 block"
                     >
                       <h3 className="font-semibold text-lg text-gray-900 mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-gray-600 mb-4">
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                        {" "}
+                        {/* Added line-clamp for description */}
                         {item.description}
                       </p>
-                      <a
-                        href={item.linkHref}
-                        className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group"
-                      >
+                      <span className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group">
                         {item.linkText}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -407,64 +348,16 @@ export default function MegaMenu() {
                             d="M9 5l7 7-7 7"
                           />
                         </svg>
-                      </a>
-                    </div>
+                      </span>
+                    </a>
                   ))}
                 </div>
               );
-            })
-          ) : (
-            /* Fallback for old mainItems structure if sections are not defined */
-            <div
-              className={`grid grid-cols-1 md:grid-cols-2 ${
-                activeMenuContent.mainItems &&
-                activeMenuContent.mainItems.length === 1
-                  ? "lg:grid-cols-1"
-                  : activeMenuContent.mainItems &&
-                    activeMenuContent.mainItems.length === 2
-                  ? "lg:grid-cols-2"
-                  : "lg:grid-cols-3"
-              } gap-6`}
-            >
-              {activeMenuContent.mainItems &&
-                activeMenuContent.mainItems.map((item, index) => (
-                  <div
-                    key={index}
-                    className="bg-white p-4 rounded-lg shadow-sm"
-                  >
-                    <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-4">
-                      {item.description}
-                    </p>
-                    <a
-                      href={item.linkHref}
-                      className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group"
-                    >
-                      {item.linkText}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="2"
-                        stroke="currentColor"
-                        className="w-4 h-4 ml-1 transform transition-transform duration-200 group-hover:translate-x-1"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                ))}
-            </div>
-          )}
+            })}
         </div>
       )}
 
+      {/* Desktop Search Bar */}
       {isSearchOpen && (
         <div className="hidden lg:block bg-white border-t border-gray-200 shadow-lg animate-fade-in-down">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -473,21 +366,26 @@ export default function MegaMenu() {
                 <input
                   type="text"
                   placeholder="Cari produk, kategori, merek..."
-                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 font-inter"
                   autoFocus
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") handleSearchAction();
+                  }}
                 />
                 <button
                   onClick={handleSearchAction}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors duration-200"
+                  aria-label="Perform search"
                 >
                   <Search className="h-5 w-5" />
                 </button>
               </div>
               <button
                 onClick={toggleSearch}
-                className="px-4 py-3 text-gray-600 hover:text-red-600 transition-colors duration-200"
+                className="px-4 py-3 text-gray-600 hover:text-red-600 transition-colors duration-200 rounded-md"
+                aria-label="Close search bar"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -514,28 +412,39 @@ export default function MegaMenu() {
         </div>
       )}
 
+      {/* Mobile Menu Dropdown */}
       {isOpen && (
         <div
-          className="lg:hidden bg-white border-t"
+          className="lg:hidden bg-white border-t rounded-b-lg shadow-lg"
           style={{
+            // Apply slight transparency and blur when not scrolled for a modern look
             backgroundColor: isScrolled ? "white" : "rgba(255, 255, 255, 0.95)",
             backdropFilter: !isScrolled ? "blur(10px)" : "none",
           }}
         >
-          <div className="px-4 py-3 space-y-4 max-h-96 overflow-y-auto">
-            <div className="w-full">
+          <div className="px-4 py-3 space-y-4 max-h-[80vh] overflow-y-auto">
+            {" "}
+            {/* Added max-height for scrollability */}
+            {/* Mobile Search Bar (always visible when menu is open) */}
+            <div className="w-full sticky top-0 bg-white pt-1 pb-3 -mx-4 px-4 border-b border-gray-200 z-10">
+              {" "}
+              {/* Sticky search bar */}
               <div className="flex items-center space-x-3">
                 <div className="flex-1 relative">
                   <input
                     type="text"
                     placeholder="Masukkan kata kunci pencarian"
-                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 font-inter"
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter") handleSearchAction();
+                    }}
                   />
                   <button
                     onClick={handleSearchAction}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors duration-200"
+                    aria-label="Perform search"
                   >
                     <Search className="h-5 w-5" />
                   </button>
@@ -568,42 +477,53 @@ export default function MegaMenu() {
                 ))}
               </div>
             </div>
-
+            {/* Mobile Navigation Links */}
             {menuItems.map((item) => (
               <div key={item.id}>
-                <button
-                  onClick={() => toggleSubMenu(item.id)}
-                  className="w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:rounded-md transition-colors duration-200"
-                >
-                  <span className="font-medium">{item.title}</span>
-                  {item.hasSubmenu && (
+                {item.hasSubmenu ? (
+                  <button
+                    onClick={() => toggleSubMenu(item.id)}
+                    className="w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-200 font-inter"
+                    aria-expanded={activeMenu === item.id}
+                    aria-controls={`mobile-submenu-${item.id}`}
+                  >
+                    <span className="font-medium">{item.title}</span>
                     <ChevronDown
                       className={`h-4 w-4 transition-transform duration-200 ${
                         activeMenu === item.id ? "rotate-180" : ""
                       }`}
                     />
-                  )}
-                </button>
+                  </button>
+                ) : (
+                  <a
+                    href={item.linkHref}
+                    onClick={toggleMobileMenu} // Close menu when direct link is clicked
+                    className="block px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-200 font-medium font-inter"
+                  >
+                    {item.title}
+                  </a>
+                )}
 
+                {/* Mobile Submenu Content (using sections.items) */}
                 {item.hasSubmenu && activeMenu === item.id && (
-                  <div className="pl-4 pb-2 space-y-1">
+                  <div
+                    id={`mobile-submenu-${item.id}`}
+                    className="pl-4 pb-2 space-y-1 bg-gray-50 rounded-md py-2 transition-all duration-300 ease-in-out"
+                  >
                     {item.content &&
-                      item.content.categories &&
-                      item.content.categories.map((category, index) => (
-                        <div key={index} className="py-2">
-                          <h4 className="font-medium text-gray-900 text-sm uppercase tracking-wide mb-2">
-                            {category.title}
-                          </h4>
-                          {category.items &&
-                            category.items.map((subItem, subIndex) => (
-                              <a
-                                key={subIndex}
-                                href="#"
-                                className="block px-3 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200"
-                              >
-                                {subItem}
-                              </a>
-                            ))}
+                      item.content.sections &&
+                      item.content.sections.map((section, sectionIndex) => (
+                        <div key={sectionIndex} className="py-1">
+                          {section.items.map((subItem, subIndex) => (
+                            <a
+                              key={subIndex}
+                              href={subItem.linkHref}
+                              onClick={toggleMobileMenu} // Close menu when a submenu item is clicked
+                              className="block px-3 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200 font-inter"
+                            >
+                              {subItem.title}
+                            </a>
+                          ))}
                         </div>
                       ))}
                   </div>
