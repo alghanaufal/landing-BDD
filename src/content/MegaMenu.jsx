@@ -283,15 +283,18 @@ export default function MegaMenu() {
 
       {activeMenuContent && activeMenuContent.sections && (
         <div
-          className="hidden lg:block absolute top-16 left-0 right-0 bg-[#F7F5F0] shadow-xl rounded-b-lg border-t border-gray-200 z-40 animate-fade-in-down px-8 py-6"
+          className="hidden lg:block absolute top-16 left-0 right-0 bg-[#F7F5F0] shadow-xl rounded-b-lg z-40 animate-fade-in-down"
           onMouseEnter={() => handleMouseEnter(activeMenu)}
         >
           {activeMenuContent.sections.map((section, sectionIndex) => (
-            <div key={sectionIndex} className="flex flex-wrap border-6 ">
+            <div
+              key={sectionIndex}
+              className="flex flex-wrap border border-gray-200"
+            >
               {section.items.map((item, itemIndex) => (
                 <div
                   key={itemIndex}
-                  className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-grow p-4 border-6"
+                  className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-grow p-4 border border-gray-200"
                 >
                   <h3 className="font-semibold text-lg text-gray-900 mb-2">
                     {item.title}
@@ -327,51 +330,31 @@ export default function MegaMenu() {
       )}
 
       {isSearchOpen && (
-        <div className="hidden lg:block bg-white border-t border-gray-200 shadow-lg animate-fade-in-down">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex items-center space-x-3">
-              <div className="flex-1 relative">
-                <input
-                  type="text"
-                  placeholder="Cari produk, kategori, merek..."
-                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 font-inter"
-                  autoFocus
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
-                />
-                <button
-                  onClick={handleSearchAction}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors duration-200"
-                  aria-label="Perform search"
-                >
-                  <Search className="h-5 w-5" />
-                </button>
-              </div>
+        <div
+          className={`absolute top-16 left-0 right-0 z-40 animate-fade-in-down ${
+            isScrolled
+              ? "bg-white border-t border-gray-200 shadow-lg"
+              : "bg-white"
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:px-0 py-4">
+            <div className="flex items-center space-x-0 border border-gray-300 rounded-lg overflow-hidden w-[90%] mx-auto">
+              <input
+                type="text"
+                placeholder="Masukkan kata kunci pencarian"
+                className="flex-1 px-4 py-3 outline-none transition-all duration-200 font-inter text-gray-700 placeholder-gray-400"
+                autoFocus
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                aria-label="Search input"
+              />
               <button
-                onClick={toggleSearch}
-                className="px-4 py-3 text-gray-600 hover:text-red-600 transition-colors duration-200 rounded-md"
-                aria-label="Close search bar"
+                onClick={handleSearchAction}
+                className="bg-blue-600 text-white px-6 py-3 text-sm font-semibold hover:bg-blue-700 transition-colors duration-200"
+                aria-label="Cari sekarang"
               >
-                <X className="h-5 w-5" />
+                Cari Sekarang
               </button>
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <span className="text-sm text-gray-500">Pencarian populer:</span>
-              {[
-                "Smartphone",
-                "Laptop",
-                "Headphones",
-                "Fashion",
-                "Home Decor",
-              ].map((term) => (
-                <button
-                  key={term}
-                  className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200"
-                  onClick={() => setSearchText(term)}
-                >
-                  {term}
-                </button>
-              ))}
             </div>
           </div>
         </div>
@@ -410,26 +393,6 @@ export default function MegaMenu() {
                 >
                   Cari sekarang
                 </button>
-              </div>
-              <div className="mt-3 flex flex-wrap gap-2">
-                <span className="text-sm text-gray-500">
-                  Pencarian populer:
-                </span>
-                {[
-                  "Smartphone",
-                  "Laptop",
-                  "Headphones",
-                  "Fashion",
-                  "Home Decor",
-                ].map((term) => (
-                  <button
-                    key={term}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200"
-                    onClick={() => setSearchText(term)}
-                  >
-                    {term}
-                  </button>
-                ))}
               </div>
             </div>
 
