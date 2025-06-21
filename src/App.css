@@ -1,64 +1,384 @@
 /* Custom styles for Swiper pagination bullets for Brands */
-/* Targets the pagination bullets within the 'brand-swiper' */
 .brand-swiper .swiper-pagination-bullet {
-  width: 10px; /* Width of the pagination bullet */
-  height: 10px; /* Height of the pagination bullet */
-  background-color: #cbd5e0; /* Gray-300 background color */
-  border-radius: 50%; /* Makes the bullet a perfect circle */
-  opacity: 1; /* Ensures bullets are fully visible by default */
-  transition: background-color 0.3s ease; /* Smooth transition for background color changes */
+  display: none;
 }
 
-/* Styles for the active brand pagination bullet */
 .brand-swiper .swiper-pagination-bullet-active {
-  background-color: #3b82f6; /* Blue-600 background color when active */
+  display: none;
 }
 
 /* Custom styles for Swiper pagination bullets for Products (vertical) */
-/* The height for the .product-swiper is handled by Tailwind classes in JSX (h-[500px]) */
-
-/* Positioning and layout for the product slider's pagination */
 .product-swiper .swiper-pagination {
-  position: absolute; /* Absolute positioning relative to the Swiper container */
-  right: 10px; /* 10px from the right edge */
-  top: 50%; /* Vertically centered */
-  transform: translateY(-50%); /* Adjusts vertical centering precisely */
-  display: flex; /* Uses flexbox for layout */
-  flex-direction: column; /* Arranges bullets in a column */
-  gap: 10px; /* Space between bullets */
-  z-index: 10; /* Ensures pagination is above other content */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
 }
 
-/* Styles for individual product pagination bullets */
 .product-pagination-bullet {
-  display: block; /* Ensures each bullet is a block element */
-  width: 10px; /* Width of the bullet */
-  height: 10px; /* Height of the bullet */
-  border-radius: 50%; /* Makes the bullet a perfect circle */
-  background-color: #d1d5db; /* Gray-300 background color */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  transition: background-color 0.3s ease; /* Smooth transition for background color changes */
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #d1d5db; /* Gray-300 */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Styles for the active product pagination bullet */
 .product-pagination-bullet-active {
-  background-color: #3b82f6; /* Blue-600 background color when active */
+  background-color: #3b82f6; /* Blue-600 */
 }
 
 /* Ensure brand slides expand to content for 'auto' slidesPerView */
-/* This is crucial for the smooth, continuous autoplay of the brand slider */
 .brand-swiper-slide {
-  width: auto !important; /* Forces the slide to take its natural width, overriding Swiper's default */
+  width: auto !important;
+  height: auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0.5rem;
 }
 
 /* Adjust the main Swiper container height for products */
 .product-swiper.swiper {
-  height: 500px; /* Fixed height for the product slider container */
-  border-radius: 1.5rem; /* Apply rounded corners (equivalent to Tailwind's rounded-3xl) */
+  height: 500px;
+  border-radius: 1.5rem;
 }
 
 /* Remove default Swiper styles for the wrapper to let flexbox manage it */
-/* This helps in centering product cards within the vertical slides */
 .product-swiper .swiper-wrapper {
-  align-items: center; /* Vertically centers the content (product cards) within each slide */
+  align-items: center;
+}
+
+/* Custom CSS for hiding the scrollbar */
+.custom-scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Padding untuk swiper-wrapper agar konten tidak terlalu dekat dengan tepi */
+.brand-swiper .swiper-wrapper {
+  padding-bottom: 0.5rem;
+}
+
+/* Aturan untuk menghilangkan bullet Swiper yang muncul secara default */
+.brand-swiper .swiper-pagination {
+  display: none !important;
+}
+
+/* Adjust the image sizes within the slides for consistency with the provided image */
+.brand-swiper-slide img {
+  height: auto;
+  max-height: 50px;
+  width: auto;
+  max-width: 120px;
+}
+
+/* Override default Swiper styles that might add unnecessary height/padding */
+.brand-swiper {
+  height: auto !important;
+  padding-bottom: 0 !important;
+}
+
+/* --- New CSS for CategoryGridSection (We On Numbers) --- */
+
+.section-statistik {
+  max-width: 1140px;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  align-items: center;
+  background-color: #f8f4f4; /* Match the background from App.jsx */
+  border-radius: 1.5rem; /* rounded-3xl */
+  padding: 2rem 3rem; /* Adjusted padding to be consistent with p-8 lg:p-12 */
+}
+.statistik-header {
+  flex: 0 0 auto;
+  max-width: 35.417vw;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.statistik-subtitle .subtitle {
+  color: #513b6a;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+}
+.statistik-title .title {
+  color: #222;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+.statistik-description .description {
+  color: #222;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  margin: 0;
+}
+.statistik-body {
+  flex: 0 0 auto;
+  max-width: 34.028vw;
+}
+.statistik-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.statistik-card {
+  position: relative;
+  background-color: #fff;
+  border: 2px solid #222;
+  border-radius: 8px;
+  min-height: 151px;
+  transition: 0.2s ease-in-out;
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+  overflow: hidden; /* Ensure color animation stays within bounds */
+}
+.statistik-card:not(.statistik-card-more):hover {
+  box-shadow: 4px 4px 0px 0px #222;
+  -webkit-box-shadow: 4px 4px 0px 0px #222;
+}
+/* Specific widths for cards based on their position/type */
+.statistik-card-large {
+  /* For 1st, 4th, 5th child */
+  flex: 1 0 auto;
+  width: 259px;
+}
+.statistik-card-small {
+  /* For 2nd, 3rd, 6th child */
+  flex: 0 0 auto;
+  width: 211px;
+}
+
+.statistik-card-text {
+  padding: 30px 20px 30px 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* Ensure text is above the animating color */
+  display: flex; /* Use flex to align content if needed */
+  flex-direction: column;
+  justify-content: space-between; /* Pushed content to top and bottom */
+}
+.statistik-card-title .title {
+  color: #222;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.statistik-card-description .description {
+  color: #222;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: normal;
+  margin: 0;
+}
+.statistik-card-color {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+  bottom: 0;
+  width: 10px; /* Starting width for animation */
+  height: 100%;
+  border-radius: 0 6px 6px 0;
+  border-left: 2px solid #222;
+  z-index: 1; /* Below the text content */
+}
+/* Apply specific colors based on the data's bgColorClass */
+.statistik-card-color.bg-blue-600 {
+  background-color: #2563eb;
+} /* Example: Blue */
+.statistik-card-color.bg-orange-400 {
+  background-color: #fb923c;
+} /* Example: Orange */
+.statistik-card-color.bg-purple-600 {
+  background-color: #9333ea;
+} /* Example: Purple */
+.statistik-card-color.bg-teal-400 {
+  background-color: #2dd4bf;
+} /* Example: Teal */
+.statistik-card-color.bg-red-500 {
+  background-color: #ef4444;
+} /* Example: Red */
+
+.statistik-card:hover .statistik-card-color {
+  animation-name: statistikCardAnim;
+  animation-duration: 0.5s; /* Kecepatan animasi lebih cepat */
+  animation-fill-mode: forwards;
+}
+@keyframes statistikCardAnim {
+  from {
+    width: 10px;
+    border-color: #222;
+    border-radius: 0 6px 6px 0;
+  }
+  to {
+    width: 100%;
+    border-color: transparent;
+    border-radius: 6px;
+  }
+}
+.statistik-card.statistik-card-more {
+  background-color: #eee9df;
+  /* width: 160px; (Ini akan diatur oleh flexbox berdasarkan .statistik-card-small) */
+  /* Pastikan border juga sesuai */
+  border: 2px solid #222; /* Add border for consistency */
+}
+.statistik-card-more .statistik-card-text {
+  padding: 50px 22px 50px 30px;
+  /* Mengubah justify-content agar teks di tengah vertikal */
+  justify-content: center;
+}
+.statistik-card-more .statistik-card-title .title {
+  color: #222;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+}
+/* Media Queries */
+@media (min-width: 768px) and (max-width: 1367px) {
+  .section-statistik {
+    justify-content: center;
+    gap: 30px; /* Kurangi gap agar lebih padat di tablet */
+  }
+  .statistik-header {
+    max-width: 42.817vw;
+    /* text-align: center; (Tambahkan jika diperlukan, berdasarkan gambar) */
+  }
+  .statistik-body {
+    max-width: 40.028vw;
+  }
+  .statistik-list {
+    gap: 15px; /* Kurangi gap untuk mobile */
+  }
+  .statistik-card {
+    min-height: 120px; /* Sesuaikan tinggi kartu untuk tampilan tablet */
+  }
+  .statistik-card-large {
+    width: 48% !important; /* Sesuaikan lebar agar 2 kolom */
+  }
+  .statistik-card-small {
+    width: 48% !important; /* Sesuaikan lebar agar 2 kolom */
+  }
+  .statistik-card-text {
+    padding: 20px; /* Sesuaikan padding */
+  }
+  .statistik-card-title .title {
+    font-size: 28px; /* Sesuaikan ukuran font */
+  }
+  .statistik-card-description .description {
+    font-size: 14px; /* Sesuaikan ukuran font */
+  }
+}
+@media (max-width: 767px) {
+  /* Mengubah 750px menjadi 767px agar konsisten dengan breakpoint Tailwind */
+  .section-statistik {
+    max-width: none;
+    margin: 50px 0 70px;
+    padding: 0 11px; /* Padding di sisi */
+    flex-direction: column;
+    gap: 30px;
+    border-radius: 0; /* Hapus border-radius di mobile jika tidak diinginkan */
+    box-shadow: none; /* Hapus shadow di mobile jika tidak diinginkan */
+  }
+  .statistik-header {
+    max-width: none;
+    width: 100%;
+    text-align: center; /* Rata tengah di mobile */
+  }
+  .statistik-subtitle .subtitle {
+    font-size: 16px;
+    text-align: center;
+  }
+  .statistik-title .title {
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+  }
+  .statistik-description .description {
+    font-size: 14px;
+    line-height: normal;
+    text-align: center;
+  }
+  .statistik-body {
+    max-width: none;
+    width: 100%;
+  }
+  .statistik-list {
+    gap: 14px;
+    justify-content: center; /* Rata tengah item di mobile */
+  }
+  .statistik-card {
+    min-height: 108px;
+    flex: 0 0 auto; /* Memastikan width bekerja */
+    width: 48%; /* Adjust for 2 columns on small screens */
+    border-radius: 8px; /* Tetap pertahankan border-radius */
+  }
+  .statistik-card-large {
+    width: 46.6vw; /* Menggunakan vw untuk lebih responsif */
+  }
+  .statistik-card-small {
+    width: 42.267vw; /* Menggunakan vw untuk lebih responsif */
+  }
+  /* Mengatur ulang agar kartu memiliki lebar yang lebih fleksibel di mobile */
+  .statistik-card:nth-child(1),
+  .statistik-card:nth-child(4),
+  .statistik-card:nth-child(5),
+  .statistik-card:nth-child(2),
+  .statistik-card:nth-child(3),
+  .statistik-card:nth-child(6) {
+    width: calc(50% - 7px); /* Kurang gap untuk 2 kolom */
+    flex: none; /* Override flex properties from above */
+  }
+
+  .statistik-card-text {
+    padding: 0 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: static; /* Ubah position ke static untuk layout normal flow */
+    height: auto; /* Biarkan tinggi menyesuaikan konten */
+  }
+  .statistik-card-title .title {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+  .statistik-card-description .description {
+    font-size: 12px;
+  }
+  .statistik-card-color {
+    display: none; /* Sembunyikan animasi warna di mobile jika tidak cocok */
+  }
+  .statistik-card.statistik-card-more {
+    width: calc(50% - 7px); /* Sesuaikan lebar */
+  }
+  .statistik-card-more .statistik-card-text {
+    padding: 20px; /* Sesuaikan padding */
+  }
+  .statistik-card-more .statistik-card-title .title {
+    font-size: 16px; /* Sesuaikan font size */
+  }
 }

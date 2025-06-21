@@ -288,7 +288,7 @@ export default function BrandSection() {
   }, []);
 
   return (
-    <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl mb-20">
+    <div className="bg-white rounded-2xl border border-black p-8 lg:p-12 mb-20">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           Over 800+ Business growing with Boleh Dicoba Digital
@@ -298,7 +298,7 @@ export default function BrandSection() {
 
       {/* Bagian Nav-Tabs yang dapat digulir (sesuai mobile image) */}
       <div className="overflow-x-auto custom-scrollbar-hidden mb-8">
-        <div className="flex flex-nowrap space-x-4 justify-start">
+        <div className="flex flex-nowrap space-x-4 justify-start md:justify-center">
           {allBrandSets.map((set, index) => (
             <button
               key={set.id}
