@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, Menu, X, User, ShoppingCart, Search } from "lucide-react";
+// Import FaWhatsapp dihapus karena menyebabkan error, diganti dengan SVG inline
 
 export default function MegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -185,16 +186,30 @@ export default function MegaMenu() {
     >
       <div className="max-w px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Bagian Logo */}
-          <div className="flex-shrink-0 flex items-center">
+          {/* Bagian Kiri: Tombol Hamburger Mobile dan Logo */}
+          <div className="flex items-center">
+            {/* Tombol Menu Mobile (Ikon Hamburger/X) - Pindah ke kiri, hanya tampil di mobile */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600"
+            >
+              {isOpen ? (
+                <X className="h-6 w-6" /> // Ikon X saat menu mobile terbuka
+              ) : (
+                <Menu className="h-6 w-6" /> // Ikon Hamburger saat menu mobile tertutup
+              )}
+            </button>
+            {/* Logo */}
             {/* Menggunakan isMobile untuk memilih sumber gambar logo */}
-            <img src={isMobile ? "/Logo-S.png" : "/Logo.png"} alt="Logo" />
+            <img
+              src={isMobile ? "/Logo-S.png" : "/Logo.png"}
+              alt="Logo"
+              className={`flex-shrink-0 ${isMobile ? "ml-2" : ""}`} // Tambahkan margin kiri pada mobile jika ada hamburger
+            />
           </div>
 
           {/* Grup Menu Desktop dan Ikon Sisi Kanan */}
           <div className="flex items-center space-x-4 lg:space-x-8">
-            {" "}
-            {/* Adjusted spacing for lg screens */}
             {/* Tautan Navigasi Menu Desktop */}
             <div className="hidden lg:flex lg:items-center lg:space-x-8">
               {menuItems.map((item) => (
@@ -227,20 +242,21 @@ export default function MegaMenu() {
               >
                 <Search className="h-5 w-5" />
               </button>
-              <button className="bg-orange-500 font-semibold px-8 py-4 rounded-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                Get to Know Us!
-              </button>
-
-              {/* Tombol Menu Mobile (Ikon Hamburger/X) */}
-              <button
-                onClick={toggleMobileMenu}
-                className="lg:hidden p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600"
-              >
-                {isOpen ? (
-                  <X className="h-6 w-6" /> // Ikon X saat menu mobile terbuka
-                ) : (
-                  <Menu className="h-6 w-6" /> // Ikon Hamburger saat menu mobile tertutup
-                )}
+              {/* Changed button for Free Consultation, now using inline SVG for WhatsApp icon */}
+              <button className="flex items-center bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 shadow-lg">
+                <svg
+                  className="mr-2 h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12.002 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.721 17.525c-.212.518-.694.757-1.22.757-.523 0-1.002-.236-1.214-.755-.212-.519-.107-1.258.113-1.78.22-.519.704-.757 1.22-.757.522 0 1.002.236 1.214.755.212.519.108 1.258-.113 1.78zm-.785-3.05c-.17-.417-.549-.607-.936-.607-.384 0-.761.187-.93.602-.17.417-.092 1.004.079 1.42.17.417.549.607.936.607.384 0 .761-.187.93-.602.17-.417.092-1.004-.079-1.42zm-5.111 2.378c-.212.518-.694.757-1.22.757-.523 0-1.002-.236-1.214-.755-.212-.519-.107-1.258.113-1.78.22-.519.704-.757 1.22-.757.522 0 1.002.236 1.214.755.212.519.108 1.258-.113 1.78zm.785-3.05c-.17-.417-.549-.607-.936-.607-.384 0-.761.187-.93.602-.17.417-.092 1.004.079 1.42.17.417.549.607.936.607.384 0 .761-.187.93-.602.17-.417.092-1.004-.079-1.42zM12.002 4c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 14c-3.313 0-6-2.687-6-6s2.687-6 6-6 6 2.687 6 6-2.687 6-6 6zm-1.83-6.223c-.113.277-.281.493-.417.653-.133.16-.312.336-.572.544l-.248.196c-.347.272-.714.562-1.007.728-.29.16-.549.26-.777.297-.228.037-.417.026-.569-.028-.152-.055-.259-.158-.327-.308-.07-.152-.092-.358-.066-.606l.019-.248c.037-.417.202-.693.414-.845l.23-.178c.22-.16.549-.336.878-.456l.332-.132c.319-.12.484-.251.52-.393.037-.142.023-.277-.044-.407-.066-.13-.23-.223-.49-.28l-.358-.092c-.228-.037-.44-.066-.64-.082l-.248-.025c-.277-.019-.519-.011-.728.026-.209.037-.367.092-.47.165-.102.072-.181.16-.237.26-.055.1-.082.18-.082.23.011.05.059.088.14.118l.248.066c.22.059.393.099.519.118.12.019.22.026.3-.011.079-.037.116-.102.116-.192 0-.092-.059-.155-.178-.184-.118-.028-.24-.037-.367-.028l-.332.07-.37.124c-.209.07-.37.149-.481.237-.113.088-.19.196-.23.327-.04.13-.04.281 0 .456l.055.248c.079.358.209.585.399.684.19.099.417.152.684.165l.297.019c.277.009.519-.007.728-.059l.248-.079c.22-.066.384-.19.493-.37.113-.178.165-.399.165-.658l-.019-.277c-.019-.22-.059-.384-.118-.493-.059-.109-.13-.19-.212-.245-.079-.055-.16-.082-.248-.082l-.277.019c-.277.028-.519.07-.728.118-.209.049-.37.092-.484.13l-.22.07c-.209.07-.37.149-.481.237-.113.088-.19.196-.23.327-.04.13-.04.281 0 .456l.055.248c.079.358.209.585.399.684.19.099.417.152.684.165l.297.019c.277.009.519-.007.728-.059l.248-.079c.22-.066.384-.19.493-.37.113-.178.165-.399.165-.658l-.019-.277c-.019-.22-.059-.384-.118-.493z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Free Consultation!
               </button>
             </div>
           </div>
