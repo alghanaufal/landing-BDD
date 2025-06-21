@@ -287,17 +287,11 @@ export default function MegaMenu() {
           onMouseEnter={() => handleMouseEnter(activeMenu)}
         >
           {activeMenuContent.sections.map((section, sectionIndex) => (
-            <div
-              key={sectionIndex}
-              className={`flex flex-wrap gap-6 ${
-                sectionIndex > 0 ? "mt-6 pt-6 border-t border-gray-200" : ""
-              }`}
-            >
+            <div key={sectionIndex} className="flex flex-wrap border-6 ">
               {section.items.map((item, itemIndex) => (
-                <a
+                <div
                   key={itemIndex}
-                  href={item.linkHref}
-                  className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-grow bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 block"
+                  className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-grow p-4 border-6"
                 >
                   <h3 className="font-semibold text-lg text-gray-900 mb-2">
                     {item.title}
@@ -305,7 +299,10 @@ export default function MegaMenu() {
                   <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                     {item.description}
                   </p>
-                  <span className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group">
+                  <a
+                    href={item.linkHref}
+                    className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group"
+                  >
                     {item.linkText}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -321,8 +318,8 @@ export default function MegaMenu() {
                         d="M9 5l7 7-7 7"
                       />
                     </svg>
-                  </span>
-                </a>
+                  </a>
+                </div>
               ))}
             </div>
           ))}
