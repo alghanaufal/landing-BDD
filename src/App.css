@@ -782,14 +782,14 @@
     padding-bottom: 100px;
   }
   .services-card {
-    position: relative; 
+    position: relative;
     height: auto;
     margin-bottom: 30px;
     padding: 20px 0;
-    opacity: 1; 
+    opacity: 1;
     transform: translateY(0);
-    z-index: auto; 
-    pointer-events: auto; 
+    z-index: auto;
+    pointer-events: auto;
   }
   .services-card-inner {
     max-width: none;
@@ -844,5 +844,170 @@
     left: auto !important;
     top: auto !important;
     transform: none !important;
+  }
+}
+
+#container-section-testimoni {
+  border: 0.2vw solid #222;
+  border-left: none;
+  border-right: none;
+}
+.section-testimoni-homepage {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+.section-testimoni-homepage > .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section-testimoni-homepage .content-marque .inner {
+  width: 100vw;
+  display: flex;
+}
+.section-testimoni-homepage .content-item {
+  padding: 1.388vw;
+  width: 40vw;
+  margin: 1.5vw 0;
+  border: 0.138vw solid #000;
+  flex-direction: column;
+  display: flex;
+  border-radius: 0.55vw;
+  white-space: normal;
+  box-shadow: 0.277vw 0.277vw 0px 0px #222;
+  background-color: #fff;
+}
+.section-testimoni-homepage .content-item-header {
+  display: flex;
+  align-items: center;
+}
+.section-testimoni-homepage .content-item > p {
+  font-size: 1.25vw;
+  font-weight: 300;
+  line-height: 1.576vw;
+  margin-top: 1.5vw;
+}
+.section-testimoni-homepage .content-item .avatar {
+  width: 3.05vw;
+  height: 3.05vw;
+  display: flex;
+  border-radius: 3vw;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.5vw;
+}
+.section-testimoni-homepage .content-item .information {
+  margin-left: 0.8vw;
+}
+.section-testimoni-homepage .content-item .information .name {
+  font-weight: 500;
+  font-size: 1.111vw;
+  margin: 0;
+  padding: 0;
+}
+.section-testimoni-homepage .content-item .information .company {
+  font-size: 0.972vw;
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+}
+
+.marquee-homepage {
+  width: 100vw;
+  margin: 0 auto;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-homepage .box-content {
+  display: inline-block;
+  font-size: 20px;
+  position: relative;
+  left: 100%;
+  animation: marquee-homepage 20s linear infinite;
+}
+.marquee-homepage:hover .box-content {
+  animation-play-state: paused;
+}
+.section-testimoni-homepage .content-heading h5 {
+  font-size: 0.972vw;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.section-testimoni-homepage .content-heading h3 {
+  font-size: 2.57vw;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin: 0.3vw 0 0.9vw 0;
+  font-weight: 400;
+}
+.inner-marquee {
+  position: relative;
+  overflow: hidden;
+  min-height: 20vh;
+}
+.box-marquee {
+  display: flex;
+  width: 100vw;
+}
+.swiper-container .swiper-wrapper,
+.swiper-container1 .swiper-wrapper {
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -ms-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  transition-timing-function: linear;
+  pointer-events: none;
+}
+@media (max-width: 768px) {
+  .inner-marquee {
+    min-height: 50vh;
+  }
+  .section-testimoni-homepage .content-heading h5 {
+    font-size: 4.26vw;
+  }
+  .section-testimoni-homepage .content-heading h3 {
+    font-size: 6.4vw;
+    margin: 2vw 0 7vw 0;
+  }
+  .section-testimoni-homepage .content-item .information .name {
+    font-size: 4.26vw;
+  }
+  .section-testimoni-homepage .content-item .information .company {
+    font-size: 3.2vw;
+  }
+  .section-testimoni-homepage .content-item > p {
+    font-size: 3.73vw;
+    line-height: 4.5vw;
+  }
+  .section-testimoni-homepage .content-item {
+    width: 75vw;
+    border: 0.5vw solid #000;
+    border-radius: 2.55vw;
+    padding: 3vw;
+    margin: 0 3.5vw;
+    box-shadow: 1.277vw 1.277vw 0px 0px #222;
+  }
+  .section-testimoni-homepage .content-item .avatar {
+    width: 11.73vw;
+    height: 11.73vw;
+    border-radius: 7vw;
+    font-size: 5.5vw;
+  }
+  .section-testimoni-homepage .content-item .information {
+    margin-left: 3.8vw;
+  }
+  .section-testimoni-homepage .content-item > p {
+    margin-top: 5vw;
+  }
+  .swiper-container1 {
+    margin-top: 7vw;
+  }
+  .content-heading {
+    width: 100vw;
   }
 }
