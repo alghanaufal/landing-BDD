@@ -121,7 +121,7 @@ const TestimonialSection = () => {
             display:flex;
           }
           .section-testimoni-homepage .content-item {
-            padding:1.388vw;
+            padding:30px;
             width: 40vw;
             margin:1.5vw 0;
             border:0.138vw solid #000;
@@ -314,7 +314,7 @@ const TestimonialSection = () => {
                         <SwiperSlide
                           key={index}
                           className="content-item"
-                          style={{ height: `${maxHeight}px` }}
+                          style={{ height: "300px" }}
                         >
                           <div className="content-item-header">
                             <div
@@ -356,7 +356,7 @@ const TestimonialSection = () => {
                         <SwiperSlide
                           key={index}
                           className="content-item"
-                          style={{ height: `${maxHeight}px` }}
+                          style={{ height: "300px" }}
                         >
                           <div className="content-item-header">
                             <div
