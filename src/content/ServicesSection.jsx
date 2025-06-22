@@ -1,13 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function OurServices() {
-  const servicesListRef = useRef(null);
-  const serviceCardsRefs = useRef([]);
-  const pinSpacerRef = useRef(null);
-
   const servicesData = [
     {
       title: "Digital Advertising",
@@ -87,204 +83,222 @@ export default function OurServices() {
       textColor: "rgb(34, 34, 34)",
     },
   ];
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const containerRef = useRef(null);
+  const pinWrapperRef = useRef(null);
+  const cardsRef = useRef(null);
 
   useEffect(() => {
-    const servicesList = servicesListRef.current;
-    const serviceCards = serviceCardsRefs.current.filter(Boolean);
-    const pinSpacer = pinSpacerRef.current;
+    const handleScroll = () => {
+      if (!containerRef.current || !pinWrapperRef.current) return;
 
-    const setupScrollAnimations = () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      const container = containerRef.current;
+      const pinWrapper = pinWrapperRef.current;
 
-      if (window.innerWidth > 750 && serviceCards.length > 0) {
-        gsap.set(serviceCards, { opacity: 0, translateY: 50 });
+      const containerRect = container.getBoundingClientRect();
+      const pinWrapperRect = pinWrapper.getBoundingClientRect();
 
-        gsap.set(serviceCards[0], {
-          opacity: 1,
-          translateY: 0,
-          pointerEvents: "auto",
-        });
+      // Calculate scroll progress within the pin wrapper
+      const scrollStart = -containerRect.top;
+      const scrollEnd = containerRect.height - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, scrollStart / scrollEnd));
 
-        const cardRevealScrollAmount = window.innerHeight * 0.8;
-
-        const totalPinSpacerHeight =
-          (serviceCards.length - 1) * cardRevealScrollAmount +
-          servicesList.offsetHeight;
-        pinSpacer.style.height = `${totalPinSpacerHeight}px`;
-
-        ScrollTrigger.create({
-          trigger: pinSpacer,
-          pin: servicesList,
-          start: "top top",
-          end: `bottom bottom`,
-          scrub: true,
-          onUpdate: (self) => {
-            const progressPerCard = 1 / serviceCards.length;
-            serviceCards.forEach((card, i) => {
-              const startProgress = i * progressPerCard;
-              const endProgress = (i + 1) * progressPerCard;
-              if (
-                self.progress >= startProgress &&
-                self.progress < endProgress
-              ) {
-                card.classList.add("active");
-              } else {
-                card.classList.remove("active");
-              }
-            });
-          },
-        });
-
-        const cardAnimationTimeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: pinSpacer,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-          },
-        });
-
-        serviceCards.forEach((card, index) => {
-          if (index > 0) {
-            const startScrollPoint = index / serviceCards.length;
-
-            cardAnimationTimeline.to(
-              card,
-              {
-                opacity: 1,
-                translateY: 0,
-                duration: 0.2,
-                ease: "power1.out",
-              },
-              startScrollPoint
-            );
-
-            cardAnimationTimeline.to(
-              serviceCards[index - 1],
-              {
-                opacity: 0,
-                translateY: -50, 
-                duration: 0.2,
-                ease: "power1.in",
-              },
-              startScrollPoint + 0.05
-            ); 
-          }
-        });
-      } else {
-        serviceCards.forEach((card) => {
-          gsap.set(card, {
-            opacity: 1,
-            translateY: 0,
-            position: "relative",
-            top: "auto",
-            bottom: "auto",
-            pointerEvents: "auto",
-          });
-        });
-        pinSpacer.style.height = "auto"; 
-      }
+      setScrollProgress(progress);
     };
 
-    setupScrollAnimations();
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial call
 
-    ScrollTrigger.addEventListener("refreshInit", setupScrollAnimations);
-    window.addEventListener("resize", ScrollTrigger.refresh);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      ScrollTrigger.removeEventListener("refreshInit", setupScrollAnimations);
-      window.removeEventListener("resize", ScrollTrigger.refresh);
-      serviceCardsRefs.current = [];
-    };
-  }, []); 
+  // Calculate current active card based on scroll progress
+  const currentCard = Math.floor(scrollProgress * servicesData.length);
+  const activeCard = Math.min(currentCard, servicesData.length - 1);
 
   return (
-    <div className="section-services">
-      <div className="services-header">
-        <div className="services-header-left">
-          <div className="services-subtitle">
-            <p className="subtitle">OUR SERVICES</p>
-          </div>
-          <div className="services-title">
-            <h4 className="title">
-              We Offer a Wide Services Aimed to Support your Business
-            </h4>
-          </div>
-        </div>
-        <div className="services-header-right">
-          <div className="services-description">
-            <p className="description">
-              It may surprise you, but digital marketing is not a single
-              strategy, it covers a lot of spectrum, but don’t worry, we got
-              you!
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="services-body">
-        <div className="pin-spacer" ref={pinSpacerRef}>
-          <div className="services-list" ref={servicesListRef}>
-            {servicesData.map((service, index) => (
-              <div
-                key={index}
-                className={`services-card services-card-${index}`}
-                style={{
-                  backgroundColor: service.bgColor,
-                  color: service.textColor,
-                }}
-                ref={(el) => (serviceCardsRefs.current[index] = el)}
-              >
-                <div className="services-card-inner">
-                  <div className="services-card-text">
-                    <div className="services-card-title">
-                      <h4 className="title">{service.title}</h4>
-                    </div>
-                    <div className="services-card-description">
-                      <div className="description">
-                        <p>{service.description}</p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Pin Spacer Container */}
+      <div
+        ref={containerRef}
+        className="relative"
+        style={{
+          height: `${100 + (servicesData.length - 1) * 100}vh`, // Total height for pinning
+        }}
+      >
+        {/* Pin Wrapper - This gets pinned */}
+        <div
+          ref={pinWrapperRef}
+          className="sticky top-0 h-screen overflow-hidden"
+        >
+          {/* Cards Container */}
+          <div ref={cardsRef} className="relative w-full h-full">
+            {servicesData.map((service, index) => {
+              // Calculate progress for each card
+              const cardStartProgress = index / servicesData.length;
+              const cardEndProgress = (index + 1) / servicesData.length;
+
+              // Determine card state
+              const isCurrent =
+                scrollProgress >= cardStartProgress &&
+                scrollProgress < cardEndProgress;
+              const isPast = scrollProgress >= cardEndProgress;
+              const isFuture = scrollProgress < cardStartProgress;
+
+              // Calculate individual card progress within its range
+              const cardProgress = isCurrent
+                ? (scrollProgress - cardStartProgress) /
+                  (cardEndProgress - cardStartProgress)
+                : isPast
+                ? 1
+                : 0;
+
+              // Transform calculations for stack effect
+              let translateY = 0;
+              let scale = 1;
+              let rotateX = 0;
+              let opacity = 1;
+              let zIndex = servicesData.length - index;
+
+              if (isFuture) {
+                // Cards that haven't appeared yet - start from front
+                translateY = 100; // Start from below
+                scale = 0.9;
+                opacity = 0;
+                zIndex = servicesData.length + index; // Higher z-index for future cards
+              } else if (isCurrent) {
+                // Current card being animated
+                translateY = 0;
+                scale = 1;
+                opacity = 1;
+                zIndex = servicesData.length + index;
+              } else if (isPast) {
+                // Cards that have passed - move to back with stacking effect
+                translateY = -cardProgress * 20; // Slight upward movement
+                scale = 1 - cardProgress * 0.05; // Subtle scale down
+                rotateX = cardProgress * -5; // Slight rotation for depth
+                opacity = 1 - cardProgress * 0.3; // Fade slightly
+                zIndex = servicesData.length - index - 1; // Lower z-index for past cards
+              }
+
+              // Special handling for the transition between cards
+              if (isCurrent && cardProgress > 0) {
+                const nextIndex = index + 1;
+                if (nextIndex < servicesData.length) {
+                  // Current card starts moving back
+                  translateY = -cardProgress * 30;
+                  scale = 1 - cardProgress * 0.1;
+                  rotateX = -cardProgress * 10;
+                  opacity = 1 - cardProgress * 0.2;
+                }
+              }
+
+              return (
+                <div
+                  key={index}
+                  className="absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out"
+                  style={{
+                    transform: `translateY(${translateY}px) scale(${scale}) rotateX(${rotateX}deg)`,
+                    opacity: opacity,
+                    zIndex: zIndex,
+                    transformOrigin: "center center",
+                    transformStyle: "preserve-3d",
+                  }}
+                >
+                  <div className="w-full max-w-6xl mx-auto px-4">
+                    <div
+                      className="rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden relative"
+                      style={{
+                        backgroundColor: service.bgColor,
+                        color: service.textColor,
+                        height: "80vh",
+                        boxShadow:
+                          isCurrent || isFuture
+                            ? "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                            : "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center h-full">
+                        {/* Left Content */}
+                        <div className="space-y-6 lg:space-y-8">
+                          <div className="space-y-4">
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                              {service.title}
+                            </h2>
+                            <p className="text-lg md:text-xl opacity-90 leading-relaxed">
+                              {service.description}
+                            </p>
+                          </div>
+
+                          <button className="bg-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2 group">
+                            <span>See Detail Service</span>
+                            <svg
+                              className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+
+                        {/* Right Content - Image */}
+                        <div className="flex justify-center lg:justify-end">
+                          <div className="relative">
+                            <img
+                              src={service.image}
+                              alt={service.alt}
+                              className="w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto object-contain transition-transform duration-700 ease-out hover:scale-105"
+                              style={{
+                                filter:
+                                  service.bgColor === "rgb(34, 34, 34)"
+                                    ? "brightness(1.1)"
+                                    : "none",
+                              }}
+                            />
+                            {/* Decorative elements */}
+                            <div className="absolute -top-4 -right-4 w-8 h-8 bg-orange-500 rounded-full opacity-20 animate-pulse"></div>
+                            <div
+                              className="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-500 rounded-full opacity-20 animate-pulse"
+                              style={{ animationDelay: "1s" }}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Progress indicator */}
+                      <div className="absolute bottom-6 left-8 flex space-x-2">
+                        {servicesData.map((_, i) => (
+                          <div
+                            key={i}
+                            className={`
+                              w-2 h-2 rounded-full transition-all duration-300
+                              ${
+                                i === activeCard
+                                  ? "bg-orange-500 w-8"
+                                  : "bg-gray-400 opacity-50"
+                              }
+                            `}
+                          />
+                        ))}
+                      </div>
+
+                      {/* Card number indicator */}
+                      <div className="absolute top-8 right-8 text-sm opacity-60">
+                        {String(index + 1).padStart(2, "0")} /{" "}
+                        {String(servicesData.length).padStart(2, "0")}
                       </div>
                     </div>
-                    <div className="services-card-button">
-                      <a
-                        href={service.link}
-                        className="btn btn-branding-secondary"
-                      >
-                        See Detail Service
-                        <svg
-                          className="svg-inline--fa fa-arrow-right"
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="arrow-right"
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 448 512"
-                          data-fa-i2svg=""
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="services-card-image">
-                    <img
-                      decoding="async"
-                      src={service.image}
-                      alt={service.alt}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src =
-                          "https://placehold.co/400x250/cccccc/333333?text=Image+Not+Found";
-                      }}
-                    />
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

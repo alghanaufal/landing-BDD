@@ -44,8 +44,8 @@ export default function SpaceSection() {
       const newSlideWidth =
         carouselTrackRef.current.offsetWidth / slidesPerView;
 
-        if (Math.abs(slideWidthRef.current - newSlideWidth) > 1) {
-        slideWidthRef.current = newSlideWidth; 
+      if (Math.abs(slideWidthRef.current - newSlideWidth) > 1) {
+        slideWidthRef.current = newSlideWidth;
 
         const targetOffset = -(currentVisualIndex * newSlideWidth);
 
@@ -61,10 +61,10 @@ export default function SpaceSection() {
         }, 50);
       }
     }
-  }, [currentVisualIndex, getSlidesPerView]); 
+  }, [currentVisualIndex, getSlidesPerView]);
 
   useEffect(() => {
-    updateCarouselPositionOnResize(); 
+    updateCarouselPositionOnResize();
     window.addEventListener("resize", updateCarouselPositionOnResize);
     return () =>
       window.removeEventListener("resize", updateCarouselPositionOnResize);
@@ -86,12 +86,11 @@ export default function SpaceSection() {
         setTransitionEnabled(true);
         setCurrentVisualIndex(originalLength + numClones);
         setTimeout(() => {
-          setTransitionEnabled(false); 
+          setTransitionEnabled(false);
           setCurrentVisualIndex(numClones);
           setTimeout(() => setTransitionEnabled(true), 50);
-        }, 500); 
+        }, 500);
       } else {
-        
         setCurrentVisualIndex(currentLogicalIndex + 1 + numClones);
       }
     }, 3000);
@@ -111,92 +110,13 @@ export default function SpaceSection() {
         ? "transform 0.5s ease-out"
         : "none";
       carouselTrackRef.current.style.transform = `translateX(${targetOffset}px)`;
-      currentTranslateX.current = targetOffset; 
+      currentTranslateX.current = targetOffset;
     }
   }, [currentVisualIndex, slideWidthRef.current, transitionEnabled]);
 
   const goToSlide = (index) => {
     setCurrentLogicalIndex(index);
     setCurrentVisualIndex(index + numClones); // Set langsung untuk indeks visual
-  };
-
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setTransitionEnabled(false); // Nonaktifkan transisi selama seret untuk umpan balik instan.
-    startX.current = e.pageX;
-    dragOffset.current = 0; // Setel ulang offset seret.
-    // Hapus autoplay selama interaksi manual
-    if (autoplayTimeoutRef.current) {
-      clearTimeout(autoplayTimeoutRef.current);
-    }
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging || !carouselTrackRef.current) return;
-    const diffX = e.pageX - startX.current;
-    dragOffset.current = diffX; // Simpan offset seret saat ini.
-    carouselTrackRef.current.style.transform = `translateX(${
-      currentTranslateX.current + dragOffset.current
-    }px)`;
-  };
-
-  const handleMouseUp = (e) => {
-    if (!isDragging) return;
-    setIsDragging(false);
-    setTransitionEnabled(true); // Aktifkan kembali transisi setelah seret berakhir.
-
-    const finalDiffX = e.pageX - startX.current;
-    const snapThreshold = slideWidthRef.current * 0.25; // Ambang seret (25% dari lebar slide) untuk menjepret ke berikutnya/sebelumnya.
-
-    let newTargetVisualIndex = currentVisualIndex;
-
-    if (finalDiffX < -snapThreshold) {
-      newTargetVisualIndex = Math.min(
-        clonedImages.length - 1,
-        currentVisualIndex + 1
-      );
-    } else if (finalDiffX > snapThreshold) {
-      newTargetVisualIndex = Math.max(0, currentVisualIndex - 1);
-    }
-    setCurrentVisualIndex(newTargetVisualIndex);
-
-    if (newTargetVisualIndex >= originalLength + numClones) {
-      // Jika dipindahkan ke bagian "mulai" yang dikloning (kloning dari akhir), lompat ke awal asli.
-      setTimeout(() => {
-        setTransitionEnabled(false); // Nonaktifkan transisi untuk lompatan.
-        setCurrentVisualIndex(
-          numClones + (newTargetVisualIndex - (originalLength + numClones))
-        );
-        setTimeout(() => setTransitionEnabled(true), 50); 
-      }, 500); 
-    } else if (newTargetVisualIndex < numClones) {
-      setTimeout(() => {
-        setTransitionEnabled(false); 
-        setCurrentVisualIndex(originalLength + newTargetVisualIndex);
-        setTimeout(() => setTransitionEnabled(true), 50); 
-      }, 500);
-    }
-
-    let newLogicalIndex =
-      (newTargetVisualIndex - numClones + originalLength) % originalLength;
-    setCurrentLogicalIndex(newLogicalIndex);
-  };
-
-  const handleMouseLeave = () => {
-    if (isDragging) {
-      handleMouseUp({ pageX: startX.current + dragOffset.current }); 
-    }
-  };
-  const handleTouchStart = (e) => {
-    handleMouseDown({ pageX: e.touches[0].pageX });
-  };
-
-  const handleTouchMove = (e) => {
-    handleMouseMove({ pageX: e.touches[0].pageX });
-  };
-
-  const handleTouchEnd = (e) => {
-    handleMouseUp({ pageX: e.changedTouches[0].pageX });
   };
 
   return (
@@ -212,16 +132,7 @@ export default function SpaceSection() {
         </p>
       </div>
 
-      <div
-        className="relative space-slider-container overflow-hidden pb-10 select-none"
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
+      <div className="relative space-slider-container overflow-hidden pb-10 select-none">
         {/* Kontainer Slide */}
         <div
           ref={carouselTrackRef}
@@ -235,11 +146,11 @@ export default function SpaceSection() {
         >
           {clonedImages.map((item, index) => (
             <div
-              key={`${item.id}-${index}`} 
+              key={`${item.id}-${index}`}
               className="flex-shrink-0 px-2"
               style={{
                 width: `${100 / getSlidesPerView()}%`,
-                padding: "0 10px", 
+                padding: "0 10px",
                 boxSizing: "border-box",
               }}
             >
