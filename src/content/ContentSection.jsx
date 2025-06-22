@@ -6,6 +6,8 @@ import OwnerSection from "./OwnerSection";
 import ServicesSection from "./ServicesSection";
 import SpaceSection from "./SpaceSection";
 import StudioSection from "./StudioSection";
+import ProgramSection from "./ProgramSection";
+import BlogSection from "./BlogSection";
 import PopularProductsSection from "./PopularProductsSection";
 
 export default function ContentSection() {
@@ -19,8 +21,10 @@ export default function ContentSection() {
         <ServicesSection />
         <SpaceSection />
         <StudioSection />
-        <OwnerSection />
-        <PopularProductsSection />
+        <ProgramSection />
+        <BlogSection />
+        {/* <OwnerSection />
+        <PopularProductsSection /> */}
       </div>
     </section>
   );

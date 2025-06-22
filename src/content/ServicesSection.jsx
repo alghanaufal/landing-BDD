@@ -159,19 +159,22 @@ export default function OurServices() {
               let rotateX = 0;
               let opacity = 1;
               let zIndex = servicesData.length - index;
+              let pointerEvents = "auto";
 
               if (isFuture) {
                 // Cards that haven't appeared yet - start from front
                 translateY = 100; // Start from below
                 scale = 0.9;
                 opacity = 0;
-                zIndex = servicesData.length + index; // Higher z-index for future cards
+                zIndex = index; // Lower z-index for future cards
+                pointerEvents = "none"; // Disable interaction for future cards
               } else if (isCurrent) {
                 // Current card being animated
                 translateY = 0;
                 scale = 1;
                 opacity = 1;
-                zIndex = servicesData.length + index;
+                zIndex = servicesData.length + 10; // Highest z-index for current card
+                pointerEvents = "auto"; // Enable interaction for current card
               } else if (isPast) {
                 // Cards that have passed - move to back with stacking effect
                 translateY = -cardProgress * 20; // Slight upward movement
@@ -179,6 +182,7 @@ export default function OurServices() {
                 rotateX = cardProgress * -5; // Slight rotation for depth
                 opacity = 1 - cardProgress * 0.3; // Fade slightly
                 zIndex = servicesData.length - index - 1; // Lower z-index for past cards
+                pointerEvents = "none"; // Disable interaction for past cards
               }
 
               // Special handling for the transition between cards
@@ -190,6 +194,8 @@ export default function OurServices() {
                   scale = 1 - cardProgress * 0.1;
                   rotateX = -cardProgress * 10;
                   opacity = 1 - cardProgress * 0.2;
+                  // Keep interaction enabled during transition
+                  pointerEvents = cardProgress < 0.8 ? "auto" : "none";
                 }
               }
 
@@ -203,6 +209,7 @@ export default function OurServices() {
                     zIndex: zIndex,
                     transformOrigin: "center center",
                     transformStyle: "preserve-3d",
+                    pointerEvents: pointerEvents,
                   }}
                 >
                   <div className="w-full max-w-6xl mx-auto px-4">
@@ -230,7 +237,20 @@ export default function OurServices() {
                             </p>
                           </div>
 
-                          <button className="bg-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2 group">
+                          <button
+                            className="bg-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2 group relative cursor-pointer"
+                            onClick={() => {
+                              console.log(`Clicked on ${service.title}`);
+                              // Add your click handler here
+                              if (service.link) {
+                                window.open(service.link, "_blank");
+                              }
+                            }}
+                            style={{
+                              pointerEvents: "auto",
+                              zIndex: 10,
+                            }}
+                          >
                             <span>See Detail Service</span>
                             <svg
                               className="w-5 h-5 transition-transform group-hover:translate-x-1"
