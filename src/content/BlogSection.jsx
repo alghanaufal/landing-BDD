@@ -1,308 +1,244 @@
-import React, { useEffect } from "react";
-import { ArrowRight, ArrowUpRight } from "lucide-react"; // Menggunakan Lucide React untuk ikon
+import React from "react";
+// Import Swiper React components from a CDN that supports ES Modules
+import {
+  Swiper,
+  SwiperSlide,
+} from "swiper/react";
+// Import Swiper modules from the same CDN
+import {
+  Scrollbar,
+  FreeMode,
+} from "swiper/modules";
 
-// Komponen BlogCard untuk setiap entri blog
-const BlogCard = ({
-  imageUrl,
-  imageAlt,
-  category,
-  logoUrl,
-  logoAlt,
-  title,
-  description,
-  link,
-}) => {
-  return (
-    // Blog card container with responsive width and hover effects
-    <div className="blog-card relative flex flex-col h-auto transition-all duration-200 ease-in-out">
-      <div
-        className="blog-card-inner mb-2 border-2 border-[#222] rounded-lg transition-all duration-200 ease-in-out flex flex-col h-full bg-white
-                      hover:shadow-[6px_6px_0px_0px_#222]"
-      >
-        <div className="blog-card-image">
+// --- Helper Components & Data ---
+
+// Icon component for arrows to keep the code clean
+const ArrowIcon = ({ className }) => (
+  <svg
+    className={className}
+    aria-hidden="true"
+    focusable="false"
+    role="img"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 448 512"
+  >
+    <path
+      fill="currentColor"
+      d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 0 273.7 0 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"
+    />
+  </svg>
+);
+
+// Sample data for the blog cards. In a real app, this would come from an API.
+const blogPosts = [
+  {
+    image: "https://placehold.co/1600x1200/F4F0EA/333?text=Colorbox",
+    category: "Digital Advertising",
+    logo: "https://placehold.co/150x40/ffffff/000000?text=COLORBOX",
+    title:
+      "Offline-Focused, Digitally-Activated: How Click & Collect Delivered 30% of Monthly Web Revenue",
+    description:
+      "Unlock growth by activating untapped eCommerce features like Click & Collect, boosting sales, ROAS, and cross-team alignment for sustainable fashion retail success.",
+    link: "#",
+  },
+  {
+    image: "https://placehold.co/780x458/F4F0EA/333?text=Logitech",
+    category: "Digital Advertising",
+    logo: "https://placehold.co/150x40/ffffff/000000?text=Logitech",
+    title:
+      "Consistently crushed expectations with an average ROAS of 10x per month, soaring past our 8x target.",
+    description:
+      "Discover how our actionable strategies works brilliantly, delivering impressive average ROAS for Logitech.",
+    link: "#",
+  },
+  {
+    image: "https://placehold.co/780x458/F4F0EA/333?text=AXA",
+    category: "Digital Advertising",
+    logo: "https://placehold.co/150x40/ffffff/000000?text=AXA",
+    title:
+      "Generated a monthly three-fold increase in the quantity and quality of leads.",
+    description:
+      "Axa Insurance Indonesia achieved a remarkable threefold increase in both the quality and quantity of leads by leveraging the BDD digital advertising strategy.",
+    link: "#",
+  },
+  {
+    image: "https://placehold.co/780x458/F4F0EA/333?text=Yamaha",
+    category: "Digital Advertising",
+    logo: "https://placehold.co/150x40/ffffff/000000?text=Yamaha",
+    title:
+      "Yamaha Jabar connected with an audience of 1 million people each month.",
+    description:
+      "Yamaha's ambition to boost its brand awareness aligns seamlessly with the BDD strategy. Check out how it all comes together here!",
+    link: "#",
+  },
+];
+
+// --- Main Components ---
+
+// Individual Blog Card Component
+const BlogCard = ({ post }) => (
+  <div className="group relative flex h-full flex-col">
+    {/* The main card container with border and hover shadow */}
+    <div className="mb-2 flex h-full flex-col overflow-hidden rounded-lg border-2 border-zinc-800 transition-shadow duration-200 ease-in-out group-hover:shadow-[6px_6px_0px_0px_#222]">
+      <div className="blog-card-image">
+        <img
+          loading="lazy"
+          src={post.image}
+          alt={post.title}
+          className="h-auto w-full"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src =
+              "https://placehold.co/800x600/eee/ccc?text=Image+Error";
+          }}
+        />
+      </div>
+      <div className="border-y-2 border-zinc-800 bg-[#F4F0EA] py-3.5 text-center md:py-2">
+        <p className="text-sm font-medium md:text-xs">{post.category}</p>
+      </div>
+      <div className="flex flex-grow flex-col p-5 md:p-2.5">
+        <div className="mb-2.5 h-10 md:mb-2.5">
           <img
-            loading="lazy"
-            decoding="async"
-            width="100%"
-            src={imageUrl}
-            className="w-full rounded-t-[6px]"
-            alt={imageAlt}
+            src={post.logo}
+            alt="Client Logo"
+            className="max-h-10 md:max-h-8"
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src =
-                "https://placehold.co/780x458/cccccc/333333?text=Blog+Image";
+              e.target.src = "https://placehold.co/150x40/eee/ccc?text=Logo";
             }}
           />
         </div>
-        {/* Blog card category */}
-        <div
-          className="blog-card-category py-3.5 bg-[#F4F0EA] text-center border-y-2 border-[#222]
-                        max-sm:px-5 max-sm:py-1.5"
-        >
-          <p
-            className="category text-base font-medium leading-normal m-0 text-black
-                        max-sm:text-xs max-sm:whitespace-nowrap"
-          >
-            {category}
+        <div className="mb-2.5 h-32 md:h-28">
+          <a href={post.link} className="text-zinc-800">
+            <h6 className="text-xl font-medium leading-tight text-zinc-800 group-hover:underline md:text-sm md:leading-tight">
+              {post.title}
+            </h6>
+          </a>
+        </div>
+        <div className="mb-5 h-24 md:mb-2.5 md:h-20">
+          <p className="text-base font-light text-zinc-800 md:text-xs">
+            {post.description}
           </p>
         </div>
-        {/* Blog card body */}
-        <div
-          className="blog-card-body p-5 flex flex-col flex-grow
-                        max-sm:p-2.5"
-        >
-          {/* Blog card logo */}
-          <div className="blog-card-logo mb-1.5 max-sm:mb-2.5">
-            <img
-              decoding="async"
-              src={logoUrl}
-              alt={logoAlt}
-              className="max-h-[30px] w-auto"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src =
-                  "https://placehold.co/40x40/cccccc/333333?text=Logo";
-              }}
-            />
-          </div>
-          {/* Blog card title */}
-          <div className="blog-card-title mb-2.5 max-sm:mb-1">
-            <a href={link} className="block hover:underline">
-              <h6
-                className="title text-[#222] text-2xl font-medium leading-normal m-0
-                             overflow-hidden text-ellipsis line-clamp-3
-                             max-sm:text-sm max-sm:leading-5"
-              >
-                {" "}
-                {/* Changed to line-clamp-3 for both desktop and mobile */}
-                {title}
-              </h6>
-            </a>
-          </div>
-          {/* Blog card description */}
-          <div className="blog-card-description mb-5 max-sm:mb-2.5">
-            <p
-              className="description text-[#222] text-base font-light leading-normal m-0
-                          overflow-hidden text-ellipsis line-clamp-3
-                          max-sm:text-xs max-sm:line-clamp-3"
-            >
-              {description}
-            </p>
-          </div>
-          {/* Blog card link */}
-          <div className="blog-card-link mt-auto pt-2">
-            <a
-              href={link}
-              className="text-[#222] text-lg font-medium leading-normal m-0 flex items-center gap-2.5
-                                    max-sm:text-sm max-sm:gap-1.5"
-            >
-              Read The Story
-              <ArrowRight size={20} className="rotate-[-45deg] mb-[-3px]" />
-            </a>
-          </div>
+        <div className="mt-auto">
+          <a
+            href={post.link}
+            className="flex items-center gap-2.5 text-lg font-medium text-zinc-800 md:text-sm"
+          >
+            Read The Story
+            <ArrowIcon className="h-4 w-4 -rotate-45" />
+          </a>
         </div>
-      </div>
-      {/* Absolute positioned link with icon on top of the image */}
-      <div
-        className="blog-link absolute top-5 right-5 flex transition-all duration-200 ease-in-out z-10
-                      max-sm:top-[9px] max-sm:right-3"
-      >
-        <a
-          href={link}
-          className="block text-[#222] border-2 border-[#222] rounded-full bg-white text-3xl p-[11px] px-4 w-16 h-16 transition-all duration-200 ease-in-out flex items-center justify-center
-                                max-sm:text-xs max-sm:p-[3px] max-sm:px-1.5 max-sm:w-6 max-sm:h-6
-                                hover:bg-[#FFB14C] hover:shadow-[6px_6px_0px_0px_#222]"
-        >
-          <ArrowUpRight
-            size={28}
-            className="max-sm:text-sm max-sm:w-3 max-sm:h-3"
-          />{" "}
-          {/* Changed to ArrowUpRight */}
-        </a>
       </div>
     </div>
-  );
-};
 
-const BlogSection = () => {
-  // Data dummy untuk kartu blog
-  const blogPosts = [
-    {
-      id: 1,
-      imageUrl:
-        "https://bolehdicoba.com/wp-content/uploads/2025/04/Colorbox-Post-Featured.webp",
-      imageAlt: "Colorbox",
-      category: "Digital Advertising",
-      logoUrl:
-        "https://bolehdicoba.com/wp-content/uploads/2025/04/colorbox-logo.png",
-      logoAlt: "logo-card-blog",
-      title:
-        "Offline-Focused, Digitally-Activated: How Click & Collect Delivered 30% of Monthly Web Revenue",
-      description:
-        "Unlock growth by activating untapped eCommerce features like Click & Collect, boosting sales, ROAS, and cross-team alignment for sustainable fashion retail success",
-      link: "https://bolehdicoba.com/news-blog/case-study/offline-focused-digitally-activated-how-click-collect-delivered-30-of-monthly-web-revenue/",
-    },
-    {
-      id: 2,
-      imageUrl:
-        "https://bolehdicoba.com/wp-content/uploads/2024/04/Rectangle-9899-3.png",
-      imageAlt: "Logitech",
-      category: "Digital Advertising",
-      logoUrl:
-        "https://bolehdicoba.com/wp-content/uploads/2024/04/Group-40398-1.png",
-      logoAlt: "logo-card-blog",
-      title:
-        "Consistently crushed expectations with an average ROAS of 10x per month, soaring past our 8x target.",
-      description:
-        "Discover how our actionable strategies works brilliantly, delivering impressive average ROAS for Logitech.",
-      link: "https://bolehdicoba.com/news-blog/case-study/consistently-crushed-expectations-with-an-average-roas-of-10x-per-month-soaring-past-our-8x-target/",
-    },
-    {
-      id: 3,
-      imageUrl:
-        "https://bolehdicoba.com/wp-content/uploads/2024/04/Rectangle-9899.png",
-      imageAlt: "AXA Insurance",
-      category: "Digital Advertising",
-      logoUrl:
-        "https://bolehdicoba.com/wp-content/uploads/2024/04/image-301-1.png",
-      logoAlt: "logo-card-blog",
-      title:
-        "Generated a monthly three-fold increase in the quantity and quality of leads.",
-      description:
-        "Axa Insurance Indonesia achieved a remarkable threefold increase in both the quality and quantity of leads by leveraging the BDD digital advertising strategy.",
-      link: "https://bolehdicoba.com/news-blog/case-study/generated-a-monthly-three-fold-increase-in-the-quantity-and-quality-of-leads/",
-    },
-    {
-      id: 4,
-      imageUrl:
-        "https://bolehdicoba.com/wp-content/uploads/2024/04/Rectangle-9899-1.png",
-      imageAlt: "Yamaha Jabar",
-      category: "Digital Advertising",
-      logoUrl:
-        "https://bolehdicoba.com/wp-content/uploads/2024/04/Frame-2200447.png",
-      logoAlt: "logo-card-blog",
-      title:
-        "Yamaha Jabar connected with an audience of 1 million people each month.",
-      description:
-        "Yamaha's ambition to boost its brand awareness aligns seamlessly with the BDD strategy. Check out how it all comes together here!",
-      link: "https://bolehdicoba.com/news-blog/case-study/yamaha-jabar-connected-with-an-audience-of-1-million-people-each-month/",
-    },
-  ];
+    {/* The circular link icon that appears on hover */}
+    <a
+      href={post.link}
+      className="absolute top-5 right-5 flex h-16 w-16 items-center justify-center rounded-full border-2 border-zinc-800 bg-white transition-all duration-200 ease-in-out group-hover:bg-[#FFB14C] group-hover:shadow-[6px_6px_0px_0px_#222] md:top-2 md:right-3 md:h-6 md:w-6"
+    >
+      <ArrowIcon className="h-6 w-6 -rotate-45 text-zinc-800 md:h-3 md:w-3" />
+    </a>
+  </div>
+);
+
+// Main App Component
+export default function App() {
   return (
     <>
-      {/* Custom styles for the horizontal scrollbar */}
-      {/* These styles are applied to the native scrollbar for consistency. */}
-      <style>
-        {`
-        /* Webkit (Chrome, Safari, Edge, Opera) scrollbar styles */
-        .blog-list::-webkit-scrollbar {
-          height: 100px; /* Lebar total area scrollbar */
+      {/* Custom styles for Swiper scrollbar and importing Swiper's CSS from CDN. */}
+      <style>{`
+        @import url('https://unpkg.com/swiper@11/swiper.min.css');
+        @import url('https://unpkg.com/swiper@11/modules/scrollbar.min.css');
+        
+        .section-blog .swiper-scrollbar {
+          height: 1px !important;
+          background-color: #A9A59E;
+          margin-top: 30px;
+          margin-bottom: 55px;
+          bottom: 35px !important;
+          left: 0;
+          width: 48vw; /* Corresponds to original 47.917vw */
         }
-
-        .blog-list::-webkit-scrollbar-track {
-          background-color: #A9A59E; /* Warna track scrollbar */
-        }
-
-        .blog-list::-webkit-scrollbar-thumb {
-          background-color: #00BFB3; /* Warna teal untuk thumb */
-          border: 2px solid #222; /* Border hitam */
-          border-radius: 50px; /* Bentuk pill/kapsul */
-          background-image: none; /* Menghapus gambar latar belakang */
-          background-size: auto;
+        .section-blog .swiper-scrollbar-drag {
+          background-color: transparent;
+          background-image: url('https://bolehdicoba.com/wp-content/uploads/2025/02/slide-indicator.png');
+          background-size: contain;
           background-repeat: no-repeat;
-          background-position: center;
-          height: 64px; /* Tinggi thumb, mungkin tidak akurat di semua browser */
+          background-position: center bottom;
+          height: 135px !important;
+          border-radius: 0;
+          top: -60px; /* Adjust vertical position */
+          cursor: grab;
         }
-
-        /* Firefox scrollbar styles */
-        .blog-list {
-          scrollbar-width: thin; /* "auto" or "thin" */
-          scrollbar-color: #00BFB3 #A9A59E; /* thumb color dan track color */
-          /* Menghapus border-image karena tidak relevan tanpa gambar latar belakang */
-          border-image: none;
+        @media (max-width: 767px) {
+            .section-blog .swiper-scrollbar {
+                display: none;
+            }
         }
+      `}</style>
 
-        /* Responsive overrides for scrollbar height/position if needed for specific desktop viewports */
-        @media (min-width: 768px) {
-          .blog-list.desktop-scrollbar {
-            padding-bottom: 135px; /* Adjust padding for scrollbar visibility */
-            margin-bottom: 55px; /* Mimic original margin for scrollbar positioning */
-          }
-          .blog-list.desktop-scrollbar::-webkit-scrollbar-thumb {
-            height: 135px; /* Visual target, might not be exact */
-            border-radius: 67.5px; /* Menyesuaikan radius untuk tinggi baru */
-          }
-        }
-        `}
-      </style>
-
-      <div
-        className="section-blog mx-auto my-24 flex flex-row justify-end items-center gap-8
-                      max-sm:my-12 max-sm:mb-[70px] max-sm:px-4 max-sm:flex-col max-sm:justify-center"
-      >
-        {/* Blog Text Section */}
-        <div
-          className="blog-text flex-none w-[22.917vw]
-                        max-sm:w-full"
-        >
-          <div className="blog-subtitle mb-1.5">
-            <p
-              className="subtitle text-[#513B6A] text-sm font-medium leading-normal m-0
-                          max-sm:text-base max-sm:text-center"
-            >
-              CASE STUDY
-            </p>
-          </div>
-          <div className="blog-title mb-[70px] max-sm:mb-4">
-            <h4
-              className="title text-[#222] text-4xl font-normal leading-normal m-0
-                          max-sm:text-2xl max-sm:leading-7 max-sm:text-center"
-            >
-              Explore more about our partner success stories
-            </h4>
-          </div>
-          <div className="blog-button max-sm:flex max-sm:justify-center">
-            <a
-              href="https://bolehdicoba.com/case-study/"
-              className="btn btn-branding-secondary text-lg font-semibold leading-normal m-0 flex gap-4 w-fit items-center px-6 py-2.5 border border-black rounded-md transition-all duration-300 ease-in-out bg-white text-black
-                        max-sm:shadow-[4px_4px_0px_0px_#222] max-sm:px-5 max-sm:py-2 max-sm:text-base
-                        hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222] hover:text-black"
-            >
-              See More Success Stories
-              <ArrowRight size={24} />
-            </a>
-          </div>
-        </div>
-
-        {/* Blog Content Section (Desktop View - Horizontal Scroll) */}
-        <div
-          className="blog-content flex-none w-[calc(100%-576px)] hidden md:block
-                        md:w-[calc(100%-455px)]"
-        >
-          <div className="blog-list desktop-scrollbar flex flex-row items-center w-full pb-[135px] pr-8 overflow-x-auto whitespace-nowrap md:min-h-[850px]">
-            {blogPosts.map((post) => (
-              <div
-                key={post.id}
-                className="blog-card flex-shrink-0 inline-block mr-8 last:mr-0"
-                style={{ width: "170.8px" }}
+      <div className="min-h-screen bg-gray-50 font-sans">
+        <section className="section-blog container mx-auto flex flex-col items-center justify-center gap-12 px-4 py-12 md:gap-24 lg:flex-row lg:justify-end lg:py-24">
+          {/* Left Text Content */}
+          <div className="flex-shrink-0 text-center lg:w-[400px] lg:text-left">
+            <div className="mb-1.5">
+              <p className="text-sm font-medium text-[#513B6A]">CASE STUDY</p>
+            </div>
+            <div className="mb-16 lg:mb-12">
+              <h4 className="text-4xl font-normal text-zinc-800 md:text-2xl md:leading-tight">
+                Explore more about our partner success stories
+              </h4>
+            </div>
+            <div className="flex justify-center lg:justify-start">
+              <a
+                href="#"
+                className="inline-flex items-center gap-4 rounded-md bg-transparent px-6 py-3 text-lg font-semibold text-zinc-800 ring-2 ring-inset ring-zinc-800 transition-all duration-200 hover:bg-[#E8A145] hover:text-black hover:shadow-[4px_4px_0px_0px_#222]"
               >
-                <BlogCard {...post} />
-              </div>
-            ))}
+                See More Success Stories
+                <ArrowIcon className="h-5 w-5" />
+              </a>
+            </div>
           </div>
-        </div>
 
-        {/* Blog Content Section (Mobile View - Grid Layout) */}
-        <div className="blog-content hidden max-sm:block w-full">
-          <div className="blog-list flex flex-row flex-wrap justify-center gap-x-[13px] gap-y-2.5 pb-0 pr-0">
-            {blogPosts.map((post) => (
-              <BlogCard key={post.id} {...post} />
-            ))}
+          {/* Right Content Area (Swiper for Desktop, Grid for Mobile) */}
+          <div className="w-full lg:w-3/5">
+            {/* Desktop Swiper View */}
+            <div className="hidden lg:block">
+              <Swiper
+                modules={[Scrollbar, FreeMode]}
+                freeMode={true}
+                grabCursor={true}
+                slidesPerView={"auto"}
+                spaceBetween={30}
+                scrollbar={{
+                  draggable: true,
+                  hide: false,
+                }}
+                className="!pb-32" // Padding bottom to make space for the scrollbar
+              >
+                {blogPosts.map((post, index) => (
+                  <SwiperSlide
+                    key={index}
+                    style={{ width: "420px", height: "auto" }}
+                  >
+                    <BlogCard post={post} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+
+            {/* Mobile Grid View */}
+            <div className="flex flex-wrap justify-center gap-4 lg:hidden">
+              {blogPosts.slice(0, 4).map((post, index) => (
+                <div key={index} className="w-[48%]">
+                  <BlogCard post={post} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </>
   );
-};
-
-export default BlogSection;
+}

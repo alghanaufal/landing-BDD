@@ -9,6 +9,8 @@ import StudioSection from "./StudioSection";
 import ProgramSection from "./ProgramSection";
 import BlogSection from "./BlogSection";
 import TestimonySection from "./TestimonySection";
+import NewsSection from "./NewsSection";
+import FormSection from "./FormSection";
 import PopularProductsSection from "./PopularProductsSection";
 
 export default function ContentSection() {
@@ -25,6 +27,8 @@ export default function ContentSection() {
         <ProgramSection />
         <BlogSection />
         <TestimonySection />
+        <NewsSection />
+        <FormSection />
         {/* <OwnerSection />
         <PopularProductsSection /> */}
       </div>
