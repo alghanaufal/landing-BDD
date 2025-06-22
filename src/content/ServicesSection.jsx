@@ -1,17 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// Daftarkan plugin ScrollTrigger di luar komponen untuk menghindari pendaftaran ulang setiap render
 gsap.registerPlugin(ScrollTrigger);
 
 export default function OurServices() {
-  // Ref untuk elemen DOM yang akan dimanipulasi oleh GSAP/ScrollTrigger
   const servicesListRef = useRef(null);
   const serviceCardsRefs = useRef([]);
   const pinSpacerRef = useRef(null);
 
-  // Data layanan yang akan ditampilkan dalam kartu
   const servicesData = [
     {
       title: "Digital Advertising",
@@ -94,49 +90,39 @@ export default function OurServices() {
 
   useEffect(() => {
     const servicesList = servicesListRef.current;
-    const serviceCards = serviceCardsRefs.current.filter(Boolean); // Filter out nulls if any ref is not yet set
+    const serviceCards = serviceCardsRefs.current.filter(Boolean);
     const pinSpacer = pinSpacerRef.current;
 
     const setupScrollAnimations = () => {
-      // Hentikan ScrollTrigger yang ada untuk mencegah duplikasi saat refresh
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-      // Terapkan pinning kompleks hanya pada layar yang lebih besar (desktop)
       if (window.innerWidth > 750 && serviceCards.length > 0) {
-        // Atur status awal untuk semua kartu (tersembunyi dan sedikit bergeser)
         gsap.set(serviceCards, { opacity: 0, translateY: 50 });
 
-        // Kartu pertama harus segera terlihat
         gsap.set(serviceCards[0], {
           opacity: 1,
           translateY: 0,
           pointerEvents: "auto",
         });
 
-        // Hitung jarak gulir yang diperlukan untuk setiap transisi kartu
-        const cardRevealScrollAmount = window.innerHeight * 0.8; // Contoh: 80% tinggi viewport per kartu
+        const cardRevealScrollAmount = window.innerHeight * 0.8;
 
-        // Hitung total tinggi untuk `pin-spacer`
         const totalPinSpacerHeight =
           (serviceCards.length - 1) * cardRevealScrollAmount +
           servicesList.offsetHeight;
         pinSpacer.style.height = `${totalPinSpacerHeight}px`;
 
-        // Buat ScrollTrigger utama untuk 'memin' wadah servicesList
         ScrollTrigger.create({
           trigger: pinSpacer,
           pin: servicesList,
           start: "top top",
-          end: `bottom bottom`, // Pastikan akhiran trigger sesuai dengan akhir pin-spacer
+          end: `bottom bottom`,
           scrub: true,
-          // markers: true, // Hapus komentar untuk debugging
           onUpdate: (self) => {
             const progressPerCard = 1 / serviceCards.length;
             serviceCards.forEach((card, i) => {
               const startProgress = i * progressPerCard;
               const endProgress = (i + 1) * progressPerCard;
-
-              // Jika progres gulir berada dalam rentang untuk kartu ini, aktifkan
               if (
                 self.progress >= startProgress &&
                 self.progress < endProgress
@@ -149,7 +135,6 @@ export default function OurServices() {
           },
         });
 
-        // Buat timeline untuk mengatur animasi kartu individual
         const cardAnimationTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: pinSpacer,
@@ -161,37 +146,32 @@ export default function OurServices() {
 
         serviceCards.forEach((card, index) => {
           if (index > 0) {
-            // Animasikan semua kartu kecuali yang pertama
-            // Definisikan posisi gulir spesifik (sebagai persentase dari total gulir)
             const startScrollPoint = index / serviceCards.length;
 
-            // Tambahkan animasi ke timeline
             cardAnimationTimeline.to(
               card,
               {
                 opacity: 1,
                 translateY: 0,
-                duration: 0.2, // Pengungkapan cepat
+                duration: 0.2,
                 ease: "power1.out",
               },
               startScrollPoint
-            ); // Posisikan animasi pada timeline
+            );
 
-            // Saat kartu masuk, kartu sebelumnya mungkin memudar (opsional, menciptakan tumpang tindih)
             cardAnimationTimeline.to(
               serviceCards[index - 1],
               {
                 opacity: 0,
-                translateY: -50, // Geser ke atas dan keluar
+                translateY: -50, 
                 duration: 0.2,
                 ease: "power1.in",
               },
               startScrollPoint + 0.05
-            ); // Sedikit setelah kartu saat ini masuk
+            ); 
           }
         });
       } else {
-        // Pada perangkat seluler atau layar yang lebih kecil, nonaktifkan pinning dan atur ulang gaya
         serviceCards.forEach((card) => {
           gsap.set(card, {
             opacity: 1,
@@ -202,27 +182,22 @@ export default function OurServices() {
             pointerEvents: "auto",
           });
         });
-        pinSpacer.style.height = "auto"; // Atur ulang tinggi pin-spacer
+        pinSpacer.style.height = "auto"; 
       }
     };
 
-    // Pengaturan awal animasi
     setupScrollAnimations();
 
-    // Refresh ScrollTrigger saat jendela diubah ukurannya untuk menghitung ulang tinggi dan menginisialisasi ulang
-    // Gunakan addEventListener dan hapus saat cleanup untuk mencegah masalah
     ScrollTrigger.addEventListener("refreshInit", setupScrollAnimations);
     window.addEventListener("resize", ScrollTrigger.refresh);
 
-    // Fungsi cleanup untuk saat komponen tidak lagi dipasang (unmount)
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       ScrollTrigger.removeEventListener("refreshInit", setupScrollAnimations);
       window.removeEventListener("resize", ScrollTrigger.refresh);
-      // Penting: Kosongkan ref array untuk menghindari masalah di render berikutnya jika komponen dipasang ulang
       serviceCardsRefs.current = [];
     };
-  }, []); // Array dependensi kosong berarti efek ini hanya berjalan sekali saat komponen dipasang
+  }, []); 
 
   return (
     <div className="section-services">
@@ -258,7 +233,6 @@ export default function OurServices() {
                   backgroundColor: service.bgColor,
                   color: service.textColor,
                 }}
-                // Menggunakan fungsi callback untuk mengisi ref array
                 ref={(el) => (serviceCardsRefs.current[index] = el)}
               >
                 <div className="services-card-inner">

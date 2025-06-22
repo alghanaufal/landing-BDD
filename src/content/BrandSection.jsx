@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper modules
-// Menghilangkan 'Pagination' dari modul yang diimpor
-import { Autoplay, FreeMode } from "swiper/modules"; // Import FreeMode
+import { Autoplay, FreeMode } from "swiper/modules";
 
-// Import Swiper styles (ensure these are accessible, e.g., via App.css or global import)
 import "swiper/css";
-// import "swiper/css/pagination"; // Tidak perlu lagi mengimpor gaya pagination
+
 import "swiper/css/autoplay";
-import "swiper/css/free-mode"; // Import gaya free-mode
+import "swiper/css/free-mode";
 
 export default function BrandSection() {
-  // Data for popular brands, including name and logo URL
   const popularBrands1 = [
     {
       logo: "./Brand1.png",
@@ -261,24 +256,16 @@ export default function BrandSection() {
     { id: "FMCGs & Corporations", label: "FMCGs Brands", data: popularBrands5 },
   ];
 
-  // State untuk melacak tab aktif saat ini (menggunakan indeks)
   const [activeBrandSetIndex, setActiveBrandSetIndex] = useState(0);
-  // Mengambil data merek yang sesuai dengan tab aktif
   const currentBrandsData = allBrandSets[activeBrandSetIndex].data;
-
-  // Utility function to determine the number of slides to show per view based on screen width
   const getBrandsSlidesPerView = () => {
-    // Set to 'auto' for free mode to work effectively with variable slide widths
     return "auto";
   };
 
-  // State untuk memaksa rendering ulang Swiper merek saat ukuran jendela diubah
   const [responsiveKey, setResponsiveKey] = useState(0);
 
-  // Effect hook untuk menangani event perubahan ukuran jendela
   useEffect(() => {
     const handleResize = () => {
-      // Tingkatkan kunci untuk memaksa Swiper merender ulang
       setResponsiveKey((prevKey) => prevKey + 1);
     };
 
@@ -293,10 +280,8 @@ export default function BrandSection() {
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           Over 800+ Business growing with Boleh Dicoba Digital
         </h2>
-        {/* Deskripsi di gambar tidak ada, jadi dihilangkan */}
       </div>
 
-      {/* Bagian Nav-Tabs yang dapat digulir (sesuai mobile image) */}
       <div className="overflow-x-auto custom-scrollbar-hidden mb-8">
         <div className="flex flex-nowrap space-x-4 justify-start md:justify-center">
           {allBrandSets.map((set, index) => (
@@ -306,8 +291,8 @@ export default function BrandSection() {
               className={`px-4 py-2 sm:px-4 sm:py-2 font-medium transition-colors duration-300 whitespace-nowrap flex-shrink-0
                 ${
                   activeBrandSetIndex === index
-                    ? "text-blue-600 border-b-2 border-blue-600" // Gaya aktif dengan underline
-                    : "text-gray-600 hover:text-gray-900" // Gaya tidak aktif
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-600 hover:text-gray-900" 
                 }`}
             >
               {set.label}
@@ -316,21 +301,19 @@ export default function BrandSection() {
         </div>
       </div>
 
-      {/* Implementasi Swiper untuk Merek */}
       <Swiper
-        // Menggunakan kunci gabungan untuk memaksa rendering ulang ketika tab berubah ATAU jendela diubah
         key={`${activeBrandSetIndex}-${responsiveKey}`}
         modules={[Autoplay, FreeMode]}
-        spaceBetween={40} // Meningkatkan spasi antar logo agar lebih mirip gambar desktop
+        spaceBetween={40} 
         slidesPerView={getBrandsSlidesPerView()}
         loop={true}
         autoplay={{
           delay: 0,
           disableOnInteraction: false,
         }}
-        speed={3000} // Kecepatan autoplay untuk gerakan sangat mulus
+        speed={3000} 
         freeMode={true}
-        className="brand-swiper" // Menambah padding bawah untuk ruang di bawah logo
+        className="brand-swiper" 
       >
         {currentBrandsData.map((brand, index) => (
           <SwiperSlide
@@ -342,7 +325,6 @@ export default function BrandSection() {
               alt={`Brand ${index + 1} from ${
                 allBrandSets[activeBrandSetIndex].label
               }`}
-              // Kelas disederhanakan, sesuaikan w- h- jika perlu untuk ukuran logo yang tepat
               className="object-contain max-w-[120px] max-h-[50px]"
             />
           </SwiperSlide>

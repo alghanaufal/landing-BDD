@@ -746,7 +746,6 @@
   fill: currentColor;
 }
 
-/* Responsive adjustments */
 @media (min-width: 768px) and (max-width: 1367px) {
   .services-body {
     margin-bottom: 80px;
@@ -783,14 +782,14 @@
     padding-bottom: 100px;
   }
   .services-card {
-    position: relative; /* Switch to relative for mobile stack */
+    position: relative; 
     height: auto;
     margin-bottom: 30px;
     padding: 20px 0;
-    opacity: 1; /* Fully visible on mobile */
-    transform: translateY(0); /* No translation on mobile */
-    z-index: auto; /* Reset z-index */
-    pointer-events: auto; /* Re-enable pointer events on mobile */
+    opacity: 1; 
+    transform: translateY(0);
+    z-index: auto; 
+    pointer-events: auto; 
   }
   .services-card-inner {
     max-width: none;
@@ -827,7 +826,6 @@
     width: 100%;
     margin-bottom: 20px;
   }
-  /* Adjust the pin-spacer and services-list for mobile to avoid fixed positioning issues */
   .pin-spacer {
     display: block !important;
     width: auto !important;

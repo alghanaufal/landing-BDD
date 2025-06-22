@@ -1,44 +1,41 @@
 import React from "react";
 
 export default function StatisticSection() {
-  // Data untuk menampilkan statistik "We On Numbers"
   const stats = [
     {
       value: "800+",
       label: "Clients Growing",
-      bgColorClass: "bg-blue-600", // Background color for the animated border fill
+      bgColorClass: "bg-blue-600", 
     },
     {
       value: "140+",
       label: "Teams of Professional",
-      bgColorClass: "bg-orange-400", // Background color for the animated border fill
+      bgColorClass: "bg-orange-400", 
     },
     {
       value: "50+",
       label: "Meta & Google Certified Professional",
-      bgColorClass: "bg-purple-600", // Background color for the animated border fill
+      bgColorClass: "bg-purple-600", 
     },
     {
       value: "400 Mio+",
       label: "Online Engagement Performance",
-      bgColorClass: "bg-teal-400", // Background color for the animated border fill
+      bgColorClass: "bg-teal-400", 
     },
     {
       value: "USD 15 Mio+",
       label: "Advertising Spend",
-      bgColorClass: "bg-red-500", // Background color for the animated border fill
+      bgColorClass: "bg-red-500", 
     },
     {
       value: "+ And Many More",
-      label: "", // Tidak ada label tambahan untuk ini
-      isMoreCard: true, // Flag untuk kartu "And Many More"
+      label: "", 
+      isMoreCard: true, 
     },
   ];
 
   return (
-    // Menggunakan classname baru sesuai spesifikasi CSS
     <div className="section-statistik">
-      {/* Bagian Kiri: Title and Description */}
       <div className="statistik-header">
         <div className="statistik-subtitle">
           <p className="subtitle">WE ON NUMBERS</p>
@@ -57,13 +54,11 @@ export default function StatisticSection() {
         </div>
       </div>
 
-      {/* Bagian Kanan: Grid Statistik */}
       <div className="statistik-body">
         <div className="statistik-list">
           {stats.map((stat, index) => (
             <div
               key={index}
-              // Menggunakan classname baru dan conditional class untuk ukuran kartu
               className={`statistik-card ${
                 stat.isMoreCard ? "statistik-card-more" : ""
               } ${
@@ -80,7 +75,6 @@ export default function StatisticSection() {
                   <p className="description">{stat.label}</p>
                 </div>
               </div>
-              {/* Tambahkan elemen warna yang akan dianimasikan, hanya jika bukan kartu "And Many More" */}
               {!stat.isMoreCard && (
                 <div
                   className={`statistik-card-color ${stat.bgColorClass}`}

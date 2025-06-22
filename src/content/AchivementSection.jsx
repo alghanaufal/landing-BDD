@@ -1,16 +1,12 @@
 import React from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper modules
 import { Autoplay, FreeMode } from "swiper/modules";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/free-mode";
 
 export default function AchivementSection() {
-  // Data untuk item pencapaian
   const achievements = [
     { icon: "./achievement1.png" },
     { icon: "./achievement2.png" },
@@ -19,30 +15,27 @@ export default function AchivementSection() {
     { icon: "./achievement5.png" },
   ];
 
-  // Utility function untuk menentukan slidesPerView untuk slider pencapaian
   const getAchievementsSlidesPerView = () => {
-    // Sesuaikan ini jika Anda ingin lebih banyak slide terlihat di layar yang lebih besar
-    if (window.innerWidth < 640) return 3; // 3 item di mobile
-    if (window.innerWidth < 768) return 4; // 4 item di tablet
-    return 5; // 5 item di desktop (disesuaikan dengan kebutuhan)
+    if (window.innerWidth < 640) return 3; 
+    if (window.innerWidth < 768) return 4;
+    return 5; 
   };
 
   return (
     <div className="section-achivement mb-20">
-      {/* Bagian Kanan: Body Pencapaian dengan Slider */}
       <div className="achivement-body">
         <Swiper
           modules={[Autoplay, FreeMode]}
-          spaceBetween={40} // Jarak antar slide
-          slidesPerView={getAchievementsSlidesPerView()} // Jumlah slide yang terlihat
-          loop={true} // Loop tak terbatas
+          spaceBetween={40} 
+          slidesPerView={getAchievementsSlidesPerView()} 
+          loop={true} 
           autoplay={{
-            delay: 0, // Tanpa jeda
+            delay: 0, 
             disableOnInteraction: false,
-            reverseDirection: false, // Bergerak ke kanan
+            reverseDirection: false,
           }}
-          speed= {3000} // Kecepatan autoplay yang disesuaikan
-          freeMode={true} // Mengaktifkan mode bebas
+          speed= {3000} 
+          freeMode={true}
           className="achivement-slider"
         >
           {achievements.map((item, index) => (
@@ -51,7 +44,7 @@ export default function AchivementSection() {
                 <img
                   src={item.icon}
                   alt={`Achievement Icon ${index + 1}`}
-                  className="w-full h-auto max-w-[100px] max-h-[100px] object-contain"
+                  className="w-full h-full max-w-[100px] max-h-[100px] object-contain"
                 />
               </div>
             </SwiperSlide>
