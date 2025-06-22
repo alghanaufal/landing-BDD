@@ -593,3 +593,258 @@
     padding-left: 70px;
   }
 }
+/* Custom styles provided by the user */
+.section-services {
+  padding: 100px 50px 0;
+  overflow: hidden; /* Ensure no horizontal scroll from animations */
+}
+.services-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  max-width: 1050px;
+  margin: 0 auto 50px;
+}
+.services-subtitle {
+  margin-bottom: 14px;
+}
+.services-subtitle .subtitle {
+  color: #222;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+}
+.services-title .title {
+  color: #222;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+.services-description .description {
+  color: #222;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: normal;
+  margin: 0;
+}
+
+/* Styles for ScrollTrigger pinning and card animations */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Keep relative for absolute children */
+  width: 100%;
+  /* min-height and max-height will be managed by ScrollTrigger's pin */
+}
+.services-card {
+  position: absolute; /* Keep absolute for stacking/overlay effect */
+  top: 0; /* Cards start at the top of their parent (.services-list) */
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 540px; /* Fixed height for each card */
+  border: 2px solid #222;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  opacity: 0; /* Start hidden for reveal animation */
+  transform: translateY(50px); /* Start slightly below for slide-up effect */
+  pointer-events: none; /* Disable interaction until active */
+  transition: background-color 0.3s ease, color 0.3s ease; /* For background color transitions */
+}
+
+/* Ensure correct z-index for stacked cards, from back to front */
+.services-card-0 {
+  z-index: 6;
+}
+.services-card-1 {
+  z-index: 5;
+}
+.services-card-2 {
+  z-index: 4;
+}
+.services-card-3 {
+  z-index: 3;
+}
+.services-card-4 {
+  z-index: 2;
+}
+.services-card-5 {
+  z-index: 1;
+}
+
+.services-card.active {
+  pointer-events: auto; /* Enable interaction for the active card */
+}
+
+.services-card-inner {
+  max-width: 1050px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+  padding: 20px;
+}
+.services-card-title {
+  margin-bottom: 20px;
+}
+.services-card-title .title {
+  font-size: 44px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+.services-card-description {
+  margin-bottom: 70px;
+}
+.services-card-description .description p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 22px;
+  margin: 0;
+}
+.services-card-image {
+  position: relative;
+  flex: 0 0 auto;
+  width: 33.217vw;
+}
+.services-card-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.services-card-button .btn {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: fit-content;
+  align-items: center;
+  border-width: 2px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.services-card-button .btn-branding-secondary {
+  background-color: #f7fafc;
+  color: #222;
+  border: 2px solid #222;
+}
+.services-card-button .btn:hover {
+  background-color: #e8a145;
+  box-shadow: 4px 4px 0px 0px #222;
+  color: #000;
+  -webkit-box-shadow: 4px 4px 0px 0px #222;
+}
+.services-card-button .btn svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) and (max-width: 1367px) {
+  .services-body {
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 750px) {
+  .section-services {
+    padding: 50px 15px 70px;
+  }
+  .services-header {
+    flex-direction: column;
+    align-items: center;
+    max-width: none;
+    margin-bottom: 30px;
+  }
+  .services-subtitle .subtitle {
+    font-size: 16px;
+    text-align: center;
+  }
+  .services-title {
+    margin-bottom: 15px;
+  }
+  .services-title .title {
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+  }
+  .services-description .description p {
+    font-size: 14px;
+    text-align: center;
+  }
+  .services-body {
+    height: auto;
+    padding-bottom: 100px;
+  }
+  .services-card {
+    position: relative; /* Switch to relative for mobile stack */
+    height: auto;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    opacity: 1; /* Fully visible on mobile */
+    transform: translateY(0); /* No translation on mobile */
+    z-index: auto; /* Reset z-index */
+    pointer-events: auto; /* Re-enable pointer events on mobile */
+  }
+  .services-card-inner {
+    max-width: none;
+    margin: 0;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 14px;
+  }
+  .services-card-title {
+    margin-bottom: 10px;
+  }
+  .services-card-title .title {
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+  }
+  .services-card-description {
+    margin-bottom: 30px;
+  }
+  .services-card-description .description {
+    font-size: 14px;
+    line-height: normal;
+    text-align: center;
+  }
+  .services-card-button {
+    display: flex;
+    justify-content: center;
+  }
+  .services-card-text {
+    order: 2;
+  }
+  .services-card-image {
+    order: 1;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  /* Adjust the pin-spacer and services-list for mobile to avoid fixed positioning issues */
+  .pin-spacer {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    position: relative !important;
+  }
+  .services-list {
+    position: relative !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+  }
+}

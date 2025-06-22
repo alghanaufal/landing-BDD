@@ -3,6 +3,7 @@ import BrandSection from "./BrandSection";
 import CategoryGridSection from "./StatisticSection"; // Import the new component
 import AchivementSection from "./AchivementSection";
 import OwnerSection from "./OwnerSection";
+import ServicesSection from "./ServicesSection";
 import PopularProductsSection from "./PopularProductsSection";
 
 export default function ContentSection() {
@@ -17,6 +18,10 @@ export default function ContentSection() {
 
         {/* Render Features Section */}
         <AchivementSection />
+
+        <OwnerSection />
+
+        <ServicesSection />
 
         <OwnerSection />
 
