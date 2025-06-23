@@ -1,183 +1,113 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 
-export default function SpaceSection() {
-  const spaceImages = [
-    { id: 1, src: "./space.webp" },
-    { id: 2, src: "./space.webp" },
-    { id: 3, src: "./space.webp" },
-    { id: 4, src: "./space.webp" },
-    { id: 5, src: "./space.webp" },
-  ];
-  const originalLength = spaceImages.length;
-  const numClones = 2;
+export default function SpaceSection({ data }) {
+  const swiperRef = useRef(null);
 
-  const clonedImages = [
-    ...spaceImages.slice(originalLength - numClones),
-    ...spaceImages,
-    ...spaceImages.slice(0, numClones),
-  ];
-
-  const [currentLogicalIndex, setCurrentLogicalIndex] = useState(0);
-  const [currentVisualIndex, setCurrentVisualIndex] = useState(numClones);
-
-  const [isDragging, setIsDragging] = useState(false);
-  const startX = useRef(0);
-  const currentTranslateX = useRef(0);
-  const dragOffset = useRef(0);
-  const carouselTrackRef = useRef(null);
-  const slideWidthRef = useRef(0);
-  const [transitionEnabled, setTransitionEnabled] = useState(true);
-  const autoplayTimeoutRef = useRef(null);
-
-  const getSlidesPerView = useCallback(() => {
-    const width = window.innerWidth;
-    if (width >= 1280) return 3;
-    if (width >= 1024) return 3;
-    if (width >= 768) return 2.5;
-    if (width >= 640) return 1.5;
-    return 1;
-  }, []);
-
-  const updateCarouselPositionOnResize = useCallback(() => {
-    if (carouselTrackRef.current) {
-      const slidesPerView = getSlidesPerView();
-      const newSlideWidth =
-        carouselTrackRef.current.offsetWidth / slidesPerView;
-
-      if (Math.abs(slideWidthRef.current - newSlideWidth) > 1) {
-        slideWidthRef.current = newSlideWidth;
-
-        const targetOffset = -(currentVisualIndex * newSlideWidth);
-
-        carouselTrackRef.current.style.transition = "none";
-        carouselTrackRef.current.style.transform = `translateX(${targetOffset}px)`;
-        currentTranslateX.current = targetOffset;
-
-        setTimeout(() => {
-          if (carouselTrackRef.current) {
-            carouselTrackRef.current.style.transition =
-              "transform 0.5s ease-out";
-          }
-        }, 50);
-      }
-    }
-  }, [currentVisualIndex, getSlidesPerView]);
-
+  // Hook ini bertanggung jawab untuk menyuntikkan library Swiper.js.
   useEffect(() => {
-    updateCarouselPositionOnResize();
-    window.addEventListener("resize", updateCarouselPositionOnResize);
-    return () =>
-      window.removeEventListener("resize", updateCarouselPositionOnResize);
-  }, [updateCarouselPositionOnResize]);
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js";
+    script.async = true;
+    document.body.appendChild(script);
 
-  useEffect(() => {
-    if (autoplayTimeoutRef.current) {
-      clearTimeout(autoplayTimeoutRef.current);
-    }
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+    document.head.appendChild(link);
 
-    autoplayTimeoutRef.current = setTimeout(() => {
-      let nextLogicalIndex = (currentLogicalIndex + 1) % originalLength;
-      setCurrentLogicalIndex(nextLogicalIndex);
-
-      if (
-        currentLogicalIndex === originalLength - 1 &&
-        nextLogicalIndex === 0
-      ) {
-        setTransitionEnabled(true);
-        setCurrentVisualIndex(originalLength + numClones);
-        setTimeout(() => {
-          setTransitionEnabled(false);
-          setCurrentVisualIndex(numClones);
-          setTimeout(() => setTransitionEnabled(true), 50);
-        }, 500);
-      } else {
-        setCurrentVisualIndex(currentLogicalIndex + 1 + numClones);
-      }
-    }, 3000);
-
+    // Fungsi cleanup saat komponen di-unmount.
     return () => {
-      if (autoplayTimeoutRef.current) {
-        clearTimeout(autoplayTimeoutRef.current);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
       }
     };
-  }, [currentLogicalIndex, originalLength, numClones, currentVisualIndex]);
+  }, []);
 
+  // Hook ini mengatur parameter Swiper setelah komponen di-mount.
   useEffect(() => {
-    if (slideWidthRef.current > 0 && carouselTrackRef.current) {
-      const targetOffset = -(currentVisualIndex * slideWidthRef.current);
-
-      carouselTrackRef.current.style.transition = transitionEnabled
-        ? "transform 0.5s ease-out"
-        : "none";
-      carouselTrackRef.current.style.transform = `translateX(${targetOffset}px)`;
-      currentTranslateX.current = targetOffset;
+    const swiperContainer = swiperRef.current;
+    if (!swiperContainer) {
+      return;
     }
-  }, [currentVisualIndex, slideWidthRef.current, transitionEnabled]);
 
-  const goToSlide = (index) => {
-    setCurrentLogicalIndex(index);
-    setCurrentVisualIndex(index + numClones); // Set langsung untuk indeks visual
-  };
+    const params = {
+      slidesPerView: 3,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        clickable: true,
+      },
+      breakpoints: {
+        640: { slidesPerView: 1.5, spaceBetween: 20 },
+        768: { slidesPerView: 2.5, spaceBetween: 30 },
+        1024: { slidesPerView: 3, spaceBetween: 40 },
+      },
+      injectStyles: [
+        `
+        .swiper-pagination {
+            position: relative;
+            margin-top: 2.5rem;
+            bottom: auto;
+        }
+        
+        .swiper-pagination-bullet {
+            background-color: #a0aec0;
+            width: 12px;
+            height: 12px;
+            opacity: 0.75;
+            transition: background-color 0.3s, opacity 0.3s;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #1a202c;
+            opacity: 1;
+        }
+        `,
+      ],
+    };
+
+    customElements.whenDefined("swiper-container").then(() => {
+      if (swiperRef.current) {
+        Object.assign(swiperRef.current, params);
+        swiperRef.current.initialize();
+      }
+    });
+  }, []); // Dependensi kosong agar hanya berjalan sekali.
 
   return (
-    <div className="section-space my-20 py-16 px-4 sm:px-6 lg:px-8 bg-[#f8f4f4] rounded-3xl">
+    <div className="section-space my-20 py-16 px-4 sm:px-6 lg:px-8 font-sans max-w-7xl mx-auto">
       <div className="max-w-4xl mx-auto text-center mb-12">
+        {/* Judul dan deskripsi sekarang dinamis dari prop 'data' */}
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-          Our Space - Where Ideas Take Flight
+          {data.title}
         </h2>
         <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-lg mx-auto">
-          Step into BDD's Agency - where strategy meets imagination. A space
-          designed for collaboration, innovation, and bringing bold ideas to
-          life.
+          {data.description}
         </p>
       </div>
 
-      <div className="relative space-slider-container overflow-hidden pb-10 select-none">
-        {/* Kontainer Slide */}
-        <div
-          ref={carouselTrackRef}
-          className="flex h-full"
-          style={{
-            transform: `translateX(${
-              currentTranslateX.current + dragOffset.current
-            }px)`,
-            transition: transitionEnabled ? "transform 0.5s ease-out" : "none",
-          }}
-        >
-          {clonedImages.map((item, index) => (
-            <div
-              key={`${item.id}-${index}`}
-              className="flex-shrink-0 px-2"
-              style={{
-                width: `${100 / getSlidesPerView()}%`,
-                padding: "0 10px",
-                boxSizing: "border-box",
-              }}
-            >
+      <swiper-container ref={swiperRef} init="false" class="select-none">
+        {/* Memetakan dari array 'images' di dalam prop 'data' */}
+        {data.images.map((item) => (
+          <swiper-slide key={item.id}>
+            <div className="flex-shrink-0 px-2 h-full">
               <img
                 src={item.src}
                 alt={`Our Space - Image ${item.id}`}
-                className="w-full h-full object-cover rounded-xl shadow-lg"
+                className="w-full h-full object-cover"
               />
             </div>
-          ))}
-        </div>
-
-        <div className="absolute bottom-0 left-0 w-full flex justify-center space-x-2 py-4">
-          {spaceImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                currentLogicalIndex === index
-                  ? "bg-gray-900"
-                  : "bg-gray-400 opacity-75"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            ></button>
-          ))}
-        </div>
-      </div>
+          </swiper-slide>
+        ))}
+      </swiper-container>
     </div>
   );
 }
