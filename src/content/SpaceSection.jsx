@@ -35,8 +35,6 @@ export default function SpaceSection({ data }) {
     }
 
     const params = {
-      slidesPerView: 3,
-      spaceBetween: 20,
       loop: true,
       autoplay: {
         delay: 3000,
@@ -60,8 +58,8 @@ export default function SpaceSection({ data }) {
         
         .swiper-pagination-bullet {
             background-color: #a0aec0;
-            width: 12px;
-            height: 12px;
+            width: 5px;
+            height: 5px;
             opacity: 0.75;
             transition: background-color 0.3s, opacity 0.3s;
         }

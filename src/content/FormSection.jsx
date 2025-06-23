@@ -18,7 +18,6 @@ const App = () => {
   const [resultMessage, setResultMessage] = useState({ type: "", text: "" });
 
   // This function handles changes in any of the form inputs.
-  // It uses the input's 'name' attribute to update the correct piece of state.
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -95,323 +94,214 @@ const App = () => {
   };
 
   return (
-    <>
-      {/* The original CSS is injected here for identical styling */}
-      <style>{`
-                .elementor-element-e031aea > .elementor-widget-container{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    width: 100%;
-                }
-                .section-know-more {
-                    background-color: #FFFFFF;
-                    border: 2px solid #222222;
-                    border-radius: 24px;
-                    margin: 0 auto;
-                    max-width:1340px;
-                    width:100%;
-                    font-family: sans-serif; /* Added for better preview */
-                }
-                .knowmore-inner {
-                    max-width: 1140px;
-                    margin: 70px auto 60px;
-                    display: flex;
-                    gap: 30px;
-                }
-                .knowmore-image {
-                    position: relative;
-                    flex: 1 0 0;
-                    margin-top: 30px;
-                }
-                .knowmore-image img {
-                    width: 100%;
-                    height: auto;
-                }
-                .knowmore-text {
-                    flex: 1 0 0;
-                }
-                .knowmore-title {
-                    margin-bottom: 15px;
-                }
-                .knowmore-title .title {
-                    color: #222222;
-                    font-size: 36px;
-                    font-weight: 400;
-                    line-height: normal;
-                    margin: 0;
-                }
-                .knowmore-description {
-                    margin-bottom: 30px;
-                }
-                .knowmore-description .description {
-                    color: #222222;
-                    font-size: 16px;
-                    font-weight: 300;
-                    line-height: normal;
-                    margin: 0;
-                }
-                .knowmore-form .form-group {
-                    margin-bottom: 15px;
-                }
-                .knowmore-form .form-group:last-child {
-                    margin-bottom: 0;
-                }
-                .knowmore-form label {
-                    display: block;
-                    color: #222222;
-                    font-size: 14px;
-                    font-weight: 400;
-                    line-height: normal;
-                    margin-top: 0;
-                    margin-bottom: 10px;
-                }
-                .knowmore-form .form-control,
-                .knowmore-form .form-select {
-                    width: 100%;
-                    box-sizing: border-box; /* Ensures padding doesn't affect width */
-                    color: #222;
-                    font-size: 16px;
-                    font-weight: 300;
-                    line-height: normal;
-                    margin: 0;
-                    padding: 15px;
-                    border-radius: 8px;
-                    border: 1px solid #BABABA;
-                }
-                .knowmore-form-btn {
-                    margin: 25px 20px 0 0;
-                    text-align: right;   
-                }
-                .knowmore-form-btn .btn {
-                    font-size: 18px;
-                    box-shadow:none;
-                    background-color: #f0c14b; /* Example color, as it's not in the CSS */
-                    border: 1px solid #a88734;
-                    padding: 10px 20px;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    display: inline-flex;
-                    align-items: center;
-                    color: #111;
-                    transition: all 0.2s ease;
-                }
-                .knowmore-form-btn .btn:disabled {
-                    background-color: #ccc;
-                    cursor: not-allowed;
-                }
-                .knowmore-form-btn .btn:hover:not(:disabled){
-                    background-color:#E8A145;
-                    box-shadow: 4px 4px 0px 0px #222;
-                    color:#000;
-                    -webkit-box-shadow: 4px 4px 0px 0px #222;
-                }
-                .knowmore-form-btn .btn svg {
-                    margin-left: 15px;
-                    width: 20px;
-                }
-                @media (min-width: 768px) and (max-width: 1367px) {
-                    .knowmore-inner {
-                        margin-right: 30px;
-                        margin-left: 30px;
-                    }
-                }
-                @media (max-width: 750px) {
-                    .section-know-more {
-                        border-width: 2px 0 0;
-                        border-radius: 0;
-                        margin-top: 0;
-                        margin-bottom: 0;
-                        padding: 0 15px;
-                    }
-                    .knowmore-inner {
-                        flex-direction: column;
-                        max-width: none;
-                        margin: 50px auto 0;
-                        padding-bottom: 50px;
-                        gap: 0;
-                    }
-                    .knowmore-image {
-                        display: none;
-                    }
-                    .knowmore-title {
-                        margin-bottom: 10px;
-                    }
-                    .knowmore-title .title {
-                        font-size: 24px;
-                        line-height: 28px;
-                        text-align: center;
-                    }
-                    .knowmore-description .description {
-                        font-size: 14px;
-                        text-align: center;
-                    }
-                    .knowmore-form-btn {
-                        margin: 30px 0 0 0;
-                        text-align: center;
-                    }
-                }
-            `}</style>
-
-      <div className="section-know-more">
-        <div className="knowmore-inner">
-          <div className="knowmore-image">
+    // Main container with new background and padding
+    <div className="bg-slate-50 font-sans flex items-center justify-center min-h-screen p-4">
+      {/* Card container */}
+      <div className="bg-white w-full max-w-6xl mx-auto rounded-3xl shadow-lg border border-gray-200 p-8 md:p-12">
+        {/* Inner container for two-column layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left side image column */}
+          <div className="hidden lg:block">
             <img
-              decoding="async"
-              src="https://bolehdicoba.com/wp-content/uploads/2024/07/Group-40387-4.png"
-              alt="Want to know more?"
+              src="./form.png"
+              alt="Modern UI Illustration"
+              className="w-full h-auto rounded-xl"
             />
           </div>
-          <div className="knowmore-text">
-            <div className="knowmore-title">
-              <h4 className="title">Want to know more?</h4>
+
+          {/* Right side text and form column */}
+          <div className="flex-1">
+            <div className="mb-3">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
+                Want to know more?
+              </h2>
             </div>
-            <div className="knowmore-description">
-              <p className="description">
-                Fill out this form below &amp; consult with us!
+            <div className="mb-8">
+              <p className="text-gray-600 text-lg">
+                Fill out this form below & consult with us!
               </p>
             </div>
-            <div className="knowmore-form">
-              <form onSubmit={handleSubmit} id="form_send_email">
-                <div className="form-group">
-                  <label htmlFor="first_name">Your Name</label>
-                  <input
-                    type="text"
-                    id="first_name"
-                    name="first_name"
-                    value={formData.first_name}
-                    onChange={handleChange}
-                    placeholder="Your Name"
-                    className="form-control"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="brand_name">Brand Name</label>
-                  <input
-                    type="text"
-                    id="brand_name"
-                    name="brand_name"
-                    value={formData.brand_name}
-                    onChange={handleChange}
-                    placeholder="Brand Name"
-                    className="form-control"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="wa_number">WhatsApp Number</label>
-                  <input
-                    type="text"
-                    id="wa_number"
-                    name="wa_number"
-                    value={formData.wa_number}
-                    onChange={handleChange}
-                    placeholder="WhatsApp Number"
-                    className="form-control"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="industry">Industry</label>
-                  <select
-                    name="industry"
-                    id="industry"
-                    value={formData.industry}
-                    onChange={handleChange}
-                    className="form-select"
-                    required
-                  >
-                    <option value="">Select Options</option>
-                    <option value="Fashion">Fashion</option>
-                    <option value="Home and Living">Home and Living</option>
-                    <option value="FMCG">FMCG</option>
-                    <option value="FnB">FnB</option>
-                    <option value="Moms and Baby">Moms and Baby</option>
-                    <option value="Accesories">Accesories</option>
-                    <option value="Corporate">Corporate</option>
-                    <option value="Services">Services</option>
-                    <option value="Others">Others</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="services">Services</label>
-                  <select
-                    name="services"
-                    id="services"
-                    value={formData.services}
-                    onChange={handleChange}
-                    className="form-select"
-                    required
-                  >
-                    <option value="">Any services you're interested in?</option>
-                    <option value="Digital Advertising">
-                      Digital Advertising
-                    </option>
-                    <option value="Creative Content &amp; Liveshopping">
-                      Creative Content &amp; Liveshopping
-                    </option>
-                    <option value="Website Development &amp; Maintenance">
-                      Website Development &amp; Maintenance
-                    </option>
-                    <option value="Search Engine Optimization">
-                      Search Engine Optimization
-                    </option>
-                    <option value="Growth-Hack Consultation">
-                      Growth-Hack Consultation
-                    </option>
-                    <option value="Digital Marketing Training">
-                      Digital Marketing Training
-                    </option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <div className="knowmore-form-btn">
-                    <button
-                      id="send_email"
-                      type="submit"
-                      className="btn btn-branding-secondary"
-                      disabled={isLoading}
+
+            {/* Form container */}
+            <form
+              onSubmit={handleSubmit}
+              id="form_send_email"
+              className="space-y-5"
+            >
+              {/* Form Group: Your Name */}
+              <div>
+                <label
+                  htmlFor="first_name"
+                  className="block text-gray-700 text-sm font-semibold mb-2"
+                >
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  required
+                />
+              </div>
+
+              {/* Form Group: Brand Name */}
+              <div>
+                <label
+                  htmlFor="brand_name"
+                  className="block text-gray-700 text-sm font-semibold mb-2"
+                >
+                  Brand Name
+                </label>
+                <input
+                  type="text"
+                  id="brand_name"
+                  name="brand_name"
+                  value={formData.brand_name}
+                  onChange={handleChange}
+                  placeholder="Brand Name"
+                  className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  required
+                />
+              </div>
+
+              {/* Form Group: WhatsApp Number */}
+              <div>
+                <label
+                  htmlFor="wa_number"
+                  className="block text-gray-700 text-sm font-semibold mb-2"
+                >
+                  WhatsApp Number
+                </label>
+                <input
+                  type="text"
+                  id="wa_number"
+                  name="wa_number"
+                  value={formData.wa_number}
+                  onChange={handleChange}
+                  placeholder="WhatsApp Number"
+                  className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  required
+                />
+              </div>
+
+              {/* Form Group: Industry */}
+              <div>
+                <label
+                  htmlFor="industry"
+                  className="block text-gray-700 text-sm font-semibold mb-2"
+                >
+                  Industry
+                </label>
+                <select
+                  name="industry"
+                  id="industry"
+                  value={formData.industry}
+                  onChange={handleChange}
+                  className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400 appearance-none"
+                  required
+                >
+                  <option value="">Select Options</option>
+                  <option value="Fashion">Fashion</option>
+                  <option value="Home and Living">Home and Living</option>
+                  <option value="FMCG">FMCG</option>
+                  <option value="FnB">FnB</option>
+                  <option value="Moms and Baby">Moms and Baby</option>
+                  <option value="Accesories">Accesories</option>
+                  <option value="Corporate">Corporate</option>
+                  <option value="Services">Services</option>
+                  <option value="Others">Others</option>
+                </select>
+              </div>
+
+              {/* Form Group: Services */}
+              <div>
+                <label
+                  htmlFor="services"
+                  className="block text-gray-700 text-sm font-semibold mb-2"
+                >
+                  Services
+                </label>
+                <select
+                  name="services"
+                  id="services"
+                  value={formData.services}
+                  onChange={handleChange}
+                  className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400 appearance-none"
+                  required
+                >
+                  <option value="">Any services you're interested in?</option>
+                  <option value="Digital Advertising">
+                    Digital Advertising
+                  </option>
+                  <option value="Creative Content & Liveshopping">
+                    Creative Content &amp; Liveshopping
+                  </option>
+                  <option value="Website Development & Maintenance">
+                    Website Development &amp; Maintenance
+                  </option>
+                  <option value="Search Engine Optimization">
+                    Search Engine Optimization
+                  </option>
+                  <option value="Growth-Hack Consultation">
+                    Growth-Hack Consultation
+                  </option>
+                  <option value="Digital Marketing Training">
+                    Digital Marketing Training
+                  </option>
+                </select>
+              </div>
+
+              {/* Form Group: Submit Button */}
+              <div className="flex justify-end pt-4">
+                <button
+                  id="send_email"
+                  type="submit"
+                  className="inline-flex items-center text-white font-bold text-lg bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 shadow-md hover:shadow-lg py-3 px-8 rounded-lg cursor-pointer transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Sending..." : "Consult Now"}
+                  {!isLoading && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 ml-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
                     >
-                      {isLoading ? "Sending..." : "Consult Now"}
-                      {!isLoading && (
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 448 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"
-                          ></path>
-                        </svg>
-                      )}
-                    </button>
-                  </div>
-                </div>
-                <div className="form-group">
-                  {resultMessage.text && (
-                    <div
-                      style={{
-                        marginTop: "20px",
-                        fontSize: "16px",
-                        textAlign: "center",
-                        color:
-                          resultMessage.type === "error" ? "#ff0303" : "green",
-                      }}
-                    >
-                      {resultMessage.text}
-                    </div>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
                   )}
-                </div>
-              </form>
-            </div>
+                </button>
+              </div>
+
+              {/* Form Group: Result Message */}
+              <div>
+                {resultMessage.text && (
+                  <div
+                    className={`mt-4 text-base text-center font-semibold ${
+                      resultMessage.type === "error"
+                        ? "text-red-600"
+                        : "text-green-600"
+                    }`}
+                  >
+                    {resultMessage.text}
+                  </div>
+                )}
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
-import React from "react";
-// Import Swiper React components from a CDN that supports ES Modules
+import React, { useRef } from "react";
+// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper modules from the same CDN
+// Import Swiper modules
 import { Scrollbar, FreeMode } from "swiper/modules";
 
 // --- Helper Components & Data ---
@@ -23,7 +23,6 @@ const ArrowIcon = ({ className }) => (
   </svg>
 );
 
-// Sample data for the news cards.
 const newsData = [
   {
     image: "./news.jpg",
@@ -88,7 +87,7 @@ const NewsCard = ({ post }) => (
           <ArrowIcon className="h-4 w-4 -rotate-45 text-zinc-800 md:h-5 md:w-5" />
         </a>
       </div>
-      <div className="flex flex-grow flex-col p-3">
+      <div className="flex flex-grow flex-col p-4">
         <div className="mb-2">
           <p className="m-0 inline-block w-auto rounded-full border-2 border-zinc-800 bg-[#F4F0EA] px-3 py-1 text-xs font-medium">
             {post.category}
@@ -99,13 +98,13 @@ const NewsCard = ({ post }) => (
         </p>
         <div className="mb-2 flex-grow">
           <a href={post.link} className="text-zinc-800">
-            <h6 className="line-clamp-3 text-sm font-medium leading-tight text-zinc-800 group-hover:underline">
+            <h6 className="line-clamp-3 text-base font-medium leading-tight text-zinc-800 group-hover:underline">
               {post.title}
             </h6>
           </a>
         </div>
         <div className="mb-3">
-          <p className="line-clamp-2 text-xs font-light text-zinc-600">
+          <p className="line-clamp-2 text-sm font-light text-zinc-600">
             {post.description}
           </p>
         </div>
@@ -125,19 +124,17 @@ const NewsCard = ({ post }) => (
 
 // Main App Component
 export default function App() {
+  const swiperRef = useRef(null);
+
   return (
     <>
-      {/* Custom styles for Swiper scrollbar and importing Swiper's CSS from CDN. */}
+      {/* Custom styles for Swiper scrollbar, navigation, and importing Swiper's CSS */}
       <style>{`
         @import url('https://unpkg.com/swiper@11/swiper.min.css');
         @import url('https://unpkg.com/swiper@11/modules/scrollbar.min.css');
         
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
         .section-news .swiper-scrollbar {
-          height: 2px !important;
+          height: 1px !important;
           background-color: #A9A59E;
           margin-top: 30px;
           margin-bottom: 55px;
@@ -157,42 +154,45 @@ export default function App() {
           cursor: grab;
           margin-top: 10px;
         }
-        @media (max-width: 1023px) { /* lg breakpoint */
+        @media (max-width: 767px) {
             .section-news .swiper-scrollbar {
-              display: none;
+                display: none;
             }
         }
       `}</style>
 
-      <div className="min-h-screen bg-white font-sans lg:bg-gray-50">
-        {/* <main className="pb-16 lg:pb-0"> */}
-        <section className="section-blog container mx-auto flex flex-col items-center justify-center gap-12 px-4 py-12 md:gap-24 lg:flex-row lg:justify-end lg:py-24">
-          {/* Left Text Content */}
-          <div className="flex-shrink-0 text-center lg:w-[400px] lg:text-left">
-            <div className="mb-1.5">
-              <p className="text-sm font-medium text-[#513B6A]">CASE STUDY</p>
+      <div className="min-h-screen bg-[#F4F0EA] font-sans">
+        <section className="section-news container mx-auto flex flex-col items-center justify-center px-4 py-12 md:py-24">
+          {/* Top Header Section */}
+          <div className="mb-12 flex w-full flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
+            <div className="flex-shrink-0">
+              <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-[#513B6A]">
+                NEWS & BLOG
+              </p>
+              <h2 className="text-3xl font-medium text-zinc-800 md:text-4xl">
+                Your time is valuable.
+              </h2>
+              <p className="text-lg text-zinc-600">
+                Read our insightful articles within 5 minutes.
+              </p>
             </div>
-            <div className="mb-16 lg:mb-12">
-              <h4 className="text-4xl font-normal text-zinc-800 md:text-2xl md:leading-tight">
-                Explore more about our partner success stories
-              </h4>
-            </div>
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex-shrink-0">
               <a
                 href="#"
-                className="inline-flex items-center gap-4 rounded-md bg-transparent px-6 py-3 text-lg font-semibold text-zinc-800 ring-2 ring-inset ring-zinc-800 transition-all duration-200 hover:bg-[#E8A145] hover:text-black hover:shadow-[4px_4px_0px_0px_#222]"
+                className="inline-flex items-center gap-2.5 rounded-md bg-[#E8A145] px-5 py-3 text-base font-semibold text-black ring-2 ring-inset ring-zinc-800 transition-all duration-200 hover:shadow-[4px_4px_0px_0px_#222]"
               >
-                See More Success Stories
-                <ArrowIcon className="h-5 w-5" />
+                Explore More Articles
+                <ArrowIcon className="h-4 w-4" />
               </a>
             </div>
           </div>
 
-          {/* Right Content Area (Swiper for Desktop, Grid for Mobile) */}
-          <div className="w-full lg:w-3/5">
+          {/* Main Content Area */}
+          <div className="w-full">
             {/* Desktop Swiper View */}
             <div className="hidden lg:block">
               <Swiper
+                ref={swiperRef}
                 modules={[Scrollbar, FreeMode]}
                 freeMode={true}
                 grabCursor={true}
@@ -202,7 +202,7 @@ export default function App() {
                   draggable: true,
                   hide: false,
                 }}
-                className="!pb-32" // Padding bottom to make space for the scrollbar
+                className="!pb-32"
               >
                 {newsData.map((post, index) => (
                   <SwiperSlide
@@ -223,7 +223,6 @@ export default function App() {
             </div>
           </div>
         </section>
-        {/* </main> */}
       </div>
     </>
   );
