@@ -17,6 +17,27 @@ export default function AchivementSection() {
 
   const [slidesPerView, setSlidesPerView] = useState(5);
 
+  // useEffect untuk memuat script dan style Swiper secara dinamis
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+    document.head.appendChild(link);
+
+    // Fungsi cleanup untuk menghapus script dan link saat komponen dibongkar
+    return () => {
+      document.body.removeChild(script);
+      document.head.removeChild(link);
+    };
+  }, []); // Array dependensi kosong memastikan ini hanya berjalan sekali
+
+  // useEffect untuk mengatur slidesPerView secara responsif
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
@@ -28,25 +49,18 @@ export default function AchivementSection() {
       }
     };
 
-    // Set initial value on component mount
-    handleResize();
+    handleResize(); // Atur nilai awal
+    window.addEventListener("resize", handleResize); // Tambahkan listener
 
-    // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup event listener on component unmount
+    // Cleanup listener
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <>
-      {/* Satu-satunya style yang tidak dapat dipindahkan ke Tailwind secara langsung 
-        adalah untuk class '.swiper-wrapper' yang dibuat oleh library Swiper.
-        Praktik terbaik adalah menempatkan style ini di file CSS global Anda (misalnya, index.css).
-        Namun, untuk menjaga agar tetap berada dalam komponen, kita bisa menggunakan tag <style> minimal seperti ini.
-      */}
       <style>
         {`
+          /* Style untuk memastikan transisi linear untuk continuous scroll */
           .achivement-slider .swiper-wrapper {
             transition-timing-function: linear !important;
           }
@@ -59,52 +73,45 @@ export default function AchivementSection() {
           md:flex-row md:items-center md:mt-[100px] md:mb-20
         "
       >
-        {/* Swiper Body: urutan visual #2 di mobile, #1 di desktop */}
+        {/* Badan Swiper: urutan visual #2 di mobile, #1 di desktop */}
         <div
           className="
             order-2 w-[160%]
             md:flex-none md:order-1 md:w-[55vw] md:-ml-[2%]
-            xl:w-[64.5vw] xl:-ml-[4%]
+            lg:w-[64.5vw] lg:-ml-[4%]
           "
         >
-          <Swiper
-            modules={[Autoplay, FreeMode]}
-            spaceBetween={40}
-            slidesPerView={slidesPerView}
-            loop={true}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-              reverseDirection: false,
-            }}
-            speed={3000}
-            freeMode={true}
-            className="achivement-slider"
+          {/* Menggunakan Swiper Web Component (swiper-container) */}
+          <swiper-container
+            class="achivement-slider py-4"
+            slides-per-view={slidesPerView}
+            space-between="40"
+            speed="3000"
+            loop="true"
+            free-mode="true"
+            autoplay-delay="0"
+            autoplay-disable-on-interaction="false"
           >
             {achievements.map((item, index) => (
-              <SwiperSlide key={index}>
+              <swiper-slide key={index}>
                 <div className="flex items-center justify-center p-4">
                   <img
                     src={item.icon}
                     alt={`Achievement Icon ${index + 1}`}
-                    className="
-                      object-contain w-full h-full 
-                      max-w-[80px] max-h-[80px] 
-                      md:max-w-[100px] md:max-h-[100px]
-                    "
+                    className="object-contain w-full h-full"
                   />
                 </div>
-              </SwiperSlide>
+              </swiper-slide>
             ))}
-          </Swiper>
+          </swiper-container>
         </div>
 
-        {/* Header Content: urutan visual #1 di mobile, #2 di desktop */}
+        {/* Konten Header: urutan visual #1 di mobile, #2 di desktop */}
         <div
           className="
             order-1 w-full px-[15px] mb-[30px] 
             md:flex-none md:order-2 md:w-[42.817vw] md:py-[70px] md:pr-[70px] md:pl-[50px] md:border-l-2 md:border-[#222] md:z-10 md:mb-0
-            xl:w-[38.1vw] xl:pr-[195px]
+            lg:w-[38.1vw] lg:pr-[195px]
           "
         >
           <div className="mb-4">
@@ -113,7 +120,7 @@ export default function AchivementSection() {
             </p>
           </div>
           <div>
-            <h2 className="m-0 text-[#222] font-normal text-center text-2xl leading-7 md:text-right md:text-[32px] md:leading-normal xl:text-4xl">
+            <h2 className="m-0 text-[#222] font-normal text-center text-2xl leading-7 md:text-right md:text-[32px] md:leading-normal lg:text-4xl">
               We Establish an Ecosystem to Enhance Brand Growth.
             </h2>
           </div>
