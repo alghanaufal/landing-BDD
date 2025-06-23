@@ -1,14 +1,8 @@
 import React from "react";
 // Import Swiper React components from a CDN that supports ES Modules
-import {
-  Swiper,
-  SwiperSlide,
-} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper modules from the same CDN
-import {
-  Scrollbar,
-  FreeMode,
-} from "swiper/modules";
+import { Scrollbar, FreeMode } from "swiper/modules";
 
 // --- Helper Components & Data ---
 
@@ -32,9 +26,9 @@ const ArrowIcon = ({ className }) => (
 // Sample data for the blog cards. In a real app, this would come from an API.
 const blogPosts = [
   {
-    image: "https://placehold.co/1600x1200/F4F0EA/333?text=Colorbox",
+    image: "./partner.png",
     category: "Digital Advertising",
-    logo: "https://placehold.co/150x40/ffffff/000000?text=COLORBOX",
+    logo: "./partner-logo.png",
     title:
       "Offline-Focused, Digitally-Activated: How Click & Collect Delivered 30% of Monthly Web Revenue",
     description:
@@ -42,9 +36,9 @@ const blogPosts = [
     link: "#",
   },
   {
-    image: "https://placehold.co/780x458/F4F0EA/333?text=Logitech",
+    image: "./partner.png",
     category: "Digital Advertising",
-    logo: "https://placehold.co/150x40/ffffff/000000?text=Logitech",
+    logo: "./partner-logo.png",
     title:
       "Consistently crushed expectations with an average ROAS of 10x per month, soaring past our 8x target.",
     description:
@@ -52,9 +46,9 @@ const blogPosts = [
     link: "#",
   },
   {
-    image: "https://placehold.co/780x458/F4F0EA/333?text=AXA",
+    image: "./partner.png",
     category: "Digital Advertising",
-    logo: "https://placehold.co/150x40/ffffff/000000?text=AXA",
+    logo: "./partner-logo.png",
     title:
       "Generated a monthly three-fold increase in the quantity and quality of leads.",
     description:
@@ -62,9 +56,9 @@ const blogPosts = [
     link: "#",
   },
   {
-    image: "https://placehold.co/780x458/F4F0EA/333?text=Yamaha",
+    image: "./partner.png",
     category: "Digital Advertising",
-    logo: "https://placehold.co/150x40/ffffff/000000?text=Yamaha",
+    logo: "./partner-logo.png",
     title:
       "Yamaha Jabar connected with an audience of 1 million people each month.",
     description:
@@ -170,6 +164,7 @@ export default function App() {
           border-radius: 0;
           top: -60px; /* Adjust vertical position */
           cursor: grab;
+          margin-top: 10px;
         }
         @media (max-width: 767px) {
             .section-blog .swiper-scrollbar {
