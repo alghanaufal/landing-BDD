@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ChevronDown, Menu, X, User, ShoppingCart, Search } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaSearch } from "react-icons/fa";
+import { LuArrowUpRight, LuMenu, LuX, LuChevronDown } from "react-icons/lu";
 
 export default function MegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -226,12 +226,12 @@ export default function MegaMenu() {
           <div className="flex items-center">
             <button
               onClick={toggleMobileMenu}
-              className="lg:hidden p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600"
+              className="lg:hidden p-2 transition-colors duration-200 text-gray-600 hover:text-gray-300"
             >
               {isOpen ? (
-                <X className="h-6 w-6" />
+                <LuX className="h-6 w-6" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <LuMenu className="h-6 w-6" />
               )}
             </button>
             <img
@@ -249,13 +249,13 @@ export default function MegaMenu() {
                   onMouseEnter={() => handleMouseEnter(item.id)}
                 >
                   <button
-                    className={`flex items-center px-3 py-2 transition-colors duration-200 font-medium text-gray-700 hover:text-blue-600 ${
+                    className={`flex items-center px-3 py-2 transition-colors duration-200 font-medium text-gray-600 hover:text-gray-300 ${
                       activeMenu === item.id ? "text-blue-600" : ""
                     }`}
                   >
                     {item.title}
                     {item.hasSubmenu && (
-                      <ChevronDown
+                      <LuChevronDown
                         className={`ml-1 h-4 w-4 transition-transform duration-200 ${
                           activeMenu === item.id ? "rotate-180" : ""
                         }`}
@@ -268,13 +268,14 @@ export default function MegaMenu() {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleSearch}
-                className="p-2 transition-colors duration-200 text-gray-600 hover:text-blue-600 hidden lg:block"
+                className="p-2 transition-colors duration-200 text-gray-600 hover:text-gray-300 hidden lg:block"
               >
-                <Search className="h-5 w-5" />
+                <FaSearch className="h-5 w-5" />
               </button>
 
-              <button className="flex items-center bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 shadow-lg">
-                <FaWhatsapp /> Free Consultation!
+              <button className="flex items-center bg-[#4d7bc8] text-white font-semibold px-4 py-2 rounded-lg border-2 border-black hover:bg-black">
+                <FaWhatsapp />
+                <span className="ml-2">Free Consultation!</span>
               </button>
             </div>
           </div>
@@ -304,23 +305,10 @@ export default function MegaMenu() {
                   </p>
                   <a
                     href={item.linkHref}
-                    className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center group"
+                    className="text-emerald-600 text-sm font-semibold flex items-center group"
                   >
                     {item.linkText}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                      className="w-4 h-4 ml-1 transform transition-transform duration-200 group-hover:translate-x-1"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
+                    <LuArrowUpRight />
                   </a>
                 </div>
               ))}
@@ -337,8 +325,11 @@ export default function MegaMenu() {
               : "bg-white"
           }`}
         >
-          <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:px-0 py-4">
-            <div className="flex items-center space-x-0 border border-gray-300 rounded-lg overflow-hidden w-[90%] mx-auto">
+          <div className="flex w-full mx-auto items-center px-20 py-6">
+            <div className="relative flex items-center w-full border border-gray-300 rounded-full shadow-sm overflow-hidden bg-white">
+              <div className="pl-4 pr-2">
+                <FaSearch />
+              </div>
               <input
                 type="text"
                 placeholder="Masukkan kata kunci pencarian"
@@ -348,9 +339,11 @@ export default function MegaMenu() {
                 onChange={(e) => setSearchText(e.target.value)}
                 aria-label="Search input"
               />
+            </div>
+            <div className="p-1">
               <button
                 onClick={handleSearchAction}
-                className="bg-blue-600 text-white px-6 py-3 text-sm font-semibold hover:bg-blue-700 transition-colors duration-200"
+                className="bg-blue-600 text-white px-6 py-2.5 text-sm font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 whitespace-nowrap"
                 aria-label="Cari sekarang"
               >
                 Cari Sekarang
@@ -369,30 +362,32 @@ export default function MegaMenu() {
           }}
         >
           <div className="px-4 py-3 space-y-4 max-h-[80vh] overflow-y-auto">
-            <div className="w-full sticky top-0 bg-white pt-1 pb-3 -mx-4 px-4 border-b border-gray-200 z-10">
-              <div className="flex items-center space-x-3">
-                <div className="flex-1 relative">
-                  <input
-                    type="text"
-                    placeholder="Masukkan kata kunci pencarian"
-                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 font-inter"
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
-                  />
+            <div className="flex w-full max-w-2xl mx-auto items-center">
+              {/* The main container for the search bar, with border, shadow, and rounded corners. */}
+              <div className="relative flex items-center w-full border border-gray-300 rounded-full shadow-sm overflow-hidden bg-white">
+                <div className="pl-4 pr-2">
+                  <FaSearch />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Masukkan kata kunci pencarian"
+                  className="flex-1 w-full px-2 py-3 outline-none bg-transparent font-inter text-gray-700 placeholder-gray-500"
+                  autoFocus
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  aria-label="Search input"
+                />
+
+                <div className="p-1">
+                  {/* The search button. */}
                   <button
                     onClick={handleSearchAction}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors duration-200"
-                    aria-label="Perform search"
+                    className="bg-blue-600 text-white px-6 py-2.5 text-sm font-semibold rounded-full hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 whitespace-nowrap"
+                    aria-label="Cari sekarang"
                   >
-                    <Search className="h-5 w-5" />
+                    Cari Sekarang
                   </button>
                 </div>
-                <button
-                  onClick={handleSearchAction}
-                  className="bg-blue-600 text-white px-4 py-3 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-200"
-                >
-                  Cari sekarang
-                </button>
               </div>
             </div>
 
@@ -406,7 +401,7 @@ export default function MegaMenu() {
                     aria-controls={`mobile-submenu-${item.id}`}
                   >
                     <span className="font-medium">{item.title}</span>
-                    <ChevronDown
+                    <LuChevronDown
                       className={`h-4 w-4 transition-transform duration-200 ${
                         activeMenu === item.id ? "rotate-180" : ""
                       }`}
@@ -436,7 +431,7 @@ export default function MegaMenu() {
                               key={subIndex}
                               href={subItem.linkHref}
                               onClick={toggleMobileMenu}
-                              className="block px-3 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200 font-inter"
+                              className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-300 rounded-md transition-colors duration-200 font-inter"
                             >
                               {subItem.title}
                             </a>
