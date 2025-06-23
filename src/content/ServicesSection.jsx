@@ -10,8 +10,7 @@ export default function OurServices() {
       description:
         "Capai pertumbuhan optimal Anda melalui Iklan Digital dengan strategi yang dapat ditindaklanjuti dan berdampak.",
       link: "https://bolehdicoba.com/services/digital-advertising/",
-      image:
-        "https://bolehdicoba.com/wp-content/uploads/2024/07/Frame-770432-2.png",
+      image: "./1.png",
       alt: "Digital Advertising",
       bgColor: "#C8D6EE",
       textColor: "#222",
@@ -21,8 +20,7 @@ export default function OurServices() {
       description:
         "Kreatif kinerja menghadirkan proses berbasis data dan teknologi yang dirancang untuk memperkuat dampak dari materi kreatif itu sendiri.",
       link: "services/performance-creative",
-      image:
-        "https://bolehdicoba.com/wp-content/uploads/2024/07/Group-40596-1.png",
+      image: "./2.png",
       alt: "Konten Kreatif & Live Shopping",
       bgColor: "rgb(34, 34, 34)",
       textColor: "rgb(255, 255, 255)",
@@ -32,8 +30,7 @@ export default function OurServices() {
       description:
         "Kami merancang dan mengembangkan situs web yang paling sesuai untuk bisnis Anda untuk membantu Anda menjual produk dan layanan Anda secara efektif.",
       link: "https://bolehdicoba.com/services/website-development/",
-      image:
-        "https://bolehdicoba.com/wp-content/uploads/2024/07/Group-40597-1.png",
+      image: "./3.png",
       alt: "Pengembangan & Pemeliharaan Web",
       bgColor: "rgb(192, 233, 227)",
       textColor: "rgb(34, 34, 34)",
@@ -43,8 +40,7 @@ export default function OurServices() {
       description:
         "SEO adalah investasi jangka panjang dalam pemasaran untuk mendorong lalu lintas organik dan melambungkan peringkat situs web.",
       link: "https://bolehdicoba.com/services/seo/",
-      image:
-        "https://bolehdicoba.com/wp-content/uploads/2024/07/Group-40598-1.png",
+      image: "./4.png",
       alt: "Optimisasi Mesin Pencari (SEO)",
       bgColor: "rgb(201, 194, 209)",
       textColor: "rgb(34, 34, 34)",
@@ -54,8 +50,7 @@ export default function OurServices() {
       description:
         "Growth Hack adalah seni memilih audiens, penawaran, dan strategi yang tepat. Apakah Anda akan mempercayai kami untuk membimbing Anda melaluinya?",
       link: "https://bolehdicoba.com/services/professional-service/",
-      image:
-        "https://bolehdicoba.com/wp-content/uploads/2024/07/Group-40599-1.png",
+      image: "./5.png",
       alt: "Layanan Profesional",
       bgColor: "rgb(254, 203, 199)",
       textColor: "rgb(34, 34, 34)",
@@ -65,8 +60,7 @@ export default function OurServices() {
       description:
         "Kami membantu bisnis untuk mempertahankan pelanggan, dan mendorong mereka untuk menjelajahi lebih banyak produk dan layanan Anda.",
       link: "https://bolehdicoba.com/services/community-program-development/",
-      image:
-        "https://bolehdicoba.com/wp-content/uploads/2024/07/Group-40600-1.png",
+      image: "./6.png",
       alt: "Pengembangan Program Komunitas",
       bgColor: "rgb(255, 231, 200)",
       textColor: "rgb(34, 34, 34)",
@@ -76,8 +70,7 @@ export default function OurServices() {
       description:
         "Program pelatihan yang disesuaikan dibimbing oleh para ahli dan profesional industri.",
       link: "https://bolehbelajar.com/",
-      image:
-        "https://bolehdicoba.com/wp-content/uploads/2024/07/Group-40601-1.png",
+      image: "./7.png",
       alt: "Pelatihan Pemasaran Digital oleh Boleh Belajar",
       bgColor: "rgb(241, 237, 229)",
       textColor: "rgb(34, 34, 34)",
