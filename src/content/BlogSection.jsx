@@ -171,7 +171,7 @@ export default function App() {
         }
       `}</style>
 
-      <div className="min-h-screen bg-gray-50 font-sans">
+      <div className="min-h-screen font-sans">
         <section className="section-blog container mx-auto flex flex-col items-center justify-center gap-12 px-4 py-12 md:gap-24 lg:flex-row lg:justify-end lg:py-24">
           {/* Left Text Content */}
           <div className="flex-shrink-0 text-center lg:w-[400px] lg:text-left">

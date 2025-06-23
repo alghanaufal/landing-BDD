@@ -95,7 +95,7 @@ const App = () => {
 
   return (
     // Main container with new background and padding
-    <div className="bg-slate-50 font-sans flex items-center justify-center min-h-screen p-4">
+    <div className="font-sans flex items-center justify-center min-h-screen p-4">
       {/* Card container */}
       <div className="bg-white w-full max-w-6xl mx-auto rounded-3xl shadow-lg border border-gray-200 p-8 md:p-12">
         {/* Inner container for two-column layout */}
