@@ -5,13 +5,11 @@ import AchivementSection from "./AchivementSection";
 import OwnerSection from "./OwnerSection";
 import ServicesSection from "./ServicesSection";
 import SpaceSection from "./SpaceSection";
-import StudioSection from "./StudioSection";
 import ProgramSection from "./ProgramSection";
 import BlogSection from "./BlogSection";
 import TestimonySection from "./TestimonySection";
 import NewsSection from "./NewsSection";
 import FormSection from "./FormSection";
-import PopularProductsSection from "./PopularProductsSection";
 
 export default function ContentSection() {
   const space = {
@@ -53,8 +51,6 @@ export default function ContentSection() {
         <TestimonySection />
         <NewsSection />
         <FormSection />
-        {/* <OwnerSection />
-        <PopularProductsSection /> */}
       </div>
     </section>
   );

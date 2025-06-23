@@ -135,7 +135,7 @@ const BlogCard = ({ post }) => (
 );
 
 // Main App Component
-export default function App() {
+export default function BlogSection() {
   return (
     <>
       {/* Custom styles for Swiper scrollbar and importing Swiper's CSS from CDN. */}

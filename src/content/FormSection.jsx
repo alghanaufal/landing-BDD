@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 // The main App component that renders our form
-const App = () => {
+export default function FormSection() {
   // State to hold the values of the form fields
   const [formData, setFormData] = useState({
     first_name: "",
@@ -289,6 +289,4 @@ const App = () => {
       </div>
     </div>
   );
-};
-
-export default App;
+}

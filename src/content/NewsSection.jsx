@@ -123,7 +123,7 @@ const NewsCard = ({ post }) => (
 );
 
 // Main App Component
-export default function App() {
+export default function NewsSection() {
   const swiperRef = useRef(null);
 
   return (

@@ -60,7 +60,7 @@ const testimonials = [
   },
 ];
 
-const TestimonialSection = () => {
+export default function TestimonialSection() {
   const [maxHeight, setMaxHeight] = useState(0);
 
   useEffect(() => {
@@ -384,6 +384,4 @@ const TestimonialSection = () => {
       </div>
     </>
   );
-};
-
-export default TestimonialSection;
+}
