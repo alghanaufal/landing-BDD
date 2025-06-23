@@ -26,7 +26,7 @@ const ArrowIcon = ({ className }) => (
 // Sample data for the news cards.
 const newsData = [
   {
-    image: "https://placehold.co/600x450/F4F0EA/333?text=Brand+Priorities",
+    image: "./news.jpg",
     category: "Digital Marketing",
     date: "23 May 2025",
     title:
@@ -36,7 +36,7 @@ const newsData = [
     link: "#",
   },
   {
-    image: "https://placehold.co/600x450/F4F0EA/333?text=Brand+Strategy",
+    image: "./news.jpg",
     category: "All Article",
     date: "09 May 2025",
     title: "Strategi Brand Naik Level: Integrasi Data CRM dan E-commerce",
@@ -45,7 +45,7 @@ const newsData = [
     link: "#",
   },
   {
-    image: "https://placehold.co/600x450/F4F0EA/333?text=Marketing+Strategy",
+    image: "./news.jpg",
     category: "Digital Marketing",
     date: "23 Apr 2025",
     title:
@@ -55,7 +55,7 @@ const newsData = [
     link: "#",
   },
   {
-    image: "https://placehold.co/600x450/F4F0EA/333?text=Creative+Trends",
+    image: "./news.jpg",
     category: "Digital Marketing",
     date: "22 Apr 2025",
     title:
@@ -66,80 +66,60 @@ const newsData = [
   },
 ];
 
-// --- Main Components ---
-
-// Individual News Card Component, styled with Tailwind CSS
 const NewsCard = ({ post }) => (
   <div className="group relative flex h-full flex-col">
-    {/* The main card container with border and hover shadow */}
-    <div className="mb-2 flex h-full flex-col overflow-hidden rounded-lg border-2 border-zinc-800 bg-[#F4F0EA] transition-shadow duration-200 ease-in-out group-hover:translate-x-[-3px] group-hover:translate-y-[-3px] group-hover:shadow-[6px_6px_0px_0px_#222]">
-      <div className="news-card-image">
+    <div className="mb-2 flex h-full flex-col overflow-hidden rounded-lg border-2 border-zinc-800 bg-white transition-shadow duration-200 ease-in-out group-hover:translate-x-[-3px] group-hover:translate-y-[-3px] group-hover:shadow-[6px_6px_0px_0px_#222]">
+      <div className="relative">
         <img
           loading="lazy"
           src={post.image}
           alt={post.title}
-          className="aspect-[4/3] h-auto w-full rounded-t-lg object-cover"
+          className="aspect-[4/3] h-auto w-full object-cover"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src =
               "https://placehold.co/600x450/eee/ccc?text=Image+Error";
           }}
         />
+        <a
+          href={post.link}
+          className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full border-2 border-zinc-800 bg-white transition-all duration-200 ease-in-out group-hover:bg-[#FFB14C] md:h-10 md:w-10"
+        >
+          <ArrowIcon className="h-4 w-4 -rotate-45 text-zinc-800 md:h-5 md:w-5" />
+        </a>
       </div>
-      <div className="flex flex-grow flex-col rounded-b-lg border-t-2 border-zinc-800 p-5 md:p-4">
-        <div className="mb-4">
-          <p className="m-0 inline-block w-auto rounded-full border-2 border-zinc-800 bg-white px-3.5 py-1.5 text-sm font-medium">
+      <div className="flex flex-grow flex-col p-3">
+        <div className="mb-2">
+          <p className="m-0 inline-block w-auto rounded-full border-2 border-zinc-800 bg-[#F4F0EA] px-3 py-1 text-xs font-medium">
             {post.category}
           </p>
         </div>
-        <p className="mb-2.5 text-base font-light uppercase text-zinc-800">
+        <p className="mb-2 text-xs font-light uppercase text-zinc-600">
           {post.date}
         </p>
-        <div className="mb-2.5">
+        <div className="mb-2 flex-grow">
           <a href={post.link} className="text-zinc-800">
-            <h6 className="line-clamp-3 text-2xl font-medium leading-tight text-zinc-800 group-hover:underline md:text-lg">
+            <h6 className="line-clamp-3 text-sm font-medium leading-tight text-zinc-800 group-hover:underline">
               {post.title}
             </h6>
           </a>
         </div>
-        <div className="mb-5">
-          <p className="line-clamp-3 text-base font-light text-zinc-800 md:text-sm">
+        <div className="mb-3">
+          <p className="line-clamp-2 text-xs font-light text-zinc-600">
             {post.description}
           </p>
         </div>
         <div className="mt-auto">
           <a
             href={post.link}
-            className="flex items-center gap-2.5 text-lg font-medium text-zinc-800"
+            className="flex items-center gap-1.5 text-sm font-medium text-zinc-800"
           >
             Read More
-            <ArrowIcon className="h-4 w-4 -rotate-45" />
+            <ArrowIcon className="h-3 w-3" />
           </a>
         </div>
       </div>
     </div>
-    {/* The circular link icon that appears on hover */}
-    <a
-      href={post.link}
-      className="absolute right-5 top-5 flex h-16 w-16 items-center justify-center rounded-full border-2 border-zinc-800 bg-white transition-all duration-200 ease-in-out group-hover:bg-[#FFB14C] group-hover:shadow-[4px_4px_0px_0px_#222] md:right-4 md:top-4 md:h-12 md:w-12"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="text-zinc-800"
-        style={{ transform: "rotate(-45deg)" }}
-      >
-        <line x1="7" y1="17" x2="17" y2="7"></line>
-        <polyline points="7 7 17 7 17 17"></polyline>
-      </svg>
-    </a>
   </div>
 );
 
@@ -152,6 +132,10 @@ export default function App() {
         @import url('https://unpkg.com/swiper@11/swiper.min.css');
         @import url('https://unpkg.com/swiper@11/modules/scrollbar.min.css');
         
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
         .section-news .swiper-scrollbar {
           height: 2px !important;
           background-color: #A9A59E;
@@ -180,26 +164,25 @@ export default function App() {
         }
       `}</style>
 
-      <div className="min-h-screen bg-gray-50 font-sans">
-        <section className="section-news container mx-auto flex flex-col items-center justify-center gap-12 px-4 py-12 lg:flex-row lg:items-start lg:justify-end lg:gap-12 lg:py-24">
+      <div className="min-h-screen bg-white font-sans lg:bg-gray-50">
+        {/* <main className="pb-16 lg:pb-0"> */}
+        <section className="section-blog container mx-auto flex flex-col items-center justify-center gap-12 px-4 py-12 md:gap-24 lg:flex-row lg:justify-end lg:py-24">
           {/* Left Text Content */}
           <div className="flex-shrink-0 text-center lg:w-[400px] lg:text-left">
             <div className="mb-1.5">
-              <p className="text-sm font-medium text-[#513B6A]">NEWS & BLOG</p>
+              <p className="text-sm font-medium text-[#513B6A]">CASE STUDY</p>
             </div>
-            <div className="mb-8 lg:mb-12">
+            <div className="mb-16 lg:mb-12">
               <h4 className="text-4xl font-normal text-zinc-800 md:text-2xl md:leading-tight">
-                Your time is valuable.
-                <br />
-                Read our insightful article within 5 minutes.
+                Explore more about our partner success stories
               </h4>
             </div>
             <div className="flex justify-center lg:justify-start">
               <a
                 href="#"
-                className="inline-flex items-center gap-4 rounded-lg border-2 border-zinc-800 bg-[#F4F0EA] px-6 py-3 text-lg font-medium text-zinc-800 shadow-[4px_4px_0px_0px_#222] transition-all duration-200 hover:bg-[#E8A145]"
+                className="inline-flex items-center gap-4 rounded-md bg-transparent px-6 py-3 text-lg font-semibold text-zinc-800 ring-2 ring-inset ring-zinc-800 transition-all duration-200 hover:bg-[#E8A145] hover:text-black hover:shadow-[4px_4px_0px_0px_#222]"
               >
-                Explore More Article
+                See More Success Stories
                 <ArrowIcon className="h-5 w-5" />
               </a>
             </div>
@@ -233,15 +216,14 @@ export default function App() {
             </div>
 
             {/* Mobile Grid View */}
-            <div className="flex flex-wrap justify-center gap-4 lg:hidden">
+            <div className="grid grid-cols-2 gap-4 lg:hidden">
               {newsData.slice(0, 4).map((post, index) => (
-                <div key={index} className="w-full max-w-md sm:w-[48%]">
-                  <NewsCard post={post} />
-                </div>
+                <NewsCard key={index} post={post} />
               ))}
             </div>
           </div>
         </section>
+        {/* </main> */}
       </div>
     </>
   );

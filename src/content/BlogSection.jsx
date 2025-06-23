@@ -73,8 +73,8 @@ const blogPosts = [
 const BlogCard = ({ post }) => (
   <div className="group relative flex h-full flex-col">
     {/* The main card container with border and hover shadow */}
-    <div className="mb-2 flex h-full flex-col overflow-hidden rounded-lg border-2 border-zinc-800 transition-shadow duration-200 ease-in-out group-hover:shadow-[6px_6px_0px_0px_#222]">
-      <div className="blog-card-image">
+    <div className="mb-2 flex h-full flex-col overflow-hidden rounded-lg border-2 border-zinc-800 bg-white transition-shadow duration-200 ease-in-out group-hover:translate-x-[-3px] group-hover:translate-y-[-3px] group-hover:shadow-[6px_6px_0px_0px_#222]">
+      <div className="relative">
         <img
           loading="lazy"
           src={post.image}
@@ -101,6 +101,12 @@ const BlogCard = ({ post }) => (
               e.target.src = "https://placehold.co/150x40/eee/ccc?text=Logo";
             }}
           />
+          <a
+            href={post.link}
+            className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full border-2 border-zinc-800 bg-white transition-all duration-200 ease-in-out group-hover:bg-[#FFB14C] md:h-10 md:w-10"
+          >
+            <ArrowIcon className="h-4 w-4 -rotate-45 text-zinc-800 md:h-5 md:w-5" />
+          </a>
         </div>
         <div className="mb-2.5 h-32 md:h-28">
           <a href={post.link} className="text-zinc-800">
@@ -125,14 +131,6 @@ const BlogCard = ({ post }) => (
         </div>
       </div>
     </div>
-
-    {/* The circular link icon that appears on hover */}
-    <a
-      href={post.link}
-      className="absolute top-5 right-5 flex h-16 w-16 items-center justify-center rounded-full border-2 border-zinc-800 bg-white transition-all duration-200 ease-in-out group-hover:bg-[#FFB14C] group-hover:shadow-[6px_6px_0px_0px_#222] md:top-2 md:right-3 md:h-6 md:w-6"
-    >
-      <ArrowIcon className="h-6 w-6 -rotate-45 text-zinc-800 md:h-3 md:w-3" />
-    </a>
   </div>
 );
 
@@ -224,11 +222,9 @@ export default function App() {
             </div>
 
             {/* Mobile Grid View */}
-            <div className="flex flex-wrap justify-center gap-4 lg:hidden">
+            <div className="grid grid-cols-2 gap-4 lg:hidden">
               {blogPosts.slice(0, 4).map((post, index) => (
-                <div key={index} className="w-[48%]">
-                  <BlogCard post={post} />
-                </div>
+                <BlogCard post={post} />
               ))}
             </div>
           </div>
