@@ -179,7 +179,7 @@ export default function App() {
             <div className="flex-shrink-0">
               <a
                 href="#"
-                className="inline-flex items-center gap-2.5 rounded-md bg-[#E8A145] px-5 py-3 text-base font-semibold text-black ring-2 ring-inset ring-zinc-800 transition-all duration-200 hover:shadow-[4px_4px_0px_0px_#222]"
+                className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
               >
                 Explore More Articles
                 <ArrowIcon className="h-4 w-4" />

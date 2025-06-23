@@ -25,14 +25,14 @@ export default function HeroSection() {
             lasting success. Our mission is to elevate your business to new
             heights by exploring actionable possibilities.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              className="btn btn-branding-secondary py-[9px] pr-4 pl-6 flex items-center gap-4 w-fit mt-5 bg-[#ffb14c] border border-black text-black rounded-md transition-all duration-300 ease-in-out
-              hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222] hover:text-black"
+          <div className="mt-10 flex items-center justify-center">
+            <button
+              href="#" // Using anchor tag as requested
+              className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
             >
               Get to Know Us!
               <FaArrowRight />
-            </a>
+            </button>
           </div>
         </div>
         <img

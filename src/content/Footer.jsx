@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
 
 // SVG Icon Components for better reusability
 const InstagramIcon = () => (
@@ -102,7 +103,7 @@ export default function Footer() {
               </p>
             </div>
             <div className="flex-shrink-0">
-              <button className="bg-orange-400 hover:bg-orange-500 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 flex items-center gap-3 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              <button className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]">
                 Start our Journey
                 <ArrowRightIcon />
               </button>
@@ -149,15 +150,16 @@ export default function Footer() {
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Email address"
                   required
                 />
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white font-bold px-4 py-2 rounded-r-lg hover:bg-blue-600 transition duration-300 flex items-center"
+                  className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
                 >
                   Subscribe
+                  <FaArrowRight />
                 </button>
               </form>
               {message && (

@@ -186,7 +186,7 @@ export default function App() {
             <div className="flex justify-center lg:justify-start">
               <a
                 href="#"
-                className="inline-flex items-center gap-4 rounded-md bg-transparent px-6 py-3 text-lg font-semibold text-zinc-800 ring-2 ring-inset ring-zinc-800 transition-all duration-200 hover:bg-[#E8A145] hover:text-black hover:shadow-[4px_4px_0px_0px_#222]"
+                className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
               >
                 See More Success Stories
                 <ArrowIcon className="h-5 w-5" />

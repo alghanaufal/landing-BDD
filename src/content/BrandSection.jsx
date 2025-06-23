@@ -285,7 +285,7 @@ export default function BrandSection() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center p-4 font-sans">
+    <div className="flex items-center justify-center lg:p-4 font-sans">
       <style>
         {`
           .custom-scrollbar-hidden::-webkit-scrollbar {
@@ -301,9 +301,9 @@ export default function BrandSection() {
           }
         `}
       </style>
-      <div className="bg-white rounded-2xl border border-black p-8 lg:p-12 w-full">
+      <div className="bg-white rounded-2xl border border-black py-8 lg:py-12 w-full">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4 px-2">
             Over 800+ Businesses growing with Boleh Dicoba Digital
           </h2>
         </div>

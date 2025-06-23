@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
 
 // The main App component that renders our form
 const App = () => {
@@ -260,26 +261,11 @@ const App = () => {
                 <button
                   id="send_email"
                   type="submit"
-                  className="inline-flex items-center text-white font-bold text-lg bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 shadow-md hover:shadow-lg py-3 px-8 rounded-lg cursor-pointer transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
                   disabled={isLoading}
                 >
                   {isLoading ? "Sending..." : "Consult Now"}
-                  {!isLoading && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 ml-2"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  )}
+                  {!isLoading && <FaArrowRight />}
                 </button>
               </div>
 

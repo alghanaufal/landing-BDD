@@ -69,14 +69,13 @@ const AccordionItem = ({
             {description}
           </p>
           {exploreLink && (
-            <a
+            <button
               href={exploreLink}
-              className="btn btn-branding-secondary py-[9px] pr-4 pl-6 flex items-center gap-4 w-fit mt-5 bg-transparent border border-black text-black rounded-md transition-all duration-300 ease-in-out
-              hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222] hover:text-black"
+              className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
             >
               Explore More
               <ArrowRight size={20} />
-            </a>
+            </button>
           )}
         </div>
       </div>
