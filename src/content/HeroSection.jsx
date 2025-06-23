@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden mt-4">
+    <section className="relative overflow-hidden">
       <div className="relative max-w m-16 px-4 sm:px-6 lg:px-8 lg:flex flex-col lg:flex-row items-center justify-center lg:justify-between lg:min-h-[calc(100vh-64px)]">
         <img
           src="\landingL.png"
