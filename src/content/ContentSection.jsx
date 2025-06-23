@@ -1,6 +1,6 @@
 import React from "react";
 import BrandSection from "./BrandSection";
-import CategoryGridSection from "./StatisticSection";
+import StatisticSection from "./StatisticSection";
 import AchivementSection from "./AchivementSection";
 import OwnerSection from "./OwnerSection";
 import ServicesSection from "./ServicesSection";
@@ -18,7 +18,7 @@ export default function ContentSection() {
     <section className="py-16 lg:py-24 font-inter">
       <div className="max-w mx-auto">
         <BrandSection />
-        <CategoryGridSection />
+        <StatisticSection />
         <AchivementSection />
         <OwnerSection />
         <ServicesSection />
