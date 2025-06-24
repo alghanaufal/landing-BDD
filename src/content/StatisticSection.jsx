@@ -62,9 +62,9 @@ export default function StatisticSection() {
             {stats.map((stat, index) => {
               // Determine card classes based on its type and index
               const isLargeCard = [0, 3, 4].includes(index);
-              const cardSizeClass = isLargeCard
-                ? "w-full sm:w-[calc(50%-0.5rem)] lg:w-[259px]"
-                : "w-full sm:w-[calc(50%-0.5rem)] lg:w-[211px]";
+              const cardSizeClass = `w-[calc(50%-0.5rem)] ${
+                isLargeCard ? "lg:w-[259px]" : "lg:w-[211px]"
+              }`;
               const moreCardBaseClass = "bg-[#eee9df] border-2 border-black";
               const normalCardBaseClass =
                 "bg-white border-2 border-black hover:shadow-[4px_4px_0px_0px_#222]";

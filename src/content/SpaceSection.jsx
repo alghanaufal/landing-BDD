@@ -81,31 +81,35 @@ export default function SpaceSection({ data }) {
   }, []); // Dependensi kosong agar hanya berjalan sekali.
 
   return (
-    <div className="section-space my-20 py-16 px-4 sm:px-6 lg:px-8 font-sans max-w-7xl mx-auto">
-      <div className="max-w-4xl mx-auto text-center mb-12">
-        {/* Judul dan deskripsi sekarang dinamis dari prop 'data' */}
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-          {data.title}
-        </h2>
-        <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-lg mx-auto">
-          {data.description}
-        </p>
-      </div>
+    <>
+      <div className="border-2 border-gray-900"></div>
+      <div className="section-space my-20 py-16 px-4 sm:px-6 lg:px-8 font-sans max-w-7xl mx-auto">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          {/* Judul dan deskripsi sekarang dinamis dari prop 'data' */}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            {data.title}
+          </h2>
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-lg mx-auto">
+            {data.description}
+          </p>
+        </div>
 
-      <swiper-container ref={swiperRef} init="false" class="select-none">
-        {/* Memetakan dari array 'images' di dalam prop 'data' */}
-        {data.images.map((item) => (
-          <swiper-slide key={item.id}>
-            <div className="flex-shrink-0 px-2 h-full">
-              <img
-                src={item.src}
-                alt={`Our Space - Image ${item.id}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </swiper-slide>
-        ))}
-      </swiper-container>
-    </div>
+        <swiper-container ref={swiperRef} init="false" class="select-none">
+          {/* Memetakan dari array 'images' di dalam prop 'data' */}
+          {data.images.map((item) => (
+            <swiper-slide key={item.id}>
+              <div className="flex-shrink-0 px-2 h-full">
+                <img
+                  src={item.src}
+                  alt={`Our Space - Image ${item.id}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </swiper-slide>
+          ))}
+        </swiper-container>
+      </div>
+      <div className="border-2 border-gray-900"></div>
+    </>
   );
 }

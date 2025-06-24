@@ -68,6 +68,7 @@ export default function AchivementSection() {
       </style>
       <div
         className="
+          border-t-2 border-b-2 border-gray-900
           flex flex-col bg-[#adc2e6] overflow-hidden 
           mt-[50px] mb-[70px] 
           md:flex-row md:items-center md:mt-[100px] md:mb-20
@@ -111,7 +112,7 @@ export default function AchivementSection() {
           className="
             order-1 w-full px-[15px] mb-[30px] 
             md:flex-none md:order-2 md:w-[42.817vw] md:py-[70px] md:pr-[70px] md:pl-[50px] md:border-l-2 md:border-[#222] md:z-10 md:mb-0
-            lg:w-[38.1vw] lg:pr-[195px]
+            lg:w-[38.1vw] lg:pr-[125px]
           "
         >
           <div className="mb-4">
