@@ -5,23 +5,23 @@ export default function OwnerSection() {
     {
       id: "why-1",
       image: "./o-1.png",
-      title: "Comprehensive Digital Marketing Services",
+      title: "Meaningful Growth",
       content:
-        "We offer a full suite of digital marketing solutions, from SEO and SEM to social media and content marketing, ensuring all your needs are met under one roof.",
+        "Trust the process in elevating your business by enhancing every step of the way, guided by a team of professionals.",
     },
     {
       id: "why-2",
       image: "./o-2.png",
-      title: "Data-Driven Strategies for Optimal Results",
+      title: "Collaborative Partnership",
       content:
-        "Our approach is rooted in deep data analysis, allowing us to craft highly effective campaigns that deliver measurable and significant ROI for our clients.",
+        "Company values meet potential augmentation, create an exciting connection towards propitious business development.",
     },
     {
       id: "why-3",
       image: "./o-3.png",
-      title: "Experienced and Certified Professionals",
+      title: "Perceptive Exploration",
       content:
-        "Our team comprises Meta & Google certified experts with years of experience, ensuring your brand is handled by the best in the industry.",
+        "We're not just a player in this industry; we're visionaries. Watch our unique exploration and discover what others overlook.",
     },
   ];
 
@@ -55,15 +55,17 @@ export default function OwnerSection() {
           {/* Title */}
           <div className="mb-5 text-center md:text-left">
             <h2 className="text-[#222] text-3xl md:text-[44px] font-normal leading-tight md:leading-normal">
-              Unlock Your Brand's Potential with Our Expertise.
+              It's not about how much budget you spent, but how you spend them.
             </h2>
           </div>
           {/* Description */}
           <div className="mb-[30px] text-center md:text-left">
             <p className="text-[#222] text-base font-light leading-[22px]">
-              We are dedicated to helping businesses thrive in the digital
-              landscape. Our commitment to innovation, transparency, and results
-              sets us apart.
+              Embracing a focus of sustainable growth, we prioritise cultivating
+              long-term partnerships, ensuring your brand's growth aligns with
+              effective practices. Together, we create a positive impact that
+              goes beyond immediate gains, making a meaningful difference in the
+              lives of your customers and the market you serve.
             </p>
           </div>
 
@@ -98,11 +100,6 @@ export default function OwnerSection() {
                           src={item.image}
                           alt={`Icon for ${item.title}`}
                           className="object-contain w-full h-full md:w-full md:h-full"
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src =
-                              "https://placehold.co/55/ff0000/ffffff?text=X";
-                          }}
                         />
                       </span>
                       {item.title}

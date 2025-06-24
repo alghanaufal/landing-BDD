@@ -249,11 +249,16 @@ export default function BrandSection() {
   ];
 
   const allBrandSets = [
-    { id: "Fashion", label: "Fashion Brands", data: loopedBrands },
-    { id: "FnB", label: "FnB Brands", data: loopedBrands },
-    { id: "Lifestyle", label: "Lifestyle Brands", data: loopedBrands },
-    { id: "Startup & Other", label: "Startup Brands", data: loopedBrands },
-    { id: "FMCGs & Corporations", label: "FMCGs Brands", data: loopedBrands },
+    { id: "Fashion", label: "Fashion", data: loopedBrands },
+    { id: "FnB", label: "FnB", data: loopedBrands },
+    { id: "Beauty", label: "Beauty", data: loopedBrands },
+    { id: "Lifestyle", label: "Lifestyle", data: loopedBrands },
+    { id: "Startup & Other", label: "Startup & Other", data: loopedBrands },
+    {
+      id: "FMCGs & Corporations",
+      label: "FMCGs & Corporations",
+      data: loopedBrands,
+    },
   ];
 
   const currentBrandsData = allBrandSets[activeBrandSetIndex].data;
@@ -286,25 +291,12 @@ export default function BrandSection() {
 
   return (
     <div className="flex items-center justify-center lg:p-4 font-sans">
-      <style>
-        {`
-          .custom-scrollbar-hidden::-webkit-scrollbar {
-            display: none; /* for Chrome, Safari, and Opera */
-          }
-          .custom-scrollbar-hidden {
-            -ms-overflow-style: none;  /* for IE and Edge */
-            scrollbar-width: none;  /* for Firefox */
-          }
-          .brand-swiper::part(wrapper) {
-            transition-timing-function: linear !important;
-            padding-bottom: 0.5rem;
-          }
-        `}
-      </style>
       <div className="bg-white rounded-2xl border border-black py-8 lg:py-12 w-full">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4 px-2">
-            Over 800+ Businesses growing with Boleh Dicoba Digital
+          <h2 className="text-2xl text-gray-900 mb-4 px-2">
+            Over
+            <span className="text-teal-400 font-bold"> 800+ </span>
+            Businesses growing with Boleh Dicoba Digital
           </h2>
         </div>
         <div className="overflow-x-auto custom-scrollbar-hidden mb-8">
@@ -347,11 +339,6 @@ export default function BrandSection() {
                 src={brand.logo}
                 alt={`Brand ${index + 1}`}
                 className="object-contain w-auto h-auto max-w-[120px] max-h-[50px] transition-transform duration-300"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src =
-                    "https://placehold.co/120x50/ef4444/ffffff?text=Error";
-                }}
               />
             </swiper-slide>
           ))}

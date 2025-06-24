@@ -15,7 +15,7 @@ export default function ContentSection() {
   const space = {
     title: "Our Space - Where Ideas Take Flight",
     description:
-      "Step into our Agency - where strategy meets imagination. A space designed for collaboration, innovation, and bringing bold ideas to life.",
+      "Step into BDD's Agency—where strategy meets imagination. A space designed for collaboration, innovation, and bringing bold ideas to life.",
     images: [
       { id: 1, src: "./space.webp" },
       { id: 2, src: "./space.webp" },
@@ -25,9 +25,9 @@ export default function ContentSection() {
     ],
   };
   const studio = {
-    title: "Our Studio - Where Ideas Take Flight",
+    title: "Our Live Studio - Lights, Camera, Conversion!",
     description:
-      "Step into our Agency - where strategy meets imagination. A Studio designed for collaboration, innovation, and bringing bold ideas to life.",
+      "BDD's state-of-the-art studio is built for high-impact live streaming and content production. From brands to creators, we turn every session into a performance that sells.",
     images: [
       { id: 1, src: "./studio.webp" },
       { id: 2, src: "./studio.webp" },

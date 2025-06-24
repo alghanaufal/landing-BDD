@@ -87,21 +87,21 @@ export default function MegaMenu() {
               {
                 title: "Performance Creative",
                 description:
-                  "Create ads-ready contents to better communicate your brand message.",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 linkText: "See Service",
                 linkHref: "#service-performance-creative",
               },
               {
                 title: "Website Development",
                 description:
-                  "Effective website with sufficient performance and aesthetic to fulfil transaction and deliver brand identity.",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 linkText: "See Service",
                 linkHref: "#service-website-development",
               },
               {
                 title: "Search Engine Optimization",
                 description:
-                  "Organically increase your website and online store visibility.",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 linkText: "See Service",
                 linkHref: "#service-seo",
               },
@@ -112,14 +112,14 @@ export default function MegaMenu() {
               {
                 title: "Professional Service",
                 description:
-                  "Tailored training program guided by industry experts and professionals.",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 linkText: "See Service",
                 linkHref: "#service-professional",
               },
               {
                 title: "Digital Advertising",
                 description:
-                  "Optimize ads performance, install CPAS, solve invisible issues on your online ads campaign.",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 linkText: "See Service",
                 linkHref: "#service-digital-advertising",
               },
@@ -137,18 +137,25 @@ export default function MegaMenu() {
           {
             items: [
               {
-                title: "Educational Programs",
+                title: "Bulletin",
                 description:
-                  "Explore our coding bootcamps, design workshops, and marketing courses.",
-                linkText: "See Program",
-                linkHref: "#program-educational",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                linkText: "Explore",
+                linkHref: "#program-bulletin",
               },
               {
-                title: "Partnership Programs",
+                title: "Events",
                 description:
-                  "Join our affiliate, reseller, or strategic alliance programs for mutual growth.",
-                linkText: "See Program",
-                linkHref: "#program-partnership",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                linkText: "Explore",
+                linkHref: "#program-events",
+              },
+              {
+                title: "Breakfast Club",
+                description:
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                linkText: "Explore",
+                linkHref: "#program-breakfast-club",
               },
             ],
           },
@@ -165,23 +172,17 @@ export default function MegaMenu() {
             items: [
               {
                 title: "About Us",
-                description: "Learn about our company, mission, and values.",
-                linkText: "Read More",
+                description:
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                linkText: "More",
                 linkHref: "#info-about-us",
               },
               {
-                title: "Careers",
+                title: "Case Studies",
                 description:
-                  "Discover career opportunities and join our growing team.",
-                linkText: "View Jobs",
-                linkHref: "#info-careers",
-              },
-              {
-                title: "Blog & Insights",
-                description:
-                  "Stay updated with our latest articles, news, and industry insights.",
-                linkText: "Visit Blog",
-                linkHref: "#info-blog",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                linkText: "More",
+                linkHref: "#info-case-studies",
               },
             ],
           },

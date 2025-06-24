@@ -33,11 +33,6 @@ const AccordionItem = ({
               src={imageSrc}
               alt="accordion-image"
               className="w-8 h-8 mr-2" // Adjust image size as needed, example size
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src =
-                  "https://placehold.co/32x32/cccccc/333333?text=IMG";
-              }} // Placeholder for broken image
             />
           )}
           {/* Accordion title */}
@@ -167,12 +162,7 @@ export default function ProgramSection() {
             decoding="async"
             src="https://bolehdicoba.com/wp-content/uploads/2024/06/Group-40343-8.png"
             alt="program-us"
-            className="w-full h-auto rounded-lg" // Added rounded-lg for consistency
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src =
-                "https://placehold.co/510x300/cccccc/333333?text=Image";
-            }} // Placeholder for broken image
+            className="w-full h-auto rounded-lg"
           />
         </div>
         {/* Accordion Section */}
@@ -203,12 +193,7 @@ export default function ProgramSection() {
           decoding="async"
           src="./program.png"
           alt="program-us"
-          className="w-full h-full" // Added rounded-lg for consistency
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src =
-              "https://placehold.co/510x300/cccccc/333333?text=Image";
-          }} // Placeholder for broken image
+          className="w-full h-full"
         />
       </div>
     </div>

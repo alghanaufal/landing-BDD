@@ -6,7 +6,7 @@ export default function StatisticSection() {
     {
       value: "800+",
       label: "Clients Growing",
-      bgColorClass: "bg-blue-600",
+      bgColorClass: "bg-purple-600",
     },
     {
       value: "140+",
@@ -16,7 +16,7 @@ export default function StatisticSection() {
     {
       value: "50+",
       label: "Meta & Google Certified Professional",
-      bgColorClass: "bg-purple-600",
+      bgColorClass: "bg-blue-600",
     },
     {
       value: "400 Mio+",
@@ -39,16 +39,16 @@ export default function StatisticSection() {
     // Section container
     <section className="p-4 md:p-0 my-12 md:my-24">
       {/* Container adjusted to be wider (max-w-7xl) and content aligned with justify-between */}
-      <div className="max-w-7xl mx-auto bg-[#f8f4f4] rounded-none md:rounded-3xl p-4 md:p-8 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between">
+      <div className="max-w-7xl mx-auto rounded-none md:rounded-3xl p-4 md:p-8 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between">
         {/* Header content: Adjusted width to give more space to the stats cards on the right */}
         <div className="w-full lg:w-2/5 flex flex-col gap-4 text-center lg:text-left">
-          <p className="text-purple-700 text-sm md:text-base font-medium">
+          <p className="text-purple-900 text-sm md:text-base font-medium">
             WE ON NUMBERS
           </p>
-          <h2 className="text-gray-900 text-2xl md:text-4xl font-normal leading-tight">
+          <h2 className="tracking-wide text-gray-900 text-2xl md:text-4xl font-normal leading-tight">
             We Establish an Ecosystem to Enhance Brand Growth.
           </h2>
-          <p className="text-gray-800 text-sm md:text-base font-light leading-relaxed">
+          <p className="tracking-tight text-gray-800 text-sm md:text-base font-light leading-relaxed">
             Beyond conventional marketing norms, we craft innovative strategies
             infused with data-driven insights to create comprehensive campaigns
             that resonate with target audiences for 800+ clients.

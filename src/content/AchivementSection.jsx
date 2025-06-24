@@ -58,14 +58,6 @@ export default function AchivementSection() {
 
   return (
     <>
-      <style>
-        {`
-          /* Style untuk memastikan transisi linear untuk continuous scroll */
-          .achivement-slider .swiper-wrapper {
-            transition-timing-function: linear !important;
-          }
-        `}
-      </style>
       <div
         className="
           border-t-2 border-b-2 border-gray-900
@@ -117,12 +109,12 @@ export default function AchivementSection() {
         >
           <div className="mb-4">
             <p className="m-0 text-[#513b6a] font-medium leading-normal text-center text-base md:text-right md:text-sm">
-              WE ON NUMBERS
+              OUR ACHIEVEMENTS
             </p>
           </div>
           <div>
             <h2 className="m-0 text-[#222] font-normal text-center text-2xl leading-7 md:text-right md:text-[32px] md:leading-normal lg:text-4xl">
-              We Establish an Ecosystem to Enhance Brand Growth.
+              A Legacy of Excellence:Our Journey of Achievements
             </h2>
           </div>
         </div>

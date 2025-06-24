@@ -14,12 +14,12 @@ export default function HeroSection() {
           <p className="text-sm font-semibold uppercase tracking-wider">
             GROW WITH US
           </p>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+          <h1 className="tracking-wide mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
             Expand your brand <br className="hidden sm:inline" />
             through measurable <br className="hidden sm:inline" />
             Digital Strategies
           </h1>
-          <p className="mx-auto my-4 max-w-2xl text-sm text-gray-600 lg:text-xl">
+          <p className="tracking-tight mx-auto my-4 max-w-2xl text-sm text-gray-600 lg:text-xl">
             At BDD, we are players in the integrated digital marketing game,
             devoted to the pursuit of collective sustainable growth that ensures
             lasting success. Our mission is to elevate your business to new

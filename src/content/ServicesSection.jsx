@@ -9,7 +9,7 @@ export default function OurServices() {
     {
       title: "Digital Advertising",
       description:
-        "Capai pertumbuhan optimal Anda melalui Iklan Digital dengan strategi yang dapat ditindaklanjuti dan berdampak.",
+        "Reach your optimum growth through Digital Advertising with actionable and impactful strategies.",
       link: "https://bolehdicoba.com/services/digital-advertising/",
       image: "./1.png",
       alt: "Digital Advertising",
@@ -17,62 +17,62 @@ export default function OurServices() {
       textColor: "#222",
     },
     {
-      title: "Konten Kreatif & Live Shopping",
+      title: "Creative Content & Live Shopping",
       description:
-        "Kreatif kinerja menghadirkan proses berbasis data dan teknologi yang dirancang untuk memperkuat dampak dari materi kreatif itu sendiri.",
+        "Performance creative brings the data- and tech-driven process that designed to amplify the impact of the creative itself",
       link: "services/performance-creative",
       image: "./2.png",
-      alt: "Konten Kreatif & Live Shopping",
+      alt: "Creative Content & Live Shopping",
       bgColor: "rgb(34, 34, 34)",
       textColor: "rgb(255, 255, 255)",
     },
     {
-      title: "Pengembangan & Pemeliharaan Web",
+      title: "Web Development & Maintenance",
       description:
-        "Kami merancang dan mengembangkan situs web yang paling sesuai untuk bisnis Anda untuk membantu Anda menjual produk dan layanan Anda secara efektif.",
+        "We design and develop the most suitable website for your business to help you sell your products and services effectively.",
       link: "https://bolehdicoba.com/services/website-development/",
       image: "./3.png",
-      alt: "Pengembangan & Pemeliharaan Web",
+      alt: "Web Development & Maintenance",
       bgColor: "rgb(192, 233, 227)",
       textColor: "rgb(34, 34, 34)",
     },
     {
-      title: "Optimisasi Mesin Pencari (SEO)",
+      title: "Search Engine Optimization",
       description:
-        "SEO adalah investasi jangka panjang dalam pemasaran untuk mendorong lalu lintas organik dan melambungkan peringkat situs web.",
+        "SEO is a long term investment in marketing to drive organic traffic and skyrocket website rank.",
       link: "https://bolehdicoba.com/services/seo/",
       image: "./4.png",
-      alt: "Optimisasi Mesin Pencari (SEO)",
+      alt: "Search Engine Optimization",
       bgColor: "rgb(201, 194, 209)",
       textColor: "rgb(34, 34, 34)",
     },
     {
-      title: "Layanan Profesional",
+      title: "Professional Services",
       description:
-        "Growth Hack adalah seni memilih audiens, penawaran, dan strategi yang tepat. Apakah Anda akan mempercayai kami untuk membimbing Anda melaluinya?",
+        "Growth Hack is the art of choosing the right audience, offer and strategy. Will you trust us to guide you through it?",
       link: "https://bolehdicoba.com/services/professional-service/",
       image: "./5.png",
-      alt: "Layanan Profesional",
+      alt: "Professional Services",
       bgColor: "rgb(254, 203, 199)",
       textColor: "rgb(34, 34, 34)",
     },
     {
-      title: "Pengembangan Program Komunitas",
+      title: "Community Program Development",
       description:
-        "Kami membantu bisnis untuk mempertahankan pelanggan, dan mendorong mereka untuk menjelajahi lebih banyak produk dan layanan Anda.",
+        "We help the business to retain customers, and encourages them to explore more of your products and services.",
       link: "https://bolehdicoba.com/services/community-program-development/",
       image: "./6.png",
-      alt: "Pengembangan Program Komunitas",
+      alt: "Community Program Development",
       bgColor: "rgb(255, 231, 200)",
       textColor: "rgb(34, 34, 34)",
     },
     {
-      title: "Pelatihan Pemasaran Digital oleh Boleh Belajar",
+      title: "Digital Marketing Training by Boleh Belajar",
       description:
-        "Program pelatihan yang disesuaikan dibimbing oleh para ahli dan profesional industri.",
+        "Tailored training program guided by industry experts and professionals.",
       link: "https://bolehbelajar.com/",
       image: "./7.png",
-      alt: "Pelatihan Pemasaran Digital oleh Boleh Belajar",
+      alt: "Digital Marketing Training by Boleh Belajar",
       bgColor: "rgb(241, 237, 229)",
       textColor: "rgb(34, 34, 34)",
     },
@@ -158,12 +158,12 @@ export default function OurServices() {
         <div className="flex-1 min-w-[300px]">
           <div className="mb-3">
             <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
-              LAYANAN KAMI
+              OUR SERVICES
             </p>
           </div>
           <div>
-            <h4 className="text-3xl lg:text-4xl font-bold text-gray-800 leading-tight">
-              Kami Menawarkan Berbagai Layanan Untuk Mendukung Bisnis Anda
+            <h4 className="text-4xl lg:text-4xl font-semibold text-gray-800 leading-tight">
+              We Offer a Wide Services Aimed to Support your Business
             </h4>
           </div>
         </div>
@@ -172,9 +172,8 @@ export default function OurServices() {
         <div className="flex-1 min-w-[300px] md:max-w-md">
           <div>
             <p className="text-sm font-normal text-gray-600 leading-relaxed">
-              Mungkin akan mengejutkan Anda, tetapi pemasaran digital bukanlah
-              strategi tunggal, ini mencakup banyak spektrum, tetapi jangan
-              khawatir, kami siap membantu Anda!
+              It may surprise you, but digital marketing is not a single
+              strategy, it covers a lot of spectrum, but don't worry,we got you!
             </p>
           </div>
         </div>
@@ -295,7 +294,7 @@ export default function OurServices() {
 
                             {/* Content Section */}
                             <div className="space-y-4">
-                              <h2 className="text-2xl sm:text-3xl font-bold leading-tight">
+                              <h2 className="text-2xl sm:text-3xl font-semibold leading-tight">
                                 {service.title}
                               </h2>
                               <p className="text-base opacity-90 leading-relaxed">
@@ -327,7 +326,7 @@ export default function OurServices() {
                               {/* Left Content */}
                               <div className="space-y-6 lg:space-y-8">
                                 <div className="space-y-4">
-                                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
                                     {service.title}
                                   </h2>
                                   <p className="text-lg md:text-xl opacity-90 leading-relaxed">

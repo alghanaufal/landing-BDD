@@ -121,26 +121,6 @@ export default function TestimonialSection() {
 
   return (
     <>
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
-          
-          .swiper {
-            width: 100%;
-            padding: 20px 0;
-            box-sizing: border-box;
-          }
-          
-          .swiper-wrapper {
-            transition-timing-function: linear !important;
-          }
-          
-          .swiper-slide {
-            height: auto;
-          }
-        `}
-      </style>
-
       {/* Bagian utama testimoni */}
       <div className="border-t-2 border-b-2 border-gray-900 w-full font-inter overflow-hidden">
         <div className="flex justify-center w-full">

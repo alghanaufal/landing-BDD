@@ -3,25 +3,7 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper modules
 import { Scrollbar, FreeMode } from "swiper/modules";
-
-// --- Helper Components & Data ---
-
-// Icon component for arrows to keep the code clean
-const ArrowIcon = ({ className }) => (
-  <svg
-    className={className}
-    aria-hidden="true"
-    focusable="false"
-    role="img"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 448 512"
-  >
-    <path
-      fill="currentColor"
-      d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 0 273.7 0 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"
-    />
-  </svg>
-);
+import { FaArrowRight } from "react-icons/fa";
 
 const newsData = [
   {
@@ -74,17 +56,12 @@ const NewsCard = ({ post }) => (
           src={post.image}
           alt={post.title}
           className="aspect-[4/3] h-auto w-full object-cover"
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src =
-              "https://placehold.co/600x450/eee/ccc?text=Image+Error";
-          }}
         />
         <a
           href={post.link}
           className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full border-2 border-zinc-800 bg-white transition-all duration-200 ease-in-out group-hover:bg-[#FFB14C] md:h-10 md:w-10"
         >
-          <ArrowIcon className="h-4 w-4 -rotate-45 text-zinc-800 md:h-5 md:w-5" />
+          <FaArrowRight className="h-4 w-4 -rotate-45 text-zinc-800 md:h-5 md:w-5" />
         </a>
       </div>
       <div className="flex flex-grow flex-col p-4">
@@ -114,7 +91,7 @@ const NewsCard = ({ post }) => (
             className="flex items-center gap-1.5 text-sm font-medium text-zinc-800"
           >
             Read More
-            <ArrowIcon className="h-3 w-3" />
+            <FaArrowRight className="h-3 w-3 -rotate-45" />
           </a>
         </div>
       </div>
@@ -128,41 +105,8 @@ export default function NewsSection() {
 
   return (
     <>
-      {/* Custom styles for Swiper scrollbar, navigation, and importing Swiper's CSS */}
-      <style>{`
-        @import url('https://unpkg.com/swiper@11/swiper.min.css');
-        @import url('https://unpkg.com/swiper@11/modules/scrollbar.min.css');
-        
-        .section-news .swiper-scrollbar {
-          height: 1px !important;
-          background-color: #A9A59E;
-          margin-top: 30px;
-          margin-bottom: 55px;
-          bottom: 35px !important;
-          left: 0;
-          width: 48vw; /* Corresponds to original 47.917vw */
-        }
-        .section-news .swiper-scrollbar-drag {
-          background-color: transparent;
-          background-image: url('https://bolehdicoba.com/wp-content/uploads/2025/02/slide-indicator.png');
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center bottom;
-          height: 135px !important;
-          border-radius: 0;
-          top: -60px; /* Adjust vertical position */
-          cursor: grab;
-          margin-top: 10px;
-        }
-        @media (max-width: 767px) {
-            .section-news .swiper-scrollbar {
-                display: none;
-            }
-        }
-      `}</style>
-
       <div className="min-h-screen font-sans">
-        <section className="section-news container mx-auto flex flex-col items-center justify-center px-4 py-12 md:py-24">
+        <section className="section-blog container mx-auto flex flex-col items-center justify-center px-4 py-12 md:py-24">
           {/* Top Header Section */}
           <div className="mb-12 flex w-full flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
             <div className="flex-shrink-0">
@@ -182,7 +126,7 @@ export default function NewsSection() {
                 className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
               >
                 Explore More Articles
-                <ArrowIcon className="h-4 w-4" />
+                <FaArrowRight className="h-4 w-4" />
               </a>
             </div>
           </div>
@@ -207,7 +151,7 @@ export default function NewsSection() {
                 {newsData.map((post, index) => (
                   <SwiperSlide
                     key={index}
-                    style={{ width: "360px", height: "auto" }}
+                    style={{ width: "460px", height: "auto" }}
                   >
                     <NewsCard post={post} />
                   </SwiperSlide>

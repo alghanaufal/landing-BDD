@@ -86,7 +86,7 @@ export default function SpaceSection({ data }) {
       <div className="section-space my-20 py-16 px-4 sm:px-6 lg:px-8 font-sans max-w-7xl mx-auto">
         <div className="max-w-4xl mx-auto text-center mb-12">
           {/* Judul dan deskripsi sekarang dinamis dari prop 'data' */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-900 mb-4 leading-tight">
             {data.title}
           </h2>
           <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-lg mx-auto">
