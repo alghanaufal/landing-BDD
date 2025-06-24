@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react"; // Using Lucide React for icons
+import { LuPlus, LuMinus, LuArrowRight } from "react-icons/lu";
 
-// Componente AccordionItem untuk setiap item akordeon
 const AccordionItem = ({
   id,
   imageSrc,
@@ -32,7 +31,7 @@ const AccordionItem = ({
               decoding="async"
               src={imageSrc}
               alt="accordion-image"
-              className="w-8 h-8 mr-2" // Adjust image size as needed, example size
+              className="w-8 h-8 mr-2"
             />
           )}
           {/* Accordion title */}
@@ -47,7 +46,7 @@ const AccordionItem = ({
           )}
           {/* Toggle icon */}
           <div className="ml-auto w-9 h-9 border-2 border-black rounded-full flex items-center justify-center text-[#222] text-2xl">
-            {isOpen ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+            {isOpen ? <LuMinus size={24} /> : <LuPlus size={24} />}
           </div>
         </button>
       </h2>
@@ -69,7 +68,7 @@ const AccordionItem = ({
               className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
             >
               Explore More
-              <ArrowRight size={20} />
+              <LuArrowRight size={20} />
             </button>
           )}
         </div>
@@ -79,10 +78,7 @@ const AccordionItem = ({
 };
 
 export default function ProgramSection() {
-  // State to manage the currently active accordion item
-  const [activeIndex, setActiveIndex] = useState(0); // Initialize with the first item open
-
-  // Data for the accordion items
+  const [activeIndex, setActiveIndex] = useState(0);
   const accordionData = [
     {
       id: 0,
@@ -97,7 +93,7 @@ export default function ProgramSection() {
       id: 1,
       imageSrc: "p-2.png",
       title: "Breakfast Club",
-      badgeText: null, // No badge for this item
+      badgeText: null,
       description:
         "“GOOD FOOD ENDS WITH GOOD TALK” - Geoffrey Neighor\n\nWe bring you one of the most relaxed yet productive sharing sessions during breakfast time. Curated and tasteful. Two words that would best describe this monthly program, a set of two-hour discussion with our selected group of guest lists.\n\nNo matter what you say over a cup of coffee and any preferred choice of croissants, it might lead to something bigger: network and collaboration.",
       exploreLink: "https://bolehdicoba.com/program/breakfast-club/",
@@ -106,16 +102,15 @@ export default function ProgramSection() {
       id: 2,
       imageSrc: "p-3.png",
       title: "Bulletin Report by BDD",
-      badgeText: null, // No badge for this item
+      badgeText: null,
       description:
         "Throughout our journey in the industry since its establishment in 2017, we have encountered numerous challenges and collaborated with brands from various industries. As your growth partner, one of our main sources of satisfaction is acknowledgement that brands we work with are able to create and achieve the desired results.\n\nWe decided to share our two-cents in order to assist and give several trends and insights for business owners in understanding the industry better during a particular period of time.",
       exploreLink: "https://bolehdicoba.com/program/bulletin/",
     },
   ];
 
-  // Function to handle accordion item click
   const handleAccordionClick = (index) => {
-    setActiveIndex((prevIndex) => (prevIndex === index ? null : index)); // Toggle active state
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
   return (
@@ -131,7 +126,7 @@ export default function ProgramSection() {
       >
         <div className="program-subtitle mb-4">
           <p
-            className="subtitle text-[#513B6A] text-sm font-medium leading-normal m-0
+            className="subtitle text-[#513b6a] text-sm font-medium leading-normal m-0
                         max-sm:text-base max-sm:text-center"
           >
             OUR PROGRAM

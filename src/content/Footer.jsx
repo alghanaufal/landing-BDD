@@ -12,8 +12,6 @@ export default function Footer() {
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
-    // In a real app, you would make an API call to your backend here.
-    // This is a placeholder for the original AJAX call.
     console.log(`Subscribing with email: ${email}`);
     setMessage("Thank you for subscribing!");
     setEmail("");
@@ -21,12 +19,12 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-white text-gray-600 font-sans rounded-t-2xl overflow-hidden">
+    <footer className="bg-white text-gray-600 rounded-t-2xl overflow-hidden">
       <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-t-3xl overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="text-center lg:text-left max-w-2xl">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight">
+              <h2 className="text-3xl lg:text-4xl font-medium mb-4 leading-tight">
                 Let's grow and collaborate with us!
               </h2>
               <p className="text-purple-100 text-lg leading-relaxed">
@@ -69,7 +67,7 @@ export default function Footer() {
 
             {/* Column 2: Newsletter and Social */}
             <div className="md:col-span-4">
-              <h4 className="text-lg font-bold text-gray-800 mb-4">
+              <h4 className="text-2xl font-semibold text-white mb-4">
                 Get any update from us!
               </h4>
               <form onSubmit={handleSubscribe} className="flex mb-6">
@@ -78,7 +76,7 @@ export default function Footer() {
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full bg-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Email address"
                   required
                 />
@@ -95,7 +93,7 @@ export default function Footer() {
               )}
 
               <div className="mt-8">
-                <h6 className="text-sm font-bold tracking-wider text-gray-500 uppercase mb-4">
+                <h6 className="text-sm font-bold tracking-wider text-white uppercase mb-4">
                   FOLLOW US
                 </h6>
                 <div className="flex space-x-4">
@@ -103,7 +101,7 @@ export default function Footer() {
                     href="https://www.instagram.com/bolehdicobadigital/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-blue-500 transition duration-300"
+                    className="text-white  transition duration-300"
                   >
                     <FaInstagram />
                   </a>
@@ -111,7 +109,7 @@ export default function Footer() {
                     href="https://id.linkedin.com/company/bolehdicoba"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-blue-500 transition duration-300"
+                    className="text-white  transition duration-300"
                   >
                     <FaLinkedin />
                   </a>
@@ -119,7 +117,7 @@ export default function Footer() {
                     href="https://www.tiktok.com/@bolehdicobadigital"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-blue-500 transition duration-300"
+                    className="text-white  transition duration-300"
                   >
                     <FaTiktok />
                   </a>
@@ -127,7 +125,7 @@ export default function Footer() {
               </div>
 
               <div className="mt-8">
-                <h6 className="text-sm font-bold tracking-wider text-gray-500 uppercase mb-4">
+                <h6 className="text-sm font-bold tracking-wider text-white uppercase mb-4">
                   OUR ECOSYSTEM
                 </h6>
                 <div className="flex items-center space-x-4">
@@ -161,86 +159,55 @@ export default function Footer() {
             {/* Column 3 & 4: Links and Offices */}
             <div className="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
-                <h6 className="text-sm font-bold tracking-wider text-gray-500 uppercase mb-4">
+                <h6 className="text-sm font-bold tracking-wider text-white uppercase mb-4">
                   Boleh Dicoba Digital
                 </h6>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a
-                      href="https://bolehdicoba.com/about-us/"
-                      className="hover:text-blue-500"
-                    >
-                      About Us
-                    </a>
+                    <a href="https://bolehdicoba.com/about-us/">About Us</a>
                   </li>
                   <li>
-                    <a
-                      href="https://bolehdicoba.com/news-blog/"
-                      className="hover:text-blue-500"
-                    >
-                      News & Blog
-                    </a>
+                    <a href="https://bolehdicoba.com/news-blog/">News & Blog</a>
                   </li>
                   <li>
-                    <a
-                      href="https://bolehdicoba.com/case-study/"
-                      className="hover:text-blue-500"
-                    >
+                    <a href="https://bolehdicoba.com/case-study/">
                       Case Studies
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://bolehdicoba.com/loyalty-program/"
-                      className="hover:text-blue-500"
-                    >
+                    <a href="https://bolehdicoba.com/loyalty-program/">
                       Loyalty Program
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://bolehdicoba.com/web-seo-audit/"
-                      className="hover:text-blue-500"
-                    >
+                    <a href="https://bolehdicoba.com/web-seo-audit/">
                       Web & SEO Audit
                     </a>
                   </li>
                 </ul>
               </div>
               <div>
-                <h6 className="text-sm font-bold tracking-wider text-gray-500 uppercase mb-4">
+                <h6 className="text-sm font-bold tracking-wider text-white uppercase mb-4">
                   Services
                 </h6>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a
-                      href="https://bolehdicoba.com/services/digital-advertising/"
-                      className="hover:text-blue-500"
-                    >
+                    <a href="https://bolehdicoba.com/services/digital-advertising/">
                       Digital Advertising
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://bolehdicoba.com/services/performance-creative/"
-                      className="hover:text-blue-500"
-                    >
+                    <a href="https://bolehdicoba.com/services/performance-creative/">
                       Performance Creative
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://bolehdicoba.com/services/website-development/"
-                      className="hover:text-blue-500"
-                    >
+                    <a href="https://bolehdicoba.com/services/website-development/">
                       Web Development
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://bolehdicoba.com/services/seo/"
-                      className="hover:text-blue-500"
-                    >
+                    <a href="https://bolehdicoba.com/services/seo/">
                       Search Engine Optimization
                     </a>
                   </li>
@@ -251,56 +218,78 @@ export default function Footer() {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-12 pt-8 border-t border-gray-200">
             <div className="md:col-span-8">
-              <h6 className="text-sm font-bold tracking-wider text-gray-500 uppercase mb-4">
+              <h6 className="text-sm font-bold tracking-wider text-white uppercase mb-4">
                 OUR OFFICES
               </h6>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
                 <div>
-                  <h6 className="font-bold text-gray-700 mb-1">Bandung HQ</h6>
+                  <div className="flex items-center mb-2">
+                    <img
+                      src="./Flag-Indonesia.png"
+                      alt="Flag"
+                      className="mr-2"
+                    />
+                    <h6 className="font-bold text-white mb-1">Bandung HQ</h6>
+                  </div>
                   <p>
-                    Lima Building, Jl. Sunda No.56-61, Bandung, Jawa Barat 40112
+                    Lima Building, Jl. Sunda No.56-61, Kb. Pisang, Kec. Sumur
+                    Bandung, Kota Bandung, Jawa Barat 40112, Indonesia
                   </p>
                 </div>
                 <div>
-                  <h6 className="font-bold text-gray-700 mb-1">Jakarta HQ</h6>
-                  <p>Jl. Kemang Raya Selatan VIII No.55, Jakarta Selatan</p>
+                  <div className="flex items-center mb-2">
+                    <img
+                      src="./Flag-Indonesia.png"
+                      alt="Flag"
+                      className="mr-2"
+                    />
+
+                    <h6 className="font-bold text-white mb-1">Jakarta HQ</h6>
+                  </div>
+                  <p>
+                    Jl. Kemang Raya Selatan VIII No.55, Jakarta Selatan,
+                    Indonesia
+                  </p>
                 </div>
                 <div>
-                  <h6 className="font-bold text-gray-700 mb-1">Singapore HQ</h6>
-                  <p>531A Upper Cross Street #04-95, Hong Lim Complex</p>
+                  <div className="flex items-center mb-2">
+                    <img
+                      src="./Flag-Indonesia.png"
+                      alt="Flag"
+                      className="mr-2"
+                    />
+
+                    <h6 className="font-bold text-white mb-1">Singapore HQ</h6>
+                  </div>
+                  <p>
+                    531A Upper Cross Street #04-95, Hong Lim Complex Singapore
+                    051531
+                  </p>
                 </div>
               </div>
             </div>
             <div className="md:col-span-4">
-              <h6 className="text-sm font-bold tracking-wider text-gray-500 uppercase mb-4">
+              <h6 className="text-sm font-bold tracking-wider text-white uppercase mb-4">
                 CONTACT US
               </h6>
               <div className="text-sm space-y-2">
                 <a
                   href="https://api.whatsapp.com/send?phone=6281805757585"
-                  className="flex items-center hover:text-blue-500"
+                  className="flex items-center"
                 >
-                  <span className="font-bold mr-2">P.</span> +62 818 0575 7585
+                  <span className="font-bold mr-2 text-orange-300">P.</span> +62
+                  818 0575 7585
                 </a>
                 <a
                   href="mailto:hi@bolehdicoba.com"
-                  className="flex items-center hover:text-blue-500"
+                  className="flex items-center"
                 >
-                  <span className="font-bold mr-2">E.</span> hi@bolehdicoba.com
+                  <span className="font-bold mr-2 text-orange-300">E.</span>{" "}
+                  hi@bolehdicoba.com
                 </a>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Bottom bar: Copyright */}
-      <div className="bg-gray-900">
-        <div className="container mx-auto px-6 py-4 text-center text-gray-500 text-sm">
-          <p>
-            &copy; {new Date().getFullYear()} Boleh Dicoba Digital. All rights
-            reserved.
-          </p>
         </div>
       </div>
     </footer>

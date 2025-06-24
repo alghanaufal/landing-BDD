@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper modules
 import { Scrollbar, FreeMode } from "swiper/modules";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -99,26 +97,26 @@ const NewsCard = ({ post }) => (
   </div>
 );
 
-// Main App Component
+{
+  /*Main App Component */
+}
 export default function NewsSection() {
   const swiperRef = useRef(null);
 
   return (
     <>
-      <div className="min-h-screen font-sans">
+      <div className="min-h-screen">
         <section className="section-blog container mx-auto flex flex-col items-center justify-center px-4 py-12 md:py-24">
           {/* Top Header Section */}
           <div className="mb-12 flex w-full flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
             <div className="flex-shrink-0">
-              <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-[#513B6A]">
+              <p className="mb-1 text-sm font-semibold tracking-wider text-[#513b6a]">
                 NEWS & BLOG
               </p>
               <h2 className="text-3xl font-medium text-zinc-800 md:text-4xl">
-                Your time is valuable.
-              </h2>
-              <p className="text-lg text-zinc-600">
+                Your time is valuable. <br />
                 Read our insightful articles within 5 minutes.
-              </p>
+              </h2>
             </div>
             <div className="flex-shrink-0">
               <a

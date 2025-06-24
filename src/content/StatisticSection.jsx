@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function StatisticSection() {
-  // Data for the statistics cards
   const stats = [
     {
       value: "800+",
@@ -36,13 +35,10 @@ export default function StatisticSection() {
   ];
 
   return (
-    // Section container
     <section className="p-4 md:p-0 my-12 md:my-24">
-      {/* Container adjusted to be wider (max-w-7xl) and content aligned with justify-between */}
       <div className="max-w-7xl mx-auto rounded-none md:rounded-3xl p-4 md:p-8 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between">
-        {/* Header content: Adjusted width to give more space to the stats cards on the right */}
         <div className="w-full lg:w-2/5 flex flex-col gap-4 text-center lg:text-left">
-          <p className="text-purple-900 text-sm md:text-base font-medium">
+          <p className="text-[#513b6a] text-sm md:text-base font-medium">
             WE ON NUMBERS
           </p>
           <h2 className="tracking-wide text-gray-900 text-2xl md:text-4xl font-normal leading-tight">
@@ -60,7 +56,6 @@ export default function StatisticSection() {
           {/* On large screens, cards are aligned to the right to match the image */}
           <div className="flex flex-wrap gap-3.5 md:gap-5 justify-center lg:justify-end">
             {stats.map((stat, index) => {
-              // Determine card classes based on its type and index
               const isLargeCard = [0, 3, 4].includes(index);
               const cardSizeClass = `w-[calc(50%-0.5rem)] ${
                 isLargeCard ? "lg:w-[259px]" : "lg:w-[211px]"

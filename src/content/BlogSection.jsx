@@ -1,12 +1,8 @@
 import React from "react";
-// Import Swiper React components from a CDN that supports ES Modules
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper modules from the same CDN
 import { Scrollbar, FreeMode } from "swiper/modules";
-
 import { FaArrowRight } from "react-icons/fa";
 
-// Sample data for the blog cards. In a real app, this would come from an API.
 const blogPosts = [
   {
     image: "./partner.png",
@@ -50,9 +46,6 @@ const blogPosts = [
   },
 ];
 
-// --- Main Components ---
-
-// Individual Blog Card Component
 const BlogCard = ({ post }) => (
   <div className="group relative flex h-full flex-col">
     {/* The main card container with border and hover shadow */}
@@ -112,12 +105,12 @@ const BlogCard = ({ post }) => (
 export default function BlogSection() {
   return (
     <>
-      <div className="min-h-screen font-sans">
+      <div className="min-h-screen">
         <section className="section-blog container mx-auto flex flex-col items-center justify-center gap-12 px-4 py-12 md:gap-24 lg:flex-row lg:justify-end lg:py-24">
           {/* Left Text Content */}
           <div className="flex-shrink-0 text-center lg:w-[400px] lg:text-left">
             <div className="mb-1.5">
-              <p className="text-sm font-medium text-[#513B6A]">CASE STUDY</p>
+              <p className="text-sm font-medium text-[#513b6a]">CASE STUDY</p>
             </div>
             <div className="mb-16 lg:mb-12">
               <h4 className="text-4xl font-normal text-zinc-800 md:leading-tight">
@@ -149,7 +142,7 @@ export default function BlogSection() {
                   draggable: true,
                   hide: false,
                 }}
-                className="!pb-32" // Padding bottom to make space for the scrollbar
+                className="!pb-32"
               >
                 {blogPosts.map((post, index) => (
                   <SwiperSlide

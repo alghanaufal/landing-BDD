@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
-// The main App component that renders our form
 export default function FormSection() {
-  // State to hold the values of the form fields
   const [formData, setFormData] = useState({
     first_name: "",
     brand_name: "",
@@ -96,9 +94,9 @@ export default function FormSection() {
 
   return (
     // Main container with new background and padding
-    <div className="font-sans flex items-center justify-center min-h-screen p-4">
+    <div className="flex items-center justify-center min-h-screen p-4">
       {/* Card container */}
-      <div className="bg-white w-full max-w-6xl mx-auto rounded-3xl shadow-lg border border-gray-200 p-8 md:p-12">
+      <div className="bg-white w-full max-w-6xl mx-auto rounded-3xl border-4 border-black p-8 md:p-12">
         {/* Inner container for two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side image column */}
@@ -113,7 +111,7 @@ export default function FormSection() {
           {/* Right side text and form column */}
           <div className="flex-1">
             <div className="mb-3">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
+              <h2 className="text-4xl md:text-5xl font-small text-gray-800">
                 Want to know more?
               </h2>
             </div>

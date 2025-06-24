@@ -2,11 +2,9 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 
-// Testimonial data
 const testimonials = [
   {
     name: "Kitschy",
@@ -61,7 +59,6 @@ const testimonials = [
 ];
 
 export default function TestimonialSection() {
-  // Konfigurasi Swiper untuk mobile
   const mobileSettings = {
     modules: [Autoplay, FreeMode],
     speed: 8000,
@@ -80,7 +77,6 @@ export default function TestimonialSection() {
     allowTouchMove: false,
   };
 
-  // Konfigurasi Swiper untuk desktop (arah normal)
   const desktopSettings1 = {
     modules: [Autoplay, FreeMode],
     speed: 10000,
@@ -99,7 +95,6 @@ export default function TestimonialSection() {
     allowTouchMove: false,
   };
 
-  // Konfigurasi Swiper untuk desktop (arah terbalik)
   const desktopSettings2 = {
     modules: [Autoplay, FreeMode],
     speed: 10000,
@@ -122,7 +117,7 @@ export default function TestimonialSection() {
   return (
     <>
       {/* Bagian utama testimoni */}
-      <div className="border-t-2 border-b-2 border-gray-900 w-full font-inter overflow-hidden">
+      <div className="bg-[#f1ede5] border-t-2 border-b-2 border-gray-900 w-full overflow-hidden">
         <div className="flex justify-center w-full">
           <div className="flex flex-col items-center w-full py-10 md:py-16">
             {/* Judul testimoni */}

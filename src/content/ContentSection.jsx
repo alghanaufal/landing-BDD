@@ -37,7 +37,7 @@ export default function ContentSection() {
     ],
   };
   return (
-    <section className="py-16 lg:py-24 font-inter">
+    <section className="py-16 lg:py-24">
       <div className="max-w mx-auto">
         <BrandSection />
         <StatisticSection />

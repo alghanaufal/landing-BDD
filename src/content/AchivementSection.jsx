@@ -1,10 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, FreeMode } from "swiper/modules";
-
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/free-mode";
 
 export default function AchivementSection() {
   const achievements = [
@@ -17,7 +11,6 @@ export default function AchivementSection() {
 
   const [slidesPerView, setSlidesPerView] = useState(5);
 
-  // useEffect untuk memuat script dan style Swiper secara dinamis
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -29,15 +22,12 @@ export default function AchivementSection() {
     link.rel = "stylesheet";
     link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
     document.head.appendChild(link);
-
-    // Fungsi cleanup untuk menghapus script dan link saat komponen dibongkar
     return () => {
       document.body.removeChild(script);
       document.head.removeChild(link);
     };
-  }, []); // Array dependensi kosong memastikan ini hanya berjalan sekali
+  }, []);
 
-  // useEffect untuk mengatur slidesPerView secara responsif
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
@@ -49,10 +39,9 @@ export default function AchivementSection() {
       }
     };
 
-    handleResize(); // Atur nilai awal
-    window.addEventListener("resize", handleResize); // Tambahkan listener
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-    // Cleanup listener
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 

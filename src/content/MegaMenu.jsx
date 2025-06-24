@@ -334,7 +334,7 @@ export default function MegaMenu() {
               <input
                 type="text"
                 placeholder="Masukkan kata kunci pencarian"
-                className="flex-1 px-4 py-3 outline-none transition-all duration-200 font-inter text-gray-700 placeholder-gray-400"
+                className="flex-1 px-4 py-3 outline-none transition-all duration-200 text-gray-700 placeholder-gray-400"
                 autoFocus
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
@@ -372,7 +372,7 @@ export default function MegaMenu() {
                 <input
                   type="text"
                   placeholder="Masukkan kata kunci pencarian"
-                  className="flex-1 w-full px-2 py-3 outline-none bg-transparent font-inter text-gray-700 placeholder-gray-500"
+                  className="flex-1 w-full px-2 py-3 outline-none bg-transparent text-gray-700 placeholder-gray-500"
                   autoFocus
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
@@ -397,7 +397,7 @@ export default function MegaMenu() {
                 {item.hasSubmenu ? (
                   <button
                     onClick={() => toggleSubMenu(item.id)}
-                    className="w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-200 font-inter"
+                    className="w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-200"
                     aria-expanded={activeMenu === item.id}
                     aria-controls={`mobile-submenu-${item.id}`}
                   >
@@ -412,7 +412,7 @@ export default function MegaMenu() {
                   <a
                     href={item.linkHref}
                     onClick={toggleMobileMenu}
-                    className="block px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-200 font-medium font-inter"
+                    className="block px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-200 font-medium"
                   >
                     {item.title}
                   </a>
@@ -432,7 +432,7 @@ export default function MegaMenu() {
                               key={subIndex}
                               href={subItem.linkHref}
                               onClick={toggleMobileMenu}
-                              className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-300 rounded-md transition-colors duration-200 font-inter"
+                              className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-300 rounded-md transition-colors duration-200"
                             >
                               {subItem.title}
                             </a>

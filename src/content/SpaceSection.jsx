@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from "react";
 export default function SpaceSection({ data }) {
   const swiperRef = useRef(null);
 
-  // Hook ini bertanggung jawab untuk menyuntikkan library Swiper.js.
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -16,7 +15,6 @@ export default function SpaceSection({ data }) {
     link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
     document.head.appendChild(link);
 
-    // Fungsi cleanup saat komponen di-unmount.
     return () => {
       if (document.body.contains(script)) {
         document.body.removeChild(script);
@@ -27,7 +25,6 @@ export default function SpaceSection({ data }) {
     };
   }, []);
 
-  // Hook ini mengatur parameter Swiper setelah komponen di-mount.
   useEffect(() => {
     const swiperContainer = swiperRef.current;
     if (!swiperContainer) {
@@ -78,12 +75,12 @@ export default function SpaceSection({ data }) {
         swiperRef.current.initialize();
       }
     });
-  }, []); // Dependensi kosong agar hanya berjalan sekali.
+  }, []);
 
   return (
     <>
       <div className="border-2 border-gray-900"></div>
-      <div className="section-space my-20 py-16 px-4 sm:px-6 lg:px-8 font-sans max-w-7xl mx-auto">
+      <div className="section-space my-20 py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="max-w-4xl mx-auto text-center mb-12">
           {/* Judul dan deskripsi sekarang dinamis dari prop 'data' */}
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-900 mb-4 leading-tight">

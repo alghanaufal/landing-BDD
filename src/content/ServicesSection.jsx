@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { FaArrowRight } from "react-icons/fa";
 
-// GSAP CDN will be loaded dynamically
 let gsap, ScrollTrigger;
 
 export default function OurServices() {
@@ -157,12 +156,12 @@ export default function OurServices() {
         {/* Kolom Kiri: Subjudul dan Judul Utama */}
         <div className="flex-1 min-w-[300px]">
           <div className="mb-3">
-            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+            <p className="text-sm font-semibold text-[#513b6a] uppercase tracking-wider">
               OUR SERVICES
             </p>
           </div>
           <div>
-            <h4 className="text-4xl lg:text-4xl font-semibold text-gray-800 leading-tight">
+            <h4 className="text-4xl font-semibold text-gray-800 leading-tight">
               We Offer a Wide Services Aimed to Support your Business
             </h4>
           </div>
@@ -314,7 +313,7 @@ export default function OurServices() {
                                   }}
                                 >
                                   <span>See Detail Service</span>
-                                  <ArrowRight className="w-4 h-4" />
+                                  <FaArrowRight className="w-4 h-4" />
                                 </button>
                               </div>
                             </div>
@@ -347,7 +346,7 @@ export default function OurServices() {
                                     }}
                                   >
                                     <span>See Detail Service</span>
-                                    <ArrowRight className="w-5 h-5" />
+                                    <FaArrowRight className="w-5 h-5" />
                                   </button>
                                 </div>
                               </div>

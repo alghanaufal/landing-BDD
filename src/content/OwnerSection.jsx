@@ -32,7 +32,6 @@ export default function OwnerSection() {
   };
 
   return (
-    // Section container
     <section className="px-4 md:px-0 my-[50px] mb-[70px] md:my-[100px] md:mb-[139px] overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-[30px] md:gap-[50px]">
         {/* Image Section */}
@@ -74,15 +73,12 @@ export default function OwnerSection() {
             {accordionItems.map((item, index) => {
               const isActive = activeAccordionItem === item.id;
               return (
-                // This outer div provides the default gray border
                 <div
                   key={item.id}
                   className={`border-l border-l-[#d9d4cb] ${
                     index !== accordionItems.length - 1 ? "pb-5" : ""
                   }`}
                 >
-                  {/* Accordion Header / Button */}
-                  {/* When active, this gets the green border to overlay the gray one */}
                   <h2
                     className={`m-0 ${
                       isActive ? "border-l-2 border-l-[#33b8a5] -ml-px" : ""
@@ -113,7 +109,6 @@ export default function OwnerSection() {
                       overflow: "hidden",
                       transition: "max-height 0.4s ease-in-out",
                     }}
-                    // The content block ALSO gets the green border when active
                     className={`${
                       isActive ? "border-l-2 border-l-[#33b8a5] -ml-px" : ""
                     }`}

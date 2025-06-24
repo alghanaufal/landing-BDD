@@ -11,7 +11,7 @@ export default function HeroSection() {
           className="flex-grow hidden lg:flex object-cover"
         />
         <div className="w-full text-center lg:flex-grow lg:mx-8">
-          <p className="text-sm font-semibold uppercase tracking-wider">
+          <p className="text-sm font-semibold tracking-wider">
             GROW WITH US
           </p>
           <h1 className="tracking-wide mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
@@ -27,7 +27,7 @@ export default function HeroSection() {
           </p>
           <div className="mt-10 flex items-center justify-center">
             <button
-              href="#" // Using anchor tag as requested
+              href="#" 
               className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
             >
               Get to Know Us!
