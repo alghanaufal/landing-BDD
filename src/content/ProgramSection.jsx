@@ -13,7 +13,7 @@ const AccordionItem = ({
 }) => {
   return (
     <div
-      className={`accordion-item border-2 border-black rounded-lg ${
+      className={`accordion-item border-2 border-black rounded-lg bg-white ${
         isOpen ? "active" : ""
       }`}
     >
@@ -34,16 +34,18 @@ const AccordionItem = ({
               className="w-8 h-8 mr-2"
             />
           )}
-          {/* Accordion title */}
-          <span className="text-[#222] text-xl font-medium leading-normal ml-4 text-left flex-grow">
-            {title}
-          </span>
-          {/* Badge if present */}
-          {badgeText && (
-            <span className="badge-program px-2.5 py-1.5 bg-[#FC5649] text-white rounded-md text-base font-semibold leading-normal ml-2.5">
-              {badgeText}
+          <div className="flex items-center flex-grow">
+            {/* Accordion title */}
+            <span className="text-[#222] text-xl font-medium leading-normal ml-4 text-left">
+              {title}
             </span>
-          )}
+            {/* Badge if present */}
+            {badgeText && (
+              <span className="badge-program px-2.5 py-1.5 bg-[#FC5649] text-white rounded-md text-base font-semibold leading-normal ml-2.5">
+                {badgeText}
+              </span>
+            )}
+          </div>
           {/* Toggle icon */}
           <div className="ml-auto w-9 h-9 border-2 border-black rounded-full flex items-center justify-center text-[#222] text-2xl">
             {isOpen ? <LuMinus size={24} /> : <LuPlus size={24} />}
