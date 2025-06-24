@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   FaArrowRight,
   FaInstagram,
@@ -7,17 +7,6 @@ import {
 } from "react-icons/fa";
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubscribe = async (e) => {
-    e.preventDefault();
-    console.log(`Subscribing with email: ${email}`);
-    setMessage("Thank you for subscribing!");
-    setEmail("");
-    setTimeout(() => setMessage(""), 3000);
-  };
-
   return (
     <footer className="bg-white text-gray-600 rounded-t-2xl overflow-hidden">
       <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-t-3xl overflow-hidden">
@@ -70,12 +59,10 @@ export default function Footer() {
               <h4 className="text-2xl font-semibold text-white mb-4">
                 Get any update from us!
               </h4>
-              <form onSubmit={handleSubscribe} className="flex mb-6">
+              <form className="flex mb-6">
                 <input
                   type="email"
                   name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Email address"
                   required
@@ -88,9 +75,6 @@ export default function Footer() {
                   <FaArrowRight />
                 </button>
               </form>
-              {message && (
-                <div className="text-green-600 text-sm mt-2">{message}</div>
-              )}
 
               <div className="mt-8">
                 <h6 className="text-sm font-bold tracking-wider text-white uppercase mb-4">
@@ -164,23 +148,23 @@ export default function Footer() {
                 </h6>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="https://bolehdicoba.com/about-us/">About Us</a>
+                    <a href="#">About Us</a>
                   </li>
                   <li>
-                    <a href="https://bolehdicoba.com/news-blog/">News & Blog</a>
+                    <a href="#">News & Blog</a>
                   </li>
                   <li>
-                    <a href="https://bolehdicoba.com/case-study/">
+                    <a href="#">
                       Case Studies
                     </a>
                   </li>
                   <li>
-                    <a href="https://bolehdicoba.com/loyalty-program/">
+                    <a href="#">
                       Loyalty Program
                     </a>
                   </li>
                   <li>
-                    <a href="https://bolehdicoba.com/web-seo-audit/">
+                    <a href="#">
                       Web & SEO Audit
                     </a>
                   </li>
@@ -192,22 +176,22 @@ export default function Footer() {
                 </h6>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="https://bolehdicoba.com/services/digital-advertising/">
+                    <a href="#">
                       Digital Advertising
                     </a>
                   </li>
                   <li>
-                    <a href="https://bolehdicoba.com/services/performance-creative/">
+                    <a href="#">
                       Performance Creative
                     </a>
                   </li>
                   <li>
-                    <a href="https://bolehdicoba.com/services/website-development/">
+                    <a href="#">
                       Web Development
                     </a>
                   </li>
                   <li>
-                    <a href="https://bolehdicoba.com/services/seo/">
+                    <a href="#">
                       Search Engine Optimization
                     </a>
                   </li>

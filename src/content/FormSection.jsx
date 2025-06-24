@@ -1,97 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 export default function FormSection() {
-  const [formData, setFormData] = useState({
-    first_name: "",
-    brand_name: "",
-    wa_number: "",
-    industry: "",
-    services: "",
-  });
-
-  // State to manage the loading status during form submission
-  const [isLoading, setIsLoading] = useState(false);
-
-  // State to hold the success or error message after submission
-  const [resultMessage, setResultMessage] = useState({ type: "", text: "" });
-
-  // This function handles changes in any of the form inputs.
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  // This function handles the form submission.
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default browser form submission
-    setIsLoading(true); // Show a loading indicator
-    setResultMessage({ type: "", text: "" }); // Clear any previous messages
-
-    // Construct the data payload for the API endpoint
-    const formPayload = new URLSearchParams();
-    formPayload.append("action", "my_form_knowmore_action");
-    formPayload.append("page_submit", "homepage");
-    for (const key in formData) {
-      formPayload.append(key, formData[key]);
-    }
-
-    try {
-      // Use the native fetch API to send the data
-      const response = await fetch(
-        "https://bolehdicoba.com/wp-admin/admin-ajax.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: formPayload.toString(),
-        }
-      );
-
-      // The endpoint appears to return text, so we parse it as text, then JSON
-      const responseText = await response.text();
-      const res = JSON.parse(responseText);
-
-      if (res.code) {
-        // Handle success
-        setResultMessage({ type: "success", text: res.msg });
-        // Reset the form fields after successful submission
-        setFormData({
-          first_name: "",
-          brand_name: "",
-          wa_number: "",
-          industry: "",
-          services: "",
-        });
-      } else {
-        // Handle server-side errors
-        setResultMessage({
-          type: "error",
-          text: res.msg || "An unknown error occurred.",
-        });
-      }
-    } catch (error) {
-      // Handle network or parsing errors
-      console.error("Submission Error:", error);
-      setResultMessage({
-        type: "error",
-        text: "An error occurred while submitting the form.",
-      });
-    } finally {
-      // This block runs regardless of success or failure
-      setIsLoading(false); // Hide the loading indicator
-
-      // Set a timer to clear the result message after 3 seconds
-      setTimeout(() => {
-        setResultMessage({ type: "", text: "" });
-      }, 3000);
-    }
-  };
-
   return (
     // Main container with new background and padding
     <div className="flex items-center justify-center min-h-screen p-4">
@@ -122,11 +32,7 @@ export default function FormSection() {
             </div>
 
             {/* Form container */}
-            <form
-              onSubmit={handleSubmit}
-              id="form_send_email"
-              className="space-y-5"
-            >
+            <form id="form_send_email" className="space-y-5">
               {/* Form Group: Your Name */}
               <div>
                 <label
@@ -139,8 +45,6 @@ export default function FormSection() {
                   type="text"
                   id="first_name"
                   name="first_name"
-                  value={formData.first_name}
-                  onChange={handleChange}
                   placeholder="Your Name"
                   className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
                   required
@@ -159,8 +63,6 @@ export default function FormSection() {
                   type="text"
                   id="brand_name"
                   name="brand_name"
-                  value={formData.brand_name}
-                  onChange={handleChange}
                   placeholder="Brand Name"
                   className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
                   required
@@ -179,8 +81,6 @@ export default function FormSection() {
                   type="text"
                   id="wa_number"
                   name="wa_number"
-                  value={formData.wa_number}
-                  onChange={handleChange}
                   placeholder="WhatsApp Number"
                   className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
                   required
@@ -198,8 +98,6 @@ export default function FormSection() {
                 <select
                   name="industry"
                   id="industry"
-                  value={formData.industry}
-                  onChange={handleChange}
                   className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400 appearance-none"
                   required
                 >
@@ -227,8 +125,6 @@ export default function FormSection() {
                 <select
                   name="services"
                   id="services"
-                  value={formData.services}
-                  onChange={handleChange}
                   className="w-full text-gray-800 p-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400 appearance-none"
                   required
                 >
@@ -260,26 +156,10 @@ export default function FormSection() {
                   id="send_email"
                   type="submit"
                   className="inline-flex items-center justify-center gap-3 w-fit rounded-lg border border-black bg-[#ffb14c] py-[9px] pl-6 pr-4 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-[#E8A145] hover:shadow-[4px_4px_0px_0px_#222]"
-                  disabled={isLoading}
                 >
-                  {isLoading ? "Sending..." : "Consult Now"}
-                  {!isLoading && <FaArrowRight />}
+                  Consult Now
+                  <FaArrowRight />
                 </button>
-              </div>
-
-              {/* Form Group: Result Message */}
-              <div>
-                {resultMessage.text && (
-                  <div
-                    className={`mt-4 text-base text-center font-semibold ${
-                      resultMessage.type === "error"
-                        ? "text-red-600"
-                        : "text-green-600"
-                    }`}
-                  >
-                    {resultMessage.text}
-                  </div>
-                )}
               </div>
             </form>
           </div>
