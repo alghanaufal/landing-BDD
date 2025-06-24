@@ -24,7 +24,7 @@
 }
 .section-blog .swiper-scrollbar-drag {
   background-color: transparent;
-  background-image: url("./slide-indicator.png");
+  background-image: url("/slide-indicator.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
