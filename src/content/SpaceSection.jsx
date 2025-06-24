@@ -44,9 +44,9 @@ export default function SpaceSection({ data }) {
         clickable: true,
       },
       breakpoints: {
-        640: { slidesPerView: 1.5, spaceBetween: 20 },
-        768: { slidesPerView: 2.5, spaceBetween: 30 },
-        1024: { slidesPerView: 3, spaceBetween: 40 },
+        640: { slidesPerView: 1.5 },
+        768: { slidesPerView: 2.5 },
+        1024: { slidesPerView: 3 },
       },
       injectStyles: [
         `
