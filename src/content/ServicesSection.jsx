@@ -214,7 +214,7 @@ export default function OurServices() {
                         {/* Left Content */}
                         <div className="space-y-6 lg:space-y-8">
                           <div className="space-y-4">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight">
                               {service.title}
                             </h2>
                             <p className="text-lg md:text-xl opacity-90 leading-relaxed">
@@ -243,7 +243,7 @@ export default function OurServices() {
                         </div>
 
                         {/* Right Content - Image */}
-                        <div className="flex justify-center lg:justify-center">
+                        <div className="flex justify-center lg:justify-start">
                           <div className="relative">
                             <img
                               src={service.image}
