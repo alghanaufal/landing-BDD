@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
 
@@ -61,220 +61,236 @@ const testimonials = [
 ];
 
 export default function TestimonialSection() {
-  const [maxHeight, setMaxHeight] = useState(0);
+  const swiperMobileRef = useRef(null);
+  const swiperDesktop1Ref = useRef(null);
+  const swiperDesktop2Ref = useRef(null);
 
+  // useEffect untuk memuat skrip Swiper dan menginisialisasi
   useEffect(() => {
-    // Function to calculate maximum height of content items
-    const calculateMaxHeight = () => {
-      let currentMaxHeight = 0;
-      const contentItems = document.querySelectorAll(
-        ".testimonial-content-item"
-      );
-      contentItems.forEach((item) => {
-        const height = item.offsetHeight;
-        if (height > currentMaxHeight) {
-          // Adjust based on screen width like original JS logic
-          if (window.screen.width > 750) {
-            currentMaxHeight = height + 20;
-          } else {
-            currentMaxHeight = height + 5;
-          }
-        }
-      });
-      setMaxHeight(currentMaxHeight);
+    // Memuat skrip Swiper dari CDN
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      // Konfigurasi untuk setiap swiper
+      const mobileParams = {
+        speed: 8000,
+        spaceBetween: 20,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        loop: true,
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+        },
+        freeMode: {
+          enabled: true,
+          momentum: false,
+        },
+        injectStyles: [
+          `
+                .swiper-wrapper {
+                    transition-timing-function: linear !important;
+                    pointer-events: none;
+                }
+            `,
+        ],
+      };
+
+      const desktop1Params = {
+        speed: 10000,
+        spaceBetween: 30,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        loop: true,
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+        },
+        freeMode: {
+          enabled: true,
+          momentum: false,
+        },
+        injectStyles: [
+          `
+                .swiper-wrapper {
+                    transition-timing-function: linear !important;
+                    pointer-events: none;
+                }
+            `,
+        ],
+      };
+
+      const desktop2Params = {
+        ...desktop1Params, // Salin konfigurasi dari desktop 1
+        autoplay: {
+          // Timpa konfigurasi autoplay
+          ...desktop1Params.autoplay,
+          reverseDirection: true,
+        },
+      };
+
+      // Menginisialisasi setiap swiper setelah skrip dimuat
+      if (swiperMobileRef.current) {
+        Object.assign(swiperMobileRef.current, mobileParams);
+        swiperMobileRef.current.initialize();
+      }
+      if (swiperDesktop1Ref.current) {
+        Object.assign(swiperDesktop1Ref.current, desktop1Params);
+        swiperDesktop1Ref.current.initialize();
+      }
+      if (swiperDesktop2Ref.current) {
+        Object.assign(swiperDesktop2Ref.current, desktop2Params);
+        swiperDesktop2Ref.current.initialize();
+      }
     };
 
-    // Calculate maximum height on initialization and when window size changes
-    calculateMaxHeight();
-    window.addEventListener("resize", calculateMaxHeight);
-
-    // Cleanup function to remove event listener
+    // Cleanup function untuk menghapus skrip saat komponen di-unmount
     return () => {
-      window.removeEventListener("resize", calculateMaxHeight);
+      document.body.removeChild(script);
     };
-  }, []); // Empty dependency means effect runs only once after initial render
+  }, []);
 
   return (
     <>
       <style>
         {`
-          /* Custom styles for Swiper that can't be converted to Tailwind */
-          .swiper-container .swiper-wrapper, .swiper-container1 .swiper-wrapper {
-            transition-timing-function: linear !important;
-            pointer-events: none;
-          }
-          .swiper-container, .swiper-container1 {
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+          /* Gaya tambahan untuk memastikan tata letak yang benar */
+          swiper-container {
             width: 100%;
             padding: 20px 0;
             box-sizing: border-box;
           }
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
         `}
       </style>
 
-      {/* Main testimonial section */}
-      <div className="border-t-2 border-b-2 border-gray-900 w-full font-inter">
-        <div className="flex justify-center w-full overflow-hidden">
-          <div className="flex flex-col items-center w-full">
-            {/* Testimonial heading section */}
+      {/* Bagian utama testimoni */}
+      <div className="border-t-2 border-b-2 border-gray-900 w-full font-inter overflow-hidden">
+        <div className="flex justify-center w-full">
+          <div className="flex flex-col items-center w-full py-10 md:py-16">
+            {/* Judul testimoni */}
             <div className="text-center w-full px-4">
-              <h5 className="text-sm md:text-base text-gray-900 m-0 p-0">
+              <h5 className="text-sm md:text-base text-gray-900 m-0 p-0 tracking-wider">
                 FROM OUR NOTABLE CLIENTS
               </h5>
-              <h3 className="text-2xl md:text-4xl lg:text-5xl text-gray-900 m-0 p-0 font-normal mt-2 mb-4 md:mt-1 md:mb-6">
+              <h3 className="text-2xl md:text-4xl lg:text-5xl text-gray-900 m-0 p-0 font-normal mt-2 mb-4 md:mt-1 md:mb-10">
                 800+ business have experienced the result
               </h3>
             </div>
 
-            {/* Testimonial marquee section */}
-            <div className="w-full">
-              <div className="relative overflow-hidden min-h-[20vh] md:min-h-[50vh]">
-                {/* Mobile Swiper (runs to the left, only visible on mobile) */}
-                <Swiper
-                  modules={[Autoplay, FreeMode]}
-                  spaceBetween={20}
-                  centeredSlides={true}
-                  autoplay={{
-                    reverseDirection: true,
-                    delay: 0,
-                    disableOnInteraction: false,
-                  }}
-                  speed={8000}
-                  loop={true}
-                  slidesPerView={"auto"}
-                  freeMode={true}
-                  freeModeMomentum={false}
-                  className="swiper-container w-full py-5 md:hidden"
-                >
+            {/* Bagian marquee testimoni */}
+            <div className="w-full relative">
+              {/* Swiper untuk Mobile menggunakan Web Component */}
+              <div className="md:hidden">
+                <swiper-container ref={swiperMobileRef} init="false">
                   {testimonials.map((testimonial, index) => (
-                    <SwiperSlide
-                      key={index}
-                      className="testimonial-content-item p-4 border-2 border-black flex flex-col rounded-lg bg-white box-border mx-3"
-                      style={{
-                        height: "350px",
-                        width: "300px",
-                        boxShadow: "4px 4px 0px 0px #222",
-                      }}
-                    >
-                      <div className="flex items-center">
-                        <div
-                          className="w-12 h-12 flex rounded-full justify-center items-center text-white text-lg"
-                          style={{
-                            backgroundColor: testimonial.avatarColor,
-                          }}
-                        >
-                          {testimonial.name.charAt(0)}
+                    <swiper-slide key={index} style={{ width: "300px" }}>
+                      <div
+                        className="p-4 border-2 border-black flex flex-col rounded-lg bg-white box-border h-full"
+                        style={{
+                          minHeight: "250px",
+                          boxShadow: "4px 4px 0px 0px #222",
+                        }}
+                      >
+                        <div className="flex items-center">
+                          <div
+                            className="w-12 h-12 flex-shrink-0 flex rounded-full justify-center items-center text-white text-lg"
+                            style={{ backgroundColor: testimonial.avatarColor }}
+                          >
+                            {testimonial.name.charAt(0)}
+                          </div>
+                          <div className="ml-3">
+                            <p className="font-medium text-sm m-0 p-0 text-gray-900">
+                              {testimonial.name}
+                            </p>
+                          </div>
                         </div>
-                        <div className="ml-3">
-                          <p className="font-medium text-sm m-0 p-0 text-gray-900">
-                            {testimonial.name}
-                          </p>
-                        </div>
+                        <p className="text-sm font-light leading-relaxed mt-4 text-gray-900">
+                          {testimonial.text}
+                        </p>
                       </div>
-                      <p className="text-sm font-light leading-relaxed mt-4 text-gray-900">
-                        {testimonial.text}
-                      </p>
-                    </SwiperSlide>
+                    </swiper-slide>
                   ))}
-                </Swiper>
+                </swiper-container>
+              </div>
 
-                {/* Desktop Swiper (runs to the right, hidden on mobile) */}
-                <Swiper
-                  modules={[Autoplay, FreeMode]}
-                  spaceBetween={30}
-                  centeredSlides={true}
-                  autoplay={{
-                    delay: 0,
-                    disableOnInteraction: false,
-                  }}
-                  speed={10000}
-                  loop={true}
-                  slidesPerView={"auto"}
-                  freeMode={true}
-                  freeModeMomentum={false}
-                  className="swiper-container w-full py-5 hidden md:block"
+              {/* Swiper untuk Desktop menggunakan Web Component */}
+              <div className="hidden md:block">
+                {/* Swiper pertama untuk desktop */}
+                <swiper-container
+                  ref={swiperDesktop1Ref}
+                  init="false"
+                  className="w-full py-5"
                 >
                   {testimonials.map((testimonial, index) => (
-                    <SwiperSlide
-                      key={index}
-                      className="testimonial-content-item p-8 border border-black flex flex-col rounded-xl bg-white box-border mx-6"
-                      style={{
-                        height: "350px",
-                        width: "650px",
-                        boxShadow: "4px 4px 0px 0px #222",
-                      }}
-                    >
-                      <div className="flex items-center">
-                        <div
-                          className="w-16 h-16 lg:w-20 lg:h-20 flex rounded-full justify-center items-center text-white text-xl lg:text-2xl"
-                          style={{
-                            backgroundColor: testimonial.avatarColor,
-                          }}
-                        >
-                          {testimonial.name.charAt(0)}
+                    <swiper-slide key={index} style={{ width: "650px" }}>
+                      <div
+                        className="p-8 border-2 border-black flex flex-col rounded-xl bg-white box-border h-full"
+                        style={{
+                          minHeight: "280px",
+                          boxShadow: "4px 4px 0px 0px #222",
+                        }}
+                      >
+                        <div className="flex items-center">
+                          <div
+                            className="w-16 h-16 lg:w-20 lg:h-20 flex-shrink-0 flex rounded-full justify-center items-center text-white text-xl lg:text-2xl"
+                            style={{ backgroundColor: testimonial.avatarColor }}
+                          >
+                            {testimonial.name.charAt(0)}
+                          </div>
+                          <div className="ml-4 lg:ml-6">
+                            <p className="font-medium text-base lg:text-lg m-0 p-0 text-gray-900">
+                              {testimonial.name}
+                            </p>
+                          </div>
                         </div>
-                        <div className="ml-4 lg:ml-6">
-                          <p className="font-medium text-base lg:text-lg m-0 p-0 text-gray-900">
-                            {testimonial.name}
-                          </p>
-                        </div>
+                        <p className="text-base lg:text-lg font-light leading-relaxed mt-6 lg:mt-8 text-gray-900">
+                          {testimonial.text}
+                        </p>
                       </div>
-                      <p className="text-base lg:text-lg font-light leading-relaxed mt-6 lg:mt-8 text-gray-900">
-                        {testimonial.text}
-                      </p>
-                    </SwiperSlide>
+                    </swiper-slide>
                   ))}
-                </Swiper>
+                </swiper-container>
 
-                {/* Second Desktop Swiper (runs to the left, hidden on mobile) */}
-                <Swiper
-                  modules={[Autoplay, FreeMode]}
-                  spaceBetween={30}
-                  direction="horizontal"
-                  centeredSlides={true}
-                  autoplay={{
-                    reverseDirection: true,
-                    delay: 0,
-                    disableOnInteraction: false,
-                  }}
-                  speed={10000}
-                  loop={true}
-                  slidesPerView={"auto"}
-                  freeMode={true}
-                  freeModeMomentum={false}
-                  className="swiper-container1 w-full py-5 hidden md:block mt-4 md:mt-6"
+                {/* Swiper kedua untuk desktop */}
+                <swiper-container
+                  ref={swiperDesktop2Ref}
+                  init="false"
+                  className="w-full py-5 mt-4 md:mt-6"
                 >
                   {testimonials.map((testimonial, index) => (
-                    <SwiperSlide
-                      key={index}
-                      className="testimonial-content-item p-8 border border-black flex flex-col rounded-xl bg-white box-border mx-6"
-                      style={{
-                        height: "300px",
-                        width: "600px",
-                        boxShadow: "4px 4px 0px 0px #222",
-                      }}
-                    >
-                      <div className="flex items-center">
-                        <div
-                          className="w-16 h-16 lg:w-20 lg:h-20 flex rounded-full justify-center items-center text-white text-xl lg:text-2xl"
-                          style={{
-                            backgroundColor: testimonial.avatarColor,
-                          }}
-                        >
-                          {testimonial.name.charAt(0)}
+                    <swiper-slide key={index} style={{ width: "600px" }}>
+                      <div
+                        className="p-8 border-2 border-black flex flex-col rounded-xl bg-white box-border h-full"
+                        style={{
+                          minHeight: "280px",
+                          boxShadow: "4px 4px 0px 0px #222",
+                        }}
+                      >
+                        <div className="flex items-center">
+                          <div
+                            className="w-16 h-16 lg:w-20 lg:h-20 flex-shrink-0 flex rounded-full justify-center items-center text-white text-xl lg:text-2xl"
+                            style={{ backgroundColor: testimonial.avatarColor }}
+                          >
+                            {testimonial.name.charAt(0)}
+                          </div>
+                          <div className="ml-4 lg:ml-6">
+                            <p className="font-medium text-base lg:text-lg m-0 p-0 text-gray-900">
+                              {testimonial.name}
+                            </p>
+                          </div>
                         </div>
-                        <div className="ml-4 lg:ml-6">
-                          <p className="font-medium text-base lg:text-lg m-0 p-0 text-gray-900">
-                            {testimonial.name}
-                          </p>
-                        </div>
+                        <p className="text-base lg:text-lg font-light leading-relaxed mt-6 lg:mt-8 text-gray-900">
+                          {testimonial.text}
+                        </p>
                       </div>
-                      <p className="text-base lg:text-lg font-light leading-relaxed mt-6 lg:mt-8 text-gray-900">
-                        {testimonial.text}
-                      </p>
-                    </SwiperSlide>
+                    </swiper-slide>
                   ))}
-                </Swiper>
+                </swiper-container>
               </div>
             </div>
           </div>
