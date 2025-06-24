@@ -154,19 +154,13 @@ export default function Footer() {
                     <a href="#">News & Blog</a>
                   </li>
                   <li>
-                    <a href="#">
-                      Case Studies
-                    </a>
+                    <a href="#">Case Studies</a>
                   </li>
                   <li>
-                    <a href="#">
-                      Loyalty Program
-                    </a>
+                    <a href="#">Loyalty Program</a>
                   </li>
                   <li>
-                    <a href="#">
-                      Web & SEO Audit
-                    </a>
+                    <a href="#">Web & SEO Audit</a>
                   </li>
                 </ul>
               </div>
@@ -176,24 +170,16 @@ export default function Footer() {
                 </h6>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="#">
-                      Digital Advertising
-                    </a>
+                    <a href="#">Digital Advertising</a>
                   </li>
                   <li>
-                    <a href="#">
-                      Performance Creative
-                    </a>
+                    <a href="#">Performance Creative</a>
                   </li>
                   <li>
-                    <a href="#">
-                      Web Development
-                    </a>
+                    <a href="#">Web Development</a>
                   </li>
                   <li>
-                    <a href="#">
-                      Search Engine Optimization
-                    </a>
+                    <a href="#">Search Engine Optimization</a>
                   </li>
                 </ul>
               </div>
@@ -238,7 +224,7 @@ export default function Footer() {
                 <div>
                   <div className="flex items-center mb-2">
                     <img
-                      src="./Flag-Indonesia.png"
+                      src="./Flag-Singapore.png"
                       alt="Flag"
                       className="mr-2"
                     />
